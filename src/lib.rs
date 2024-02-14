@@ -47,14 +47,14 @@ impl WeekState {
 
     pub fn today_title(&self) -> String {
         let today = self.today.clone();
-        today.to_string("امروز E d MMM yyyy")
+        today.to_string("E d MMM yyyy")
     }
 
     pub fn week_title(&self) -> String {
         Self::week_title_from_date(&self.today)
     }
 
-    fn week_title_from_today() -> String {
+    fn _week_title_from_today() -> String {
         let today = ptime::now();
         Self::week_title_from_date(&today)
     }
