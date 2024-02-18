@@ -27,14 +27,14 @@ impl Goal {
 }
 
 pub struct WeekState {
-    today: ptime::Tm,
+    reference: ptime::Tm,
     goals: Vec<Goal>,
 }
 
 impl WeekState {
     pub fn new() -> Self {
         Self {
-            today: ptime::now(),
+            reference: ptime::now(),
             goals: vec![
                 Goal::from("اینجا خیلی کارا میشه"),
                 Goal::from("t سلام"),
@@ -45,13 +45,35 @@ impl WeekState {
         }
     }
 
+    pub fn next(&mut self) {
+        let reference = self.reference.clone();
+        let next_week_date = ptime::at(Timespec::new(
+            reference.to_timespec().sec + (7 * 24 * 3600),
+            0,
+        ));
+        self.reference = next_week_date;
+    }
+
+    pub fn previous(&mut self) {
+        let reference = self.reference.clone();
+        let next_week_date = ptime::at(Timespec::new(
+            reference.to_timespec().sec - (7 * 24 * 3600),
+            0,
+        ));
+        self.reference = next_week_date;
+    }
+
+    pub fn current(&mut self) {
+        self.reference = ptime::now();
+    }
+
     pub fn today_title(&self) -> String {
-        let today = self.today.clone();
+        let today = ptime::now();
         today.to_string("E d MMM yyyy")
     }
 
     pub fn week_title(&self) -> String {
-        Self::week_title_from_date(&self.today)
+        Self::week_title_from_date(&self.reference)
     }
 
     fn _week_title_from_today() -> String {
