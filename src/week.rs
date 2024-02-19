@@ -1,6 +1,13 @@
+// https://en.wikipedia.org/wiki/Unix_time
+// https://en.wikipedia.org/wiki/January_1970#January_1,_1970_(Thursday)
+// https://en.wikipedia.org/wiki/Leap_second
+// https://www.time.ir/
+
 use ptime;
 use time::Timespec;
 use serde::Serialize;
+
+use crate::db::read_week;
 
 #[derive(Serialize)]
 pub struct WeekStateJs {
@@ -27,44 +34,58 @@ impl Goal {
 }
 
 pub struct WeekState {
-    reference: ptime::Tm,
+    reference: i64,
     goals: Vec<Goal>,
 }
 
 impl WeekState {
     pub fn new() -> Self {
-        Self {
-            reference: ptime::now(),
-            goals: vec![
-                Goal::from("اینجا خیلی کارا میشه"),
-                Goal::from("t سلام"),
-                Goal::from("xاین کار دیگه خیلی واجبه!!"),
-                Goal::from("این کار دیگه خیلی واجبه!!"),
-                Goal::from("first goal"),
-                Goal::from("this must be done!")],
+        let reference = Self::calculate_reference_based_on_saturday(&ptime::now());
+        let x = read_week(reference);
+        if let Ok(Some((goals, notes))) = x {
+            Self {
+                reference,
+                goals: goals.iter()
+                    .map(|s| Goal::from(s))
+                    .collect(),
+            }
+        } else {
+            Self {
+                reference: reference,
+                goals: vec![],
+            }
         }
+        // Self {
+        //     reference: reference,
+        //     goals: vec![
+        //         Goal::from("اینجا خیلی کارا میشه"),
+        //         Goal::from("t سلام"),
+        //         Goal::from("xاین کار دیگه خیلی واجبه!!"),
+        //         Goal::from("این کار دیگه خیلی واجبه!!"),
+        //         Goal::from("first goal"),
+        //         Goal::from("this must be done!")],
+        // }
+    }
+
+    pub fn calculate_reference_based_on_saturday(date: &ptime::Tm) -> i64 {
+        let seconds = date.to_timespec().sec;
+        let days = seconds / 3600 / 24;
+        // January 1, 1970 was Thursday
+        // to get the next Saturday as reference, we reduce 2 days
+        let days_with_saturday_reference = days - 2;
+        days_with_saturday_reference / 7
     }
 
     pub fn next(&mut self) {
-        let reference = self.reference.clone();
-        let next_week_date = ptime::at(Timespec::new(
-            reference.to_timespec().sec + (7 * 24 * 3600),
-            0,
-        ));
-        self.reference = next_week_date;
+        self.reference = self.reference + 1;
     }
 
     pub fn previous(&mut self) {
-        let reference = self.reference.clone();
-        let next_week_date = ptime::at(Timespec::new(
-            reference.to_timespec().sec - (7 * 24 * 3600),
-            0,
-        ));
-        self.reference = next_week_date;
+        self.reference = self.reference - 1;
     }
 
     pub fn current(&mut self) {
-        self.reference = ptime::now();
+        self.reference = Self::calculate_reference_based_on_saturday(&ptime::now());
     }
 
     pub fn today_title(&self) -> String {
@@ -73,23 +94,22 @@ impl WeekState {
     }
 
     pub fn week_title(&self) -> String {
-        Self::week_title_from_date(&self.reference)
+        Self::week_title_from_date(self.reference)
     }
 
     fn _week_title_from_today() -> String {
         let today = ptime::now();
-        Self::week_title_from_date(&today)
+        let reference = Self::calculate_reference_based_on_saturday(&today);
+        Self::week_title_from_date(reference)
     }
 
-    fn week_title_from_date(date_in_week: &ptime::Tm) -> String {
-        let shanbeh = ptime::at(Timespec::new(
-            date_in_week.to_timespec().sec - i64::from(date_in_week.tm_wday * (24 * 3600)),
-            0,
-        ));
-        let jomeh = ptime::at(Timespec::new(
-            shanbeh.to_timespec().sec + i64::from(6 * (24 * 3600)),
-            0,
-        ));
+    fn week_title_from_date(week_reference: i64) -> String {
+        // January 1, 1970 was Thursday
+        // to get the Saturday, we add 2 days
+        let seconds_shanbeh = (week_reference * 7 + 2) * 24 * 3600;
+        let seconds_jomeh = seconds_shanbeh + (6 * 24 * 3600);
+        let shanbeh = ptime::at(Timespec::new(seconds_shanbeh, 0,));
+        let jomeh = ptime::at(Timespec::new(seconds_jomeh, 0,));
         format!(
             "{} ... {}",
             shanbeh.to_string("E d MMM yyyy"),

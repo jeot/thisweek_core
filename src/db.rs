@@ -1,9 +1,9 @@
 use redb::{Database, Error, ReadableTable, TableDefinition, RedbValue};
 
-const TABLE_U64_GOALS_NOTES: TableDefinition<u64, (Vec<&str>, Vec<&str>)> = TableDefinition::new("weeks");
-const db_file: &'static str = "~\\.weeks_db";
+const TABLE_U64_GOALS_NOTES: TableDefinition<i64, (Vec<&str>, Vec<&str>)> = TableDefinition::new("weeks");
+const db_file: &'static str = "~/.weeks_db";
 
-fn read(ref_seconds: u64) -> Result<Option<(Vec<String>, Vec<String>)>, Error> {
+pub fn read_week(ref_seconds: i64) -> Result<Option<(Vec<String>, Vec<String>)>, Error> {
 
     let db = Database::create(db_file)?;
     let txn = db.begin_read()?;
