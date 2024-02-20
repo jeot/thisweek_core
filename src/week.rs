@@ -11,8 +11,8 @@ use crate::db;
 
 #[derive(Serialize)]
 pub struct WeekStateJs {
-    week_title: String,
     today_title: String,
+    week_title: String,
     goals: Vec<Goal>,
 }
 
@@ -150,9 +150,24 @@ impl WeekState {
 
     pub fn week_state_js_object(&self) -> WeekStateJs {
         WeekStateJs {
-            week_title: self.week_title(),
             today_title: self.today_title(),
+            week_title: self.week_title(),
             goals: self.goals.clone(),
+        }
+    }
+
+    pub fn add_new_goal(&mut self, text: String) {
+        println!("adding a new goal: {text}");
+        let goal = Goal {
+            id: 0,
+            text,
+            done: false,
+        };
+        self.goals.push(goal);
+        let result = db::write_week(self.reference, self.goals.iter().map(|g| {g.text.clone()}).collect(), vec![]);
+        match result {
+            Ok(_) => { println!("db write success."); },
+            Err(err) => { println!("db write failed. err: {err}"); },
         }
     }
 }
