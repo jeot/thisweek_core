@@ -113,16 +113,33 @@ impl WeekState {
         (shanbeh, jomeh)
     }
 
+    fn update_week(&mut self) {
+        let weekdb = db::read_week(self.reference);
+        if let Ok(Some((goals, _notes))) = weekdb {
+            let goals = goals.iter().map(|s| { Goal::from(s) }).collect();
+            self.goals = goals;
+            // let _notes = _notes.iter().map(|s| { Notes::from(s) }).collect();
+            // todo: self.notes = notes;
+        } else if let Ok(None) = weekdb {
+            self.goals = vec![];
+        } else {
+            println!("read db failed");
+        }
+    }
+
     pub fn next(&mut self) {
         self.reference = self.reference + 1;
+        self.update_week();
     }
 
     pub fn previous(&mut self) {
         self.reference = self.reference - 1;
+        self.update_week();
     }
 
     pub fn current(&mut self) {
         self.reference = Self::calculate_reference_based_on_saturday(&ptime::now());
+        self.update_week();
     }
 
     pub fn first_day(&self) -> ptime::Tm {
