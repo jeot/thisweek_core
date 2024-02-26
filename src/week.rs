@@ -116,8 +116,7 @@ impl WeekState {
     fn update_week(&mut self) {
         let weekdb = db::read_week(self.reference);
         if let Ok(Some((goals, _notes))) = weekdb {
-            let goals = goals.iter().map(|s| { Goal::from(s) }).collect();
-            self.goals = goals;
+            self.goals = goals.iter().map(|s| { Goal::from(s) }).collect();
             // let _notes = _notes.iter().map(|s| { Notes::from(s) }).collect();
             // todo: self.notes = notes;
         } else if let Ok(None) = weekdb {
@@ -152,7 +151,11 @@ impl WeekState {
 
     pub fn today_title(&self) -> String {
         let today = ptime::now();
-        today.to_string("E d MMM yyyy")
+        if today.tm_mday == 6 && today.tm_mon == 11 {
+            today.to_string("E d MMM yyyy 🎉")
+        } else {
+            today.to_string("E d MMM yyyy")
+        }
     }
 
     pub fn week_title(&self) -> String {
