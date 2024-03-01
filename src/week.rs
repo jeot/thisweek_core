@@ -6,6 +6,7 @@
 use ptime;
 use time::Timespec;
 use serde::Serialize;
+use cuid2;
 
 use crate::db;
 
@@ -13,29 +14,38 @@ use crate::db;
 pub struct WeekStateJs {
     today_title: String,
     week_title: String,
-    goals: Vec<Goal>,
+    goals: Vec<Element>,
+    notes: Vec<Element>,
 }
 
 #[derive(Debug, Serialize, Clone)]
-struct Goal {
-    id: i32,
-    text: String,
-    done: bool,
+pub enum Element {
+    Goal { id: String, text: String, done: bool },
+    Note { id: String, text: String },
+    // Event { id: String, text: String, /* TimePeriod */ }
 }
 
-impl Goal {
-    fn from(text: &str) -> Self {
-        Self {
-            id: 0,
-            text: String::from(text),
-            done: false,
-        }
+impl Element {
+    pub fn new_goal(text: String) -> Self {
+        Element::Goal { id: cuid2::create_id(), text, done: false }
+    }
+
+    pub fn build_goal(id: String, text: String, done: bool) -> Self {
+        Element::Goal { id, text, done }
+    }
+
+    pub fn new_note(text: String) -> Self {
+        Element::Note { id: cuid2::create_id(), text }
+    }
+
+    pub fn build_note(id: String, text: String) -> Self {
+        Element::Note { id, text }
     }
 }
 
 pub struct WeekState {
-    reference: i64,
-    goals: Vec<Goal>,
+    pub reference: i64,
+    pub elements: Vec<Element>
 }
 
 impl WeekState {
@@ -51,27 +61,23 @@ impl WeekState {
     fn from_week_reference(reference: i64) -> Self {
         let db_result = db::read_week(reference);
         match db_result {
-            Ok(Some((goals, notes))) => {
-                println!("db read success. week data exists.");
-                Self {
-                    reference,
-                    goals: goals.iter()
-                        .map(|s| Goal::from(s))
-                        .collect(),
-                }
+            Ok(Some(week)) => {
+                println!("db read success. some week data.");
+                week
             },
             Ok(None) => {
                 println!("db read success. no week data.");
                 Self {
                     reference,
-                    goals: vec![],
+                    elements: vec![],
                 }
             },
             Err(err) => {
                 println!("db read failed. err: {}", err);
+                // println!("err kind: {}", err);
                 Self {
                     reference,
-                    goals: vec![],
+                    elements: vec![],
                 }
             },
         }
@@ -80,13 +86,15 @@ impl WeekState {
     pub fn dummy() -> Self {
         Self {
             reference: Self::calculate_reference_based_on_saturday(&ptime::now()),
-            goals: vec![
-                Goal::from("اینجا خیلی کارا میشه"),
-                Goal::from("t سلام"),
-                Goal::from("xاین کار دیگه خیلی واجبه!!"),
-                Goal::from("این کار دیگه خیلی واجبه!!"),
-                Goal::from("first goal"),
-                Goal::from("this must be done!")],
+            elements: vec![
+                Element::build_goal(cuid2::create_id(), "اینجا خیلی کارا میشه".to_string(), false),
+                Element::build_goal(cuid2::create_id(), "t سلام".to_string(), false),
+                Element::new_goal("xاین کار دیگه خیلی واجبه!!".to_string()),
+                Element::new_goal("این کار دیگه خیلی واجبه!!".to_string()),
+                Element::new_goal("first goal".to_string()),
+                Element::build_goal(cuid2::create_id(), "this must be done!".to_string(), false),
+                Element::new_note("this is a note!".to_string()),
+            ]
         }
     }
 
@@ -113,14 +121,14 @@ impl WeekState {
         (shanbeh, jomeh)
     }
 
-    fn update_week(&mut self) {
-        let weekdb = db::read_week(self.reference);
-        if let Ok(Some((goals, _notes))) = weekdb {
-            self.goals = goals.iter().map(|s| { Goal::from(s) }).collect();
-            // let _notes = _notes.iter().map(|s| { Notes::from(s) }).collect();
-            // todo: self.notes = notes;
-        } else if let Ok(None) = weekdb {
-            self.goals = vec![];
+    fn update_week_from_db(&mut self) {
+        let week_result = db::read_week(self.reference);
+        if let Ok(Some(week)) = week_result {
+            if week.reference == self.reference {
+                self.elements = week.elements;
+            }
+        } else if let Ok(None) = week_result {
+            self.elements = vec![];
         } else {
             println!("read db failed");
         }
@@ -128,17 +136,17 @@ impl WeekState {
 
     pub fn next(&mut self) {
         self.reference = self.reference + 1;
-        self.update_week();
+        self.update_week_from_db();
     }
 
     pub fn previous(&mut self) {
         self.reference = self.reference - 1;
-        self.update_week();
+        self.update_week_from_db();
     }
 
     pub fn current(&mut self) {
         self.reference = Self::calculate_reference_based_on_saturday(&ptime::now());
-        self.update_week();
+        self.update_week_from_db();
     }
 
     pub fn first_day(&self) -> ptime::Tm {
@@ -172,19 +180,22 @@ impl WeekState {
         WeekStateJs {
             today_title: self.today_title(),
             week_title: self.week_title(),
-            goals: self.goals.clone(),
+            goals: self.elements.clone().into_iter().filter(|e| {
+                if let Element::Goal{..} = e { true }
+                else { false }
+            }).collect(),
+            notes: self.elements.clone().into_iter().filter(|e| {
+                if let Element::Note{..} = e { true }
+                else { false }
+            }).collect(),
         }
     }
 
     pub fn add_new_goal(&mut self, text: String) {
         println!("adding a new goal: {text}");
-        let goal = Goal {
-            id: 0,
-            text,
-            done: false,
-        };
-        self.goals.push(goal);
-        let result = db::write_week(self.reference, self.goals.iter().map(|g| {g.text.clone()}).collect(), vec![]);
+        let goal = Element::new_goal(text);
+        self.elements.push(goal);
+        let result = db::write_week(self);
         match result {
             Ok(_) => { println!("db write success."); },
             Err(err) => { println!("db write failed. err: {err}"); },
