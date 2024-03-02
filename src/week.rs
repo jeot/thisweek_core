@@ -195,11 +195,33 @@ impl WeekState {
         println!("adding a new goal: {text}");
         let goal = Element::new_goal(text);
         self.elements.push(goal);
-        let result = db::write_week(self);
-        match result {
-            Ok(_) => { println!("db write success."); },
-            Err(err) => { println!("db write failed. err: {err}"); },
+        let _result = db::write_week(self);
+    }
+
+    pub fn toggle_goal_state(&mut self, goal_id: String) -> bool {
+        println!("searching for goal id {goal_id}");
+        let mut mut_iter = self.elements.iter_mut();
+        // let mut mut_iter = self.elements.into_iter();
+        let goal = mut_iter
+            .find(|e| {
+            if let Element::Goal {id,..} = e {
+                if *id == goal_id { true }
+                else { false }
+            } else {
+                false
+            }});
+        let mut final_done_value = false;
+        match goal {
+            Some(Element::Goal{done: d,..}) => {
+                println!("found the goal, toggling the done parameter");
+                *d = !(*d);
+                final_done_value = *d;
+            },
+            _ => (),
         }
+        let _result = db::write_week(self);
+        println!("returning: {final_done_value}");
+        return final_done_value;
     }
 }
 

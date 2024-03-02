@@ -61,6 +61,7 @@ pub fn write_week(week: &WeekState) -> Result<(), Error> {
         table.insert(reference, db_elements)?;
     }
     txn.commit()?;
+    // println!("db write success.");
     Ok(())
 }
 
