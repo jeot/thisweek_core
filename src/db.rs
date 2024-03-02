@@ -8,12 +8,25 @@ use redb::{Database, Error, ReadableTable, TableDefinition};
 // a vector of:
 // type, id, text, boolean, other parameters(string vector)
 type TypeOfElementsInDB<'a> = Vec<(i8, &'a str, &'a str, bool, Vec<&'a str>)>;
-const TABLE_I64_WEEKS: TableDefinition<i64, TypeOfElementsInDB> = TableDefinition::new("weeks2");
+const TABLE_I64_WEEKS: TableDefinition<i64, TypeOfElementsInDB> = TableDefinition::new("tbl_weeks");
 const DB_ELEMTN_VARIANT_GOAL: i8 = 1;
 const DB_ELEMTN_VARIANT_NOTE: i8 = 2;
 
+use once_cell::sync::OnceCell;
 
-const DB_FILE: &'static str = "weeks_db.txt";
+static DB_FILE: OnceCell<String> = OnceCell::new();
+
+fn get_db_path() -> String {
+    let file_string: &String = DB_FILE.get_or_init(|| {
+        let p = homedir::get_my_home().unwrap().unwrap();
+        let p = p.join("Dropbox").join("i7.db");
+        let file_string = String::from(p.to_string_lossy().to_string());
+        println!("Setting the global DB file path (probably first run): {file_string}");
+        file_string
+    });
+    let file_string: String = file_string.to_string();
+    file_string
+}
 
 // convert Vec<(i8, &'a str, &'a str, bool, Vec<&'a str>)> to Vec<Elements>
 #[allow(non_snake_case)]
@@ -53,7 +66,11 @@ fn convert_VecElement_to_ElementsInDB(elements: &Vec<Element>) -> TypeOfElements
 
 pub fn write_week(week: &WeekState) -> Result<(), Error> {
     let reference = week.reference;
-    let db = Database::create(Path::new(DB_FILE))?;
+    let path_string = get_db_path();
+    let path_str: &str = path_string.as_str();
+    let path: &Path = Path::new(path_str);
+    // println!("{:?}", path);
+    let db = Database::create(path)?;
     let txn = db.begin_write()?;
     {
         let mut table = txn.open_table(TABLE_I64_WEEKS)?;
@@ -61,18 +78,23 @@ pub fn write_week(week: &WeekState) -> Result<(), Error> {
         table.insert(reference, db_elements)?;
     }
     txn.commit()?;
-    // println!("db write success.");
+    println!("db write week success.");
     Ok(())
 }
 
 pub fn read_week(reference: i64) -> Result<Option<WeekState>, Error> {
-    let db = Database::create(Path::new(DB_FILE))?;
+    let path_string = get_db_path();
+    let path_str: &str = path_string.as_str();
+    let path: &Path = Path::new(path_str);
+    // println!("{:?}", path);
+    let db = Database::create(path)?;
     let txn = db.begin_read()?;
     let table = txn.open_table(TABLE_I64_WEEKS)?;
     let result = table.get(reference)?;
     if let Some(r) = result {
         let db_elements: TypeOfElementsInDB = r.value();
         let elements: Vec<Element> = convert_ElementsInDB_to_VecElement(db_elements);
+        println!("db read week success.");
         Ok(Some(WeekState { reference, elements }))
     } else {
         Ok(None)
