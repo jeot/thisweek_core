@@ -159,21 +159,32 @@ impl WeekState {
 
     pub fn today_title(&self) -> String {
         let today = ptime::now();
-        if today.tm_mday == 6 && today.tm_mon == 11 {
+        if today.tm_mday == 6 && today.tm_mon == 11 { // my birthday
             today.to_string("E d MMM yyyy 🎉")
+        } else if today.tm_mday == 1 && today.tm_mon == 0 { // new year
+            today.to_string("E d MMM yyyy 🎆️")
         } else {
             today.to_string("E d MMM yyyy")
         }
     }
 
     pub fn week_title(&self) -> String {
+        let today = ptime::now();
         let shanbeh = self.first_day();
         let jomeh = self.last_day();
-        format!(
-            "{} ... {}",
-            shanbeh.to_string("E d MMM yyyy"),
-            jomeh.to_string("E d MMM yyyy")
-        )
+        if shanbeh.tm_year == jomeh.tm_year && shanbeh.tm_year != today.tm_year {
+            format!( "{} - {}",
+                shanbeh.to_string("E d MMM"),
+                jomeh.to_string("E d MMM، (سال yyyy)"))
+        } else if shanbeh.tm_year == jomeh.tm_year && shanbeh.tm_year == today.tm_year{
+            format!( "{} - {}",
+                shanbeh.to_string("E d MMM"),
+                jomeh.to_string("E d MMM"))
+        } else {
+            format!( "{} - {}",
+                shanbeh.to_string("E d MMM yyyy"),
+                jomeh.to_string("E d MMM yyyy"))
+        }
     }
 
     pub fn week_state_js_object(&self) -> WeekStateJs {
