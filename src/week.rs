@@ -209,6 +209,19 @@ impl WeekState {
         let _result = db::write_week(self);
     }
 
+    pub fn delete_goal(&mut self, goal_id: String) {
+        println!("delete goal with id: {goal_id}");
+        let position = self.elements.iter().position(|e| {
+            if let Element::Goal {id,..} = e {
+                *id == goal_id
+            } else { false }
+        });
+        if let Some(position) = position {
+            self.elements.remove(position);
+            let _result = db::write_week(self);
+        }
+    }
+
     pub fn toggle_goal_state(&mut self, goal_id: String) -> bool {
         println!("searching for goal id {goal_id}");
         let mut mut_iter = self.elements.iter_mut();
