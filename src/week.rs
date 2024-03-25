@@ -202,6 +202,15 @@ impl WeekState {
         }
     }
 
+    pub fn get_goal(&self, goal_id: String) -> Option<Element> {
+        let goal = self.elements.iter().find(|e| {
+            if let Element::Goal {id,..} = e {
+                *id == goal_id
+            } else { false }
+        }).cloned();
+        goal
+    }
+
     pub fn add_new_goal(&mut self, text: String) {
         println!("adding a new goal: {text}");
         let goal = Element::new_goal(text);
@@ -222,6 +231,20 @@ impl WeekState {
         }
     }
 
+    pub fn edit_goal(&mut self, goal_id: String, goal_text: String) {
+        println!("edit goal: id: {goal_id}, text: {goal_text}");
+        let it = self.elements.iter_mut();
+        for e in it {
+            if let Element::Goal {id,text,..} = e {
+                if *id == goal_id {
+                    *text = goal_text.clone();
+                    let _result = db::write_week(self);
+                    break;
+                }
+            }
+        }
+    }
+
     pub fn toggle_goal_state(&mut self, goal_id: String) -> bool {
         println!("searching for goal id {goal_id}");
         let mut mut_iter = self.elements.iter_mut();
@@ -229,23 +252,19 @@ impl WeekState {
         let goal = mut_iter
             .find(|e| {
             if let Element::Goal {id,..} = e {
-                if *id == goal_id { true }
-                else { false }
+                *id == goal_id
             } else {
                 false
             }});
         let mut final_done_value = false;
-        match goal {
-            Some(Element::Goal{done: d,..}) => {
-                println!("found the goal, toggling the done parameter");
-                *d = !(*d);
-                final_done_value = *d;
-            },
-            _ => (),
+        if let Some(Element::Goal{done: d,..}) = goal {
+            println!("found the goal, toggling the done parameter");
+            *d = !(*d);
+            final_done_value = *d;
         }
         let _result = db::write_week(self);
         println!("returning: {final_done_value}");
-        return final_done_value;
+        final_done_value
     }
 }
 
