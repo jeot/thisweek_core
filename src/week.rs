@@ -14,8 +14,9 @@ use crate::db;
 pub struct WeekStateJs {
     today_title: String,
     week_title: String,
-    goals: Vec<Element>,
-    notes: Vec<Element>,
+    items: Vec<Element>,
+    // goals: Vec<Element>,
+    // notes: Vec<Element>,
 }
 
 #[derive(Debug, Serialize, Clone)]
@@ -191,14 +192,7 @@ impl WeekState {
         WeekStateJs {
             today_title: self.today_title(),
             week_title: self.week_title(),
-            goals: self.elements.clone().into_iter().filter(|e| {
-                if let Element::Goal{..} = e { true }
-                else { false }
-            }).collect(),
-            notes: self.elements.clone().into_iter().filter(|e| {
-                if let Element::Note{..} = e { true }
-                else { false }
-            }).collect(),
+            items: self.elements.clone(),
         }
     }
 
@@ -209,6 +203,15 @@ impl WeekState {
             } else { false }
         }).cloned();
         goal
+    }
+
+    pub fn get_item(&self, _id: String) -> Option<Element> {
+        let item = self.elements.iter().find(|e| {
+            if let Element::Goal {id,..} = e { *id == _id }
+            else if let Element::Note {id,..} = e { *id == _id }
+            else { false }
+        }).cloned();
+        item
     }
 
     pub fn add_new_goal(&mut self, text: String) {
@@ -246,11 +249,9 @@ impl WeekState {
     }
 
     pub fn toggle_goal_state(&mut self, goal_id: String) -> bool {
-        println!("searching for goal id {goal_id}");
+        // println!("searching for goal id {goal_id}");
         let mut mut_iter = self.elements.iter_mut();
-        // let mut mut_iter = self.elements.into_iter();
-        let goal = mut_iter
-            .find(|e| {
+        let goal = mut_iter.find(|e| {
             if let Element::Goal {id,..} = e {
                 *id == goal_id
             } else {
@@ -258,12 +259,12 @@ impl WeekState {
             }});
         let mut final_done_value = false;
         if let Some(Element::Goal{done: d,..}) = goal {
-            println!("found the goal, toggling the done parameter");
+            // println!("found the goal, toggling the done parameter");
             *d = !(*d);
             final_done_value = *d;
         }
         let _result = db::write_week(self);
-        println!("returning: {final_done_value}");
+        // println!("returning: {final_done_value}");
         final_done_value
     }
 }
