@@ -221,12 +221,19 @@ impl WeekState {
         let _result = db::write_week(self);
     }
 
-    pub fn delete_goal(&mut self, goal_id: String) {
-        println!("delete goal with id: {goal_id}");
+    pub fn add_new_note(&mut self, text: String) {
+        println!("adding a new note: {text}");
+        let note = Element::new_note(text);
+        self.elements.push(note);
+        let _result = db::write_week(self);
+    }
+
+    pub fn delete_item(&mut self, _id: String) {
+        println!("delete item (goal/note) with id: {_id}");
         let position = self.elements.iter().position(|e| {
-            if let Element::Goal {id,..} = e {
-                *id == goal_id
-            } else { false }
+            if let Element::Goal {id,..} = e { *id == _id }
+            else if let Element::Note {id,..} = e { *id == _id }
+            else { false }
         });
         if let Some(position) = position {
             self.elements.remove(position);
@@ -234,17 +241,17 @@ impl WeekState {
         }
     }
 
-    pub fn edit_goal(&mut self, goal_id: String, goal_text: String) {
-        println!("edit goal: id: {goal_id}, text: {goal_text}");
-        let it = self.elements.iter_mut();
-        for e in it {
-            if let Element::Goal {id,text,..} = e {
-                if *id == goal_id {
-                    *text = goal_text.clone();
-                    let _result = db::write_week(self);
-                    break;
-                }
-            }
+    pub fn edit_item(&mut self, _id: String, _text: String) {
+        println!("edit goal: id: {_id}, text: {_text}");
+        let item = self.elements.iter_mut().find(|e| {
+            if let Element::Goal {id,..} = e { *id == _id }
+            else if let Element::Note {id,..} = e { *id == _id }
+            else { false }
+        });
+        if let Some(e) = item {
+            if let Element::Goal {text,..} = e { *text = _text.clone(); }
+            if let Element::Note {text,..} = e { *text = _text.clone(); }
+            let _result = db::write_week(self);
         }
     }
 
