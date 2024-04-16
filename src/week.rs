@@ -5,6 +5,7 @@
 
 use ptime;
 use time::Timespec;
+use chrono::{DateTime, Local, Datelike};
 use serde::Serialize;
 use cuid2;
 
@@ -12,7 +13,8 @@ use crate::db;
 
 #[derive(Serialize)]
 pub struct WeekStateJs {
-    today_title: String,
+    today_persian_date: String,
+    today_english_date: String,
     week_title: String,
     items: Vec<Element>,
     // goals: Vec<Element>,
@@ -158,7 +160,7 @@ impl WeekState {
         Self::calculate_first_last_week_day_based_on_saturday(self.reference).1
     }
 
-    pub fn today_title(&self) -> String {
+    pub fn today_persian_date(&self) -> String {
         let today = ptime::now();
         if today.tm_mday == 6 && today.tm_mon == 11 { // my birthday
             today.to_string("E d MMM yyyy 🎉")
@@ -166,6 +168,17 @@ impl WeekState {
             today.to_string("E d MMM yyyy 🎆️")
         } else {
             today.to_string("E d MMM yyyy")
+        }
+    }
+
+    pub fn today_english_date(&self) -> String {
+        let today: DateTime<Local> = Local::now();
+        if today.day() == 25 && today.month() == 2 { // my birthday
+            today.format("%Y-%m-%d 🎉").to_string()
+        } else if today.day() == 1 && today.month() == 1 { // new year
+            today.format("%Y-%m-%d 🎆️").to_string()
+        } else {
+            today.format("%Y-%m-%d").to_string()
         }
     }
 
@@ -190,7 +203,8 @@ impl WeekState {
 
     pub fn week_state_js_object(&self) -> WeekStateJs {
         WeekStateJs {
-            today_title: self.today_title(),
+            today_persian_date: self.today_persian_date(),
+            today_english_date: self.today_english_date(),
             week_title: self.week_title(),
             items: self.elements.clone(),
         }
