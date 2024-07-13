@@ -3,168 +3,139 @@
 // https://en.wikipedia.org/wiki/Leap_second
 // https://www.time.ir/
 
-use ptime;
-use time::Timespec;
-use chrono::{DateTime, Local, Datelike};
-use serde::Serialize;
-use cuid2;
+// use std::time;
 
-use crate::db;
+use crate::models::*;
+use chrono::{DateTime, Datelike, Local};
+use ptime;
+use serde::Serialize;
+use time::Timespec;
+
+use crate::db_sqlite;
 
 #[derive(Serialize)]
 pub struct WeekStateJs {
     today_persian_date: String,
     today_english_date: String,
     week_title: String,
-    items: Vec<Element>,
-    // goals: Vec<Element>,
-    // notes: Vec<Element>,
-}
-
-#[derive(Debug, Serialize, Clone)]
-pub enum Element {
-    Goal { id: String, text: String, done: bool },
-    Note { id: String, text: String },
-    // Event { id: String, text: String, /* TimePeriod */ }
-}
-
-impl Element {
-    pub fn new_goal(text: String) -> Self {
-        Element::Goal { id: cuid2::create_id(), text, done: false }
-    }
-
-    pub fn build_goal(id: String, text: String, done: bool) -> Self {
-        Element::Goal { id, text, done }
-    }
-
-    pub fn new_note(text: String) -> Self {
-        Element::Note { id: cuid2::create_id(), text }
-    }
-
-    pub fn build_note(id: String, text: String) -> Self {
-        Element::Note { id, text }
-    }
+    items: Vec<Item>,
 }
 
 pub struct WeekState {
-    pub reference: i64,
-    pub elements: Vec<Element>
+    pub start_day: i32,
+    pub middle_day: i32,
+    pub end_day: i32,
+    pub items: Vec<Item>,
 }
 
 impl WeekState {
     pub fn new() -> Self {
-        Self::from_ptime(&ptime::now())
+        // it's local persian date for now!
+        let days_tuple = Self::calculate_week_start_middle_end_unix_day(
+            Self::get_current_unix_day(),
+            WEEKDAY_UNIX_OFFSET_SAT,
+            SEVEN_DAY_WEEK_SIZE,
+        );
+        Self::from_unix_days_tuple(days_tuple)
     }
 
-    pub fn from_ptime(persian_time: &ptime::Tm) -> Self {
-        let reference = Self::calculate_reference_based_on_saturday(&persian_time);
-        Self::from_week_reference(reference)
+    fn get_current_unix_day() -> i32 {
+        let a = std::time::SystemTime::now()
+            .duration_since(std::time::UNIX_EPOCH)
+            .unwrap()
+            .as_secs();
+        let days = (a / 3600 / 24) as i32;
+        days
     }
 
-    fn from_week_reference(reference: i64) -> Self {
-        let db_result = db::read_week(reference);
+    // January 1, 1970 was Thursday
+    // Thu, Fri, Sat, Sun, Mon, Tue, Wed,
+    // 0  , 1  , 2  , 3  , 4  , 5  , 6  ,
+    // ex: persian 7 day weeks starts from saturday
+    // day_offset = WEEKDAY_UNIX_OFFSET_SAT // 2
+    // week_size = SEVEN_DAY_WEEK_SIZE // 7
+    fn calculate_week_start_middle_end_unix_day(
+        day: i32,
+        day_offset: i32,
+        week_size: i32,
+    ) -> (i32, i32, i32) {
+        let start = ((day - day_offset) / week_size) * week_size + day_offset;
+        let middle = ((day - day_offset) / week_size) * week_size + day_offset + (week_size / 2);
+        let end = ((day - day_offset) / week_size) * week_size + day_offset + week_size - 1;
+        (start, middle, end)
+    }
+
+    fn from_unix_days_tuple((start_day, middle_day, end_day): (i32, i32, i32)) -> Self {
+        let db_result = db_sqlite::read_items_between_days(start_day, end_day);
         match db_result {
-            Ok(Some(week)) => {
+            Ok(vec) => {
                 println!("db read success. some week data.");
-                week
-            },
-            Ok(None) => {
-                println!("db read success. no week data.");
-                Self {
-                    reference,
-                    elements: vec![],
+                WeekState {
+                    start_day,
+                    middle_day,
+                    end_day,
+                    items: vec,
                 }
-            },
+            }
             Err(err) => {
                 println!("db read failed. err: {}", err);
-                // println!("err kind: {}", err);
                 Self {
-                    reference,
-                    elements: vec![],
+                    start_day,
+                    middle_day,
+                    end_day,
+                    items: vec![],
                 }
-            },
+            }
         }
     }
 
-    pub fn dummy() -> Self {
-        Self {
-            reference: Self::calculate_reference_based_on_saturday(&ptime::now()),
-            elements: vec![
-                Element::build_goal(cuid2::create_id(), "اینجا خیلی کارا میشه".to_string(), false),
-                Element::build_goal(cuid2::create_id(), "t سلام".to_string(), false),
-                Element::new_goal("xاین کار دیگه خیلی واجبه!!".to_string()),
-                Element::new_goal("این کار دیگه خیلی واجبه!!".to_string()),
-                Element::new_goal("first goal".to_string()),
-                Element::build_goal(cuid2::create_id(), "this must be done!".to_string(), false),
-                Element::new_note("this is a note!".to_string()),
-            ]
-        }
-    }
-
-    pub fn write_dummy_week_to_db() {
-        println!("trying to write dummy week data...");
-    }
-
-    fn calculate_reference_based_on_saturday(date: &ptime::Tm) -> i64 {
-        let seconds = date.to_timespec().sec;
-        let days = seconds / 3600 / 24;
-        // January 1, 1970 was Thursday
-        // to get the next Saturday as reference, we reduce 2 days
-        let days_with_saturday_reference = days - 2;
-        days_with_saturday_reference / 7
-    }
-
-    fn calculate_first_last_week_day_based_on_saturday(reference: i64) -> (ptime::Tm, ptime::Tm) {
-        // January 1, 1970 was Thursday
-        // to get the Saturday, we add 2 days
-        let seconds_shanbeh = (reference * 7 + 2) * 24 * 3600;
-        let seconds_jomeh = seconds_shanbeh + (6 * 24 * 3600);
-        let shanbeh = ptime::at(Timespec::new(seconds_shanbeh, 0,));
-        let jomeh = ptime::at(Timespec::new(seconds_jomeh, 0,));
+    fn persian_first_and_last_week_days(&self) -> (ptime::Tm, ptime::Tm) {
+        let shanbeh = ptime::at(Timespec::new((self.start_day as i64) * 24 * 3600, 0));
+        let jomeh = ptime::at(Timespec::new((self.end_day as i64) * 24 * 3600, 0));
         (shanbeh, jomeh)
     }
 
-    fn update_week_from_db(&mut self) {
-        let week_result = db::read_week(self.reference);
-        if let Ok(Some(week)) = week_result {
-            if week.reference == self.reference {
-                self.elements = week.elements;
-            }
-        } else if let Ok(None) = week_result {
-            self.elements = vec![];
-        } else {
-            println!("read db failed");
+    fn update(&mut self) {
+        let db_result = db_sqlite::read_items_between_days(self.start_day, self.end_day);
+        match db_result {
+            Ok(vec) => self.items = vec,
+            Err(err) => println!("db read failed. err: {}", err),
         }
     }
 
     pub fn next(&mut self) {
-        self.reference = self.reference + 1;
-        self.update_week_from_db();
+        self.start_day += SEVEN_DAY_WEEK_SIZE;
+        self.middle_day += SEVEN_DAY_WEEK_SIZE;
+        self.end_day += SEVEN_DAY_WEEK_SIZE;
+        self.update();
     }
 
     pub fn previous(&mut self) {
-        self.reference = self.reference - 1;
-        self.update_week_from_db();
+        self.start_day -= SEVEN_DAY_WEEK_SIZE;
+        self.middle_day -= SEVEN_DAY_WEEK_SIZE;
+        self.end_day -= SEVEN_DAY_WEEK_SIZE;
+        self.update();
     }
 
     pub fn current(&mut self) {
-        self.reference = Self::calculate_reference_based_on_saturday(&ptime::now());
-        self.update_week_from_db();
-    }
-
-    pub fn first_day(&self) -> ptime::Tm {
-        Self::calculate_first_last_week_day_based_on_saturday(self.reference).0
-    }
-
-    pub fn last_day(&self) -> ptime::Tm {
-        Self::calculate_first_last_week_day_based_on_saturday(self.reference).1
+        let (start, middle, end) = Self::calculate_week_start_middle_end_unix_day(
+            Self::get_current_unix_day(),
+            WEEKDAY_UNIX_OFFSET_SAT,
+            SEVEN_DAY_WEEK_SIZE,
+        );
+        self.start_day = start;
+        self.middle_day = middle;
+        self.end_day = end;
+        self.update();
     }
 
     pub fn today_persian_date(&self) -> String {
         let today = ptime::now();
-        if today.tm_mday == 6 && today.tm_mon == 11 { // my birthday
+        if today.tm_mday == 6 && today.tm_mon == 11 {
+            // my birthday
             today.to_string("E d MMM yyyy 🎉")
-        } else if today.tm_mday == 1 && today.tm_mon == 0 { // new year
+        } else if today.tm_mday == 1 && today.tm_mon == 0 {
+            // new year
             today.to_string("E d MMM yyyy 🎆️")
         } else {
             today.to_string("E d MMM yyyy")
@@ -173,9 +144,11 @@ impl WeekState {
 
     pub fn today_english_date(&self) -> String {
         let today: DateTime<Local> = Local::now();
-        if today.day() == 25 && today.month() == 2 { // my birthday
+        if today.day() == 25 && today.month() == 2 {
+            // my birthday
             today.format("%Y-%m-%d 🎉").to_string()
-        } else if today.day() == 1 && today.month() == 1 { // new year
+        } else if today.day() == 1 && today.month() == 1 {
+            // new year
             today.format("%Y-%m-%d 🎆️").to_string()
         } else {
             today.format("%Y-%m-%d").to_string()
@@ -184,20 +157,25 @@ impl WeekState {
 
     pub fn week_title(&self) -> String {
         let today = ptime::now();
-        let shanbeh = self.first_day();
-        let jomeh = self.last_day();
+        let (shanbeh, jomeh) = self.persian_first_and_last_week_days();
         if shanbeh.tm_year == jomeh.tm_year && shanbeh.tm_year != today.tm_year {
-            format!( "{} - {}",
+            format!(
+                "{} - {}",
                 shanbeh.to_string("E d MMM"),
-                jomeh.to_string("E d MMM، (سال yyyy)"))
-        } else if shanbeh.tm_year == jomeh.tm_year && shanbeh.tm_year == today.tm_year{
-            format!( "{} - {}",
+                jomeh.to_string("E d MMM، (سال yyyy)")
+            )
+        } else if shanbeh.tm_year == jomeh.tm_year && shanbeh.tm_year == today.tm_year {
+            format!(
+                "{} - {}",
                 shanbeh.to_string("E d MMM"),
-                jomeh.to_string("E d MMM"))
+                jomeh.to_string("E d MMM")
+            )
         } else {
-            format!( "{} - {}",
+            format!(
+                "{} - {}",
                 shanbeh.to_string("E d MMM yyyy"),
-                jomeh.to_string("E d MMM yyyy"))
+                jomeh.to_string("E d MMM yyyy")
+            )
         }
     }
 
@@ -206,105 +184,93 @@ impl WeekState {
             today_persian_date: self.today_persian_date(),
             today_english_date: self.today_english_date(),
             week_title: self.week_title(),
-            items: self.elements.clone(),
+            items: self.items.clone(),
         }
     }
 
-    pub fn get_goal(&self, goal_id: String) -> Option<Element> {
-        let goal = self.elements.iter().find(|e| {
-            if let Element::Goal {id,..} = e {
-                *id == goal_id
-            } else { false }
-        }).cloned();
-        goal
-    }
-
-    pub fn get_item(&self, _id: String) -> Option<Element> {
-        let item = self.elements.iter().find(|e| {
-            if let Element::Goal {id,..} = e { *id == _id }
-            else if let Element::Note {id,..} = e { *id == _id }
-            else { false }
-        }).cloned();
-        item
-    }
+    // pub fn get_item(&self, _id: String) -> Option<Element> {
+    //     let item = self
+    //         .elements
+    //         .iter()
+    //         .find(|e| {
+    //             if let Element::Goal { id, .. } = e {
+    //                 *id == _id
+    //             } else if let Element::Note { id, .. } = e {
+    //                 *id == _id
+    //             } else {
+    //                 false
+    //             }
+    //         })
+    //         .cloned();
+    //     item
+    // }
 
     pub fn add_new_goal(&mut self, text: String) {
         println!("adding a new goal: {text}");
-        let goal = Element::new_goal(text);
-        self.elements.push(goal);
-        let _result = db::write_week(self);
+        let goal = NewItem::new_goal(self.middle_day, text);
+        let _result = db_sqlite::create_item(&goal);
     }
 
     pub fn add_new_note(&mut self, text: String) {
         println!("adding a new note: {text}");
-        let note = Element::new_note(text);
-        self.elements.push(note);
-        let _result = db::write_week(self);
+        let note = NewItem::new_note(self.middle_day, text);
+        let _result = db_sqlite::create_item(&note);
     }
 
-    pub fn delete_item(&mut self, _id: String) {
-        println!("delete item (goal/note) with id: {_id}");
-        let position = self.elements.iter().position(|e| {
-            if let Element::Goal {id,..} = e { *id == _id }
-            else if let Element::Note {id,..} = e { *id == _id }
-            else { false }
-        });
-        if let Some(position) = position {
-            self.elements.remove(position);
-            let _result = db::write_week(self);
-        }
+    pub fn delete_item(&mut self, id: i32) {
+        println!("delete item (goal/note/event) with id: {id}");
+        let _ = db_sqlite::remove_item(id);
+        self.update();
     }
 
-    pub fn edit_item(&mut self, _id: String, _text: String) {
-        println!("edit goal: id: {_id}, text: {_text}");
-        let item = self.elements.iter_mut().find(|e| {
-            if let Element::Goal {id,..} = e { *id == _id }
-            else if let Element::Note {id,..} = e { *id == _id }
-            else { false }
-        });
-        if let Some(e) = item {
-            if let Element::Goal {text,..} = e { *text = _text.clone(); }
-            if let Element::Note {text,..} = e { *text = _text.clone(); }
-            let _result = db::write_week(self);
-        }
+    pub fn update_item(&mut self, item: Item) {
+        println!("edit item id: {}", item.id);
+        let _ = db_sqlite::update_item(&item);
+        self.update();
     }
 
-    pub fn toggle_goal_state(&mut self, goal_id: String) -> bool {
-        // println!("searching for goal id {goal_id}");
-        let mut mut_iter = self.elements.iter_mut();
-        let goal = mut_iter.find(|e| {
-            if let Element::Goal {id,..} = e {
-                *id == goal_id
+    pub fn toggle_item_state(&mut self, id: i32) {
+        let item = db_sqlite::get_item(id);
+        if let Ok(mut item) = item {
+            if item.status == Some(STATUS_DONE) {
+                item.status = Some(STATUS_UNDONE)
             } else {
-                false
-            }});
-        let mut final_done_value = false;
-        if let Some(Element::Goal{done: d,..}) = goal {
-            // println!("found the goal, toggling the done parameter");
-            *d = !(*d);
-            final_done_value = *d;
+                item.status = Some(STATUS_DONE);
+            }
+            let _ = db_sqlite::update_item(&item);
         }
-        let _result = db::write_week(self);
-        // println!("returning: {final_done_value}");
-        final_done_value
+        self.update();
     }
 }
 
-
 #[cfg(test)]
 mod tests {
-    use crate::week::WeekState;
+    use crate::week::{WeekState, SEVEN_DAY_WEEK_SIZE, WEEKDAY_UNIX_OFFSET_SAT};
 
-    fn check_correct_reference_from_dates(dates: Vec<ptime::Tm>, expected_reference: i64) -> bool {
+    fn check_correct_reference_from_dates(dates: Vec<ptime::Tm>, expected_middle_day: i32) -> bool {
         println!("----");
         for pt in dates {
-            let reference = WeekState::calculate_reference_based_on_saturday(&pt);
-            let (first, last) = WeekState::calculate_first_last_week_day_based_on_saturday(reference);
+            let pt_day = (pt.to_timespec().sec / 3600 / 24) as i32;
+            let (s, m, e) = WeekState::calculate_week_start_middle_end_unix_day(
+                pt_day,
+                WEEKDAY_UNIX_OFFSET_SAT,
+                SEVEN_DAY_WEEK_SIZE,
+            );
+            let week = WeekState {
+                start_day: s,
+                middle_day: m,
+                end_day: e,
+                items: vec![],
+            };
+            let (first, last) = week.persian_first_and_last_week_days();
             let date = pt.to_string("yyyy-MM-dd HH:mm:ss");
             let shanbeh = first.to_string("yyyy-MM-dd HH:mm:ss");
             let jomeh = last.to_string("yyyy-MM-dd HH:mm:ss");
-            println!("ptime: {}, ref: {}, week: {} -> {}", date, reference, shanbeh, jomeh);
-            if expected_reference != reference {
+            println!(
+                "ptime: {}, start_day: {}, middle_day: {}, end_day: {}, week: {} -> {}",
+                date, s, m, e, shanbeh, jomeh
+            );
+            if expected_middle_day != m {
                 return false;
             }
         }
@@ -314,48 +280,56 @@ mod tests {
     #[test]
     fn test_find_week_period_with_ptime() {
         let mut pt_vec: Vec<ptime::Tm> = Vec::new();
-        let pt = ptime::from_persian_components(1402, 11-1, 27, 23, 22, 11, 0).unwrap();
+        let pt = ptime::from_persian_components(1403, 04 - 1, 22, 23, 22, 11, 0).unwrap();
         pt_vec.push(pt);
-        let pt = ptime::from_persian_components(1402, 11-1, 27, 23, 59, 36, 0).unwrap();
+        let pt = ptime::from_persian_components(1403, 04 - 1, 22, 23, 59, 36, 0).unwrap();
         pt_vec.push(pt);
-        let pt = ptime::from_persian_components(1402, 11-1, 27, 23, 59, 59, 0).unwrap();
+        let pt = ptime::from_persian_components(1403, 04 - 1, 22, 23, 59, 59, 0).unwrap();
         pt_vec.push(pt);
-        assert!(check_correct_reference_from_dates(pt_vec, 2823));
+        assert!(check_correct_reference_from_dates(pt_vec, 19913));
 
         let mut pt_vec: Vec<ptime::Tm> = Vec::new();
-        let pt = ptime::from_persian_components(1402, 11-1, 28, 0, 0, 0, 0).unwrap();
+        let pt = ptime::from_persian_components(1403, 04 - 1, 23, 0, 0, 0, 0).unwrap();
         pt_vec.push(pt);
-        let pt = ptime::from_persian_components(1402, 11-1, 28, 0, 0, 1, 0).unwrap();
+        let pt = ptime::from_persian_components(1403, 04 - 1, 23, 0, 0, 0, 888888).unwrap();
         pt_vec.push(pt);
-        let pt = ptime::from_persian_components(1402, 11-1, 28, 0, 0, 11, 0).unwrap();
+        let pt = ptime::from_persian_components(1403, 04 - 1, 23, 0, 0, 1, 0).unwrap();
         pt_vec.push(pt);
-        let pt = ptime::from_persian_components(1402, 11-1, 28, 0, 1, 22, 0).unwrap();
+        let pt = ptime::from_persian_components(1403, 04 - 1, 23, 0, 0, 11, 0).unwrap();
         pt_vec.push(pt);
-        let pt = ptime::from_persian_components(1402, 12-1, 1, 12, 0, 0, 0).unwrap();
+        let pt = ptime::from_persian_components(1403, 04 - 1, 23, 0, 1, 1, 1).unwrap();
         pt_vec.push(pt);
-        let pt = ptime::from_persian_components(1402, 12-1, 4, 0, 0, 0, 0).unwrap();
+        let pt = ptime::from_persian_components(1403, 04 - 1, 24, 12, 0, 0, 0).unwrap();
         pt_vec.push(pt);
-        let pt = ptime::from_persian_components(1402, 12-1, 4, 23, 23, 23, 23).unwrap();
+        let pt = ptime::from_persian_components(1403, 04 - 1, 25, 0, 0, 0, 0).unwrap();
         pt_vec.push(pt);
-        let pt = ptime::from_persian_components(1402, 12-1, 4, 23, 59, 23, 23).unwrap();
+        let pt = ptime::from_persian_components(1403, 04 - 1, 26, 23, 23, 23, 23).unwrap();
         pt_vec.push(pt);
-        let pt = ptime::from_persian_components(1402, 12-1, 4, 23, 59, 59, 19993294).unwrap();
+        let pt = ptime::from_persian_components(1403, 04 - 1, 27, 23, 23, 23, 23).unwrap();
         pt_vec.push(pt);
-        assert!(check_correct_reference_from_dates(pt_vec, 2824));
+        let pt = ptime::from_persian_components(1403, 04 - 1, 28, 23, 59, 23, 23).unwrap();
+        pt_vec.push(pt);
+        let pt = ptime::from_persian_components(1403, 04 - 1, 29, 0, 0, 0, 0).unwrap();
+        pt_vec.push(pt);
+        let pt = ptime::from_persian_components(1403, 04 - 1, 29, 23, 59, 23, 23).unwrap();
+        pt_vec.push(pt);
+        let pt = ptime::from_persian_components(1403, 04 - 1, 29, 23, 59, 59, 19993294).unwrap();
+        pt_vec.push(pt);
+        assert!(check_correct_reference_from_dates(pt_vec, 19920));
 
         let mut pt_vec: Vec<ptime::Tm> = Vec::new();
-        let pt = ptime::from_persian_components(1402, 12-1, 5, 0, 0, 0, 0).unwrap();
+        let pt = ptime::from_persian_components(1403, 04 - 1, 30, 0, 0, 0, 0).unwrap();
         pt_vec.push(pt);
-        let pt = ptime::from_persian_components(1402, 12-1, 5, 0, 0, 0, 1).unwrap();
+        let pt = ptime::from_persian_components(1403, 04 - 1, 30, 0, 0, 0, 1).unwrap();
         pt_vec.push(pt);
-        let pt = ptime::from_persian_components(1402, 12-1, 5, 0, 0, 1, 1).unwrap();
+        let pt = ptime::from_persian_components(1403, 04 - 1, 30, 0, 0, 1, 1).unwrap();
         pt_vec.push(pt);
-        let pt = ptime::from_persian_components(1402, 12-1, 5, 0, 1, 1, 1).unwrap();
+        let pt = ptime::from_persian_components(1403, 04 - 1, 30, 0, 1, 1, 1).unwrap();
         pt_vec.push(pt);
-        let pt = ptime::from_persian_components(1402, 12-1, 5, 1, 1, 1, 1).unwrap();
+        let pt = ptime::from_persian_components(1403, 04 - 1, 30, 1, 1, 1, 1).unwrap();
         pt_vec.push(pt);
-        let pt = ptime::from_persian_components(1402, 12-1, 6, 6, 6, 6, 6).unwrap();
+        let pt = ptime::from_persian_components(1403, 04 - 1, 31, 6, 6, 6, 6).unwrap();
         pt_vec.push(pt);
-        assert!(check_correct_reference_from_dates(pt_vec, 2825));
+        assert!(check_correct_reference_from_dates(pt_vec, 19927));
     }
 }
