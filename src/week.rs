@@ -209,35 +209,61 @@ impl WeekState {
         println!("adding a new goal: {text}");
         let goal = NewItem::new_goal(self.middle_day, text);
         let _result = db_sqlite::create_item(&goal);
+        self.update();
     }
 
     pub fn add_new_note(&mut self, text: String) {
         println!("adding a new note: {text}");
         let note = NewItem::new_note(self.middle_day, text);
         let _result = db_sqlite::create_item(&note);
+        self.update();
     }
 
     pub fn delete_item(&mut self, id: i32) {
+        if id < 0 {
+            println!("invalid id for delete_item(). ignored. id {id}");
+            return;
+        }
         println!("delete item (goal/note/event) with id: {id}");
         let _ = db_sqlite::remove_item(id);
         self.update();
     }
 
-    pub fn update_item(&mut self, item: Item) {
-        println!("edit item id: {}", item.id);
-        let _ = db_sqlite::update_item(&item);
+    pub fn update_item(&mut self, id: i32, text: String) {
+        if id < 0 {
+            println!("invalid id for update_item(). ignored. id {id}");
+            return;
+        }
+        println!("edit item id: {}", id);
+        if let Ok(mut item) = db_sqlite::get_item(id) {
+            if item.kind == ITEM_KIND_GOAL {
+                item.title = Some(text.clone());
+            }
+            if item.kind == ITEM_KIND_NOTE {
+                item.note = Some(text.clone());
+            }
+            let _ = db_sqlite::update_item(&item);
+        }
         self.update();
     }
 
     pub fn toggle_item_state(&mut self, id: i32) {
+        if id < 0 {
+            println!("invalid id for toggle_item_state(). ignored. id {id}");
+            return;
+        }
+        println!("toggle_item_state: id: {id}");
         let item = db_sqlite::get_item(id);
+        println!("item: {item:?}");
         if let Ok(mut item) = item {
             if item.status == Some(STATUS_DONE) {
                 item.status = Some(STATUS_UNDONE)
             } else {
                 item.status = Some(STATUS_DONE);
             }
-            let _ = db_sqlite::update_item(&item);
+            println!("item: {item:?}");
+            let update_result = db_sqlite::update_item(&item);
+            println!("update_result: {update_result:?}");
         }
         self.update();
     }
