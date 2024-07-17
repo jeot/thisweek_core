@@ -267,6 +267,36 @@ impl WeekState {
         }
         self.update();
     }
+
+    pub fn get_near_items_id(&self, id: i32) -> (Option<i32>, Option<i32>) {
+        let mut previous = None;
+        let mut next = None;
+        let mut iter = self.items.iter();
+        if id < 0 {
+            // this case is when nothing is selected.
+            // return first and last item's id
+            if let Some(item) = iter.next() {
+                next = Some(item.id);
+            }
+            if let Some(item) = iter.last() {
+                previous = Some(item.id);
+            }
+            (previous, next)
+        } else {
+            let position = iter.position(|i| (i.id == id));
+            if let Some(pos) = position {
+                if pos > 0 {
+                    previous = Some(self.items[pos - 1].id);
+                }
+                if pos < (self.items.len() - 1) {
+                    next = Some(self.items[pos + 1].id);
+                }
+                (previous, next)
+            } else {
+                (None, None)
+            }
+        }
+    }
 }
 
 #[cfg(test)]
