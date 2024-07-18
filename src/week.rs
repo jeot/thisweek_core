@@ -254,14 +254,15 @@ impl WeekState {
         }
         println!("toggle_item_state: id: {id}");
         let item = db_sqlite::get_item(id);
-        println!("item: {item:?}");
         if let Ok(mut item) = item {
+            if item.kind != ITEM_KIND_GOAL {
+                return;
+            }
             if item.status == Some(STATUS_DONE) {
                 item.status = Some(STATUS_UNDONE)
             } else {
                 item.status = Some(STATUS_DONE);
             }
-            println!("item: {item:?}");
             let update_result = db_sqlite::update_item(&item);
             println!("update_result: {update_result:?}");
         }
