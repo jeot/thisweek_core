@@ -5,9 +5,10 @@
 
 // use std::time;
 
-use crate::models::*;
+use crate::{db_sqlite::update_item, models::*};
 use chrono::{DateTime, Datelike, Local};
 use ptime;
+use rusqlite::ToSql;
 use serde::Serialize;
 use time::Timespec;
 
@@ -66,27 +67,14 @@ impl WeekState {
     }
 
     fn from_unix_days_tuple((start_day, middle_day, end_day): (i32, i32, i32)) -> Self {
-        let db_result = db_sqlite::read_items_between_days(start_day, end_day);
-        match db_result {
-            Ok(vec) => {
-                println!("db read success. some week data.");
-                WeekState {
-                    start_day,
-                    middle_day,
-                    end_day,
-                    items: vec,
-                }
-            }
-            Err(err) => {
-                println!("db read failed. err: {}", err);
-                Self {
-                    start_day,
-                    middle_day,
-                    end_day,
-                    items: vec![],
-                }
-            }
-        }
+        let mut week = WeekState {
+            start_day,
+            middle_day,
+            end_day,
+            items: Vec::new(),
+        };
+        week.update();
+        week
     }
 
     fn persian_first_and_last_week_days(&self) -> (ptime::Tm, ptime::Tm) {
@@ -96,10 +84,49 @@ impl WeekState {
     }
 
     fn update(&mut self) {
-        let db_result = db_sqlite::read_items_between_days(self.start_day, self.end_day);
+        let db_result = db_sqlite::read_items_between_days(self.start_day, self.end_day, true);
         match db_result {
-            Ok(vec) => self.items = vec,
+            Ok(vec) => {
+                self.items = vec;
+                self.check_and_fix_week_ordering_keys();
+            }
             Err(err) => println!("db read failed. err: {}", err),
+        }
+    }
+
+    fn check_and_fix_week_ordering_keys(&mut self) {
+        let mut fix = false;
+        for item in self.items.clone() {
+            if item.order_in_week.is_none() {
+                fix = true;
+                break;
+            }
+        }
+        if fix {
+            println!("fixing some invalid ordering keys...");
+            println!("items before ordering: {:?}", self.items);
+            let mut top = String::from("");
+            let bot = String::from("");
+            let iter = self.items.iter_mut();
+            for item in iter {
+                let key = midstring::mid_string(&top, &bot);
+                item.order_in_week = Some(key.clone());
+                top = key;
+            }
+            println!("items after ordering: {:?}", self.items);
+            println!("commiting to database...");
+            self.update_items_in_database();
+        } else {
+            println!("ordering keys seems ok.");
+        }
+    }
+
+    fn update_items_in_database(&self) {
+        println!("updating all self items in database");
+        for item in self.items.clone() {
+            if let Err(e) = db_sqlite::update_item(&item) {
+                println!("error! {e}");
+            }
         }
     }
 
@@ -205,16 +232,29 @@ impl WeekState {
     //     item
     // }
 
+    pub fn get_new_ordering_key(&self) -> String {
+        // canculate based on adding new key after the last item
+        let last_item = self.items.last();
+        let last_item_order_key: String = if let Some(item) = last_item {
+            item.order_in_week.clone().unwrap_or("".to_string())
+        } else {
+            "".to_string()
+        };
+        midstring::mid_string(&last_item_order_key, "")
+    }
+
     pub fn add_new_goal(&mut self, text: String) {
         println!("adding a new goal: {text}");
-        let goal = NewItem::new_goal(self.middle_day, text);
+        let ordering_key = self.get_new_ordering_key();
+        let goal = NewItem::new_goal(self.middle_day, text, ordering_key);
         let _result = db_sqlite::create_item(&goal);
         self.update();
     }
 
     pub fn add_new_note(&mut self, text: String) {
         println!("adding a new note: {text}");
-        let note = NewItem::new_note(self.middle_day, text);
+        let ordering_key = self.get_new_ordering_key();
+        let note = NewItem::new_note(self.middle_day, text, ordering_key);
         let _result = db_sqlite::create_item(&note);
         self.update();
     }
@@ -265,6 +305,79 @@ impl WeekState {
             }
             let update_result = db_sqlite::update_item(&item);
             println!("update_result: {update_result:?}");
+        }
+        self.update();
+    }
+
+    pub fn move_up_selected_item(&mut self, id: i32) {
+        // reordering logic:
+        // get the ordering-keys of two previous items
+        // generate new key and update
+        let prev_key;
+        let next_key;
+        if let Some(pos) = self.items.iter().position(|item| item.id == id) {
+            if pos == 0 {
+                // already first item
+                return;
+            } else if pos == 1 {
+                prev_key = "".to_string();
+                next_key = self.items[pos - 1]
+                    .order_in_week
+                    .clone()
+                    .unwrap_or("".to_string());
+            } else {
+                // pos > 2
+                prev_key = self.items[pos - 2]
+                    .order_in_week
+                    .clone()
+                    .unwrap_or("".to_string());
+                next_key = self.items[pos - 1]
+                    .order_in_week
+                    .clone()
+                    .unwrap_or("".to_string());
+            }
+            let new_key = midstring::mid_string(&prev_key, &next_key);
+            self.items[pos].order_in_week = Some(new_key);
+            let _ = update_item(&self.items[pos]);
+        } else {
+            return;
+        }
+        self.update();
+    }
+
+    pub fn move_down_selected_item(&mut self, id: i32) {
+        // reordering logic:
+        // get the ordering-keys of two next items
+        // generate new key and update
+        let prev_key;
+        let next_key;
+        let length = self.items.len();
+        if let Some(pos) = self.items.iter().position(|item| item.id == id) {
+            if pos == length - 1 {
+                // already last item
+                return;
+            } else if pos == length - 2 {
+                prev_key = self.items[pos + 1]
+                    .order_in_week
+                    .clone()
+                    .unwrap_or("".to_string());
+                next_key = "".to_string();
+            } else {
+                // pos < length - 2
+                prev_key = self.items[pos + 1]
+                    .order_in_week
+                    .clone()
+                    .unwrap_or("".to_string());
+                next_key = self.items[pos + 2]
+                    .order_in_week
+                    .clone()
+                    .unwrap_or("".to_string());
+            }
+            let new_key = midstring::mid_string(&prev_key, &next_key);
+            self.items[pos].order_in_week = Some(new_key);
+            let _ = update_item(&self.items[pos]);
+        } else {
+            return;
         }
         self.update();
     }

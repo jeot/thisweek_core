@@ -25,7 +25,9 @@ pub const WEEKDAY_UNIX_OFFSET_MON: i32 = 4;
 pub const WEEKDAY_UNIX_OFFSET_TUE: i32 = 5;
 pub const WEEKDAY_UNIX_OFFSET_WED: i32 = 6;
 
-#[derive(Queryable, Selectable, Identifiable, Debug, Serialize, Deserialize, Clone)]
+#[derive(
+    Queryable, Selectable, Identifiable, AsChangeset, Debug, Serialize, Deserialize, Clone,
+)]
 #[diesel(table_name = crate::schema::items)]
 #[diesel(check_for_backend(diesel::sqlite::Sqlite))]
 pub struct Item {
@@ -73,7 +75,7 @@ pub struct NewItem {
 }
 
 impl NewItem {
-    fn new(day: i32, kind: i32, text: String) -> Self {
+    fn new(day: i32, kind: i32, text: String, ordering_key: String) -> Self {
         NewItem {
             calendar: CALENDAR_PERSIAN_ID,
             year: None,
@@ -96,17 +98,18 @@ impl NewItem {
             datetime: None,
             duration: None,
             status: Some(STATUS_UNDONE),
-            order_in_week: None,
+            order_in_week: Some(ordering_key),
             order_in_resolution: None,
             sync: None,
             uuid: Some(cuid2::create_id()),
         }
     }
-    pub fn new_goal(day: i32, text: String) -> Self {
-        Self::new(day, ITEM_KIND_GOAL, text)
+
+    pub fn new_goal(day: i32, text: String, ordering_key: String) -> Self {
+        Self::new(day, ITEM_KIND_GOAL, text, ordering_key)
     }
 
-    pub fn new_note(day: i32, text: String) -> Self {
-        Self::new(day, ITEM_KIND_NOTE, text)
+    pub fn new_note(day: i32, text: String, ordering_key: String) -> Self {
+        Self::new(day, ITEM_KIND_NOTE, text, ordering_key)
     }
 }

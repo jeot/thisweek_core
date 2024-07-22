@@ -32,19 +32,11 @@ pub fn remove_item(item_id: i32) -> Result<usize, String> {
 }
 
 pub fn update_item(item: &Item) -> Result<usize, String> {
-    use crate::schema::items::dsl::*;
     let conn = &mut establish_connection();
 
-    // note: only some fields are updating here.
-    // more fields should be updated in the future based on new features.
-    diesel::update(item)
-        .set((
-            day.eq(item.day),
-            fixed_date.eq(item.fixed_date),
-            title.eq(item.title.clone()),
-            note.eq(item.note.clone()),
-            status.eq(item.status),
-        ))
+    // https://diesel.rs/guides/all-about-updates.html
+    diesel::update(item) // gets id from this object here
+        .set(item) // updates all the other fields from this object
         .execute(conn)
         .map_err(|err| err.to_string())
 }
@@ -59,14 +51,29 @@ pub fn get_item(item_id: i32) -> Result<Item, String> {
         .map_err(|e| e.to_string())
 }
 
-pub fn read_items_between_days(start_day: i32, end_day: i32) -> Result<Vec<Item>, String> {
+pub fn read_items_between_days(
+    start_day: i32,
+    end_day: i32,
+    week_order: bool,
+    /* for the future: resolution_order: bool */
+) -> Result<Vec<Item>, String> {
     use crate::schema::items::dsl::*;
     let conn = &mut establish_connection();
 
-    items
-        .filter(day.ge(start_day)) // >=
-        .filter(day.le(end_day)) // <=
-        .select(Item::as_select())
-        .load(conn)
-        .map_err(|e| e.to_string())
+    if week_order {
+        items
+            .filter(day.ge(start_day)) // >=
+            .filter(day.le(end_day)) // <=
+            .order(order_in_week.asc())
+            .select(Item::as_select())
+            .load(conn)
+            .map_err(|e| e.to_string())
+    } else {
+        items
+            .filter(day.ge(start_day)) // >=
+            .filter(day.le(end_day)) // <=
+            .select(Item::as_select())
+            .load(conn)
+            .map_err(|e| e.to_string())
+    }
 }
