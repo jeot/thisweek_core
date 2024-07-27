@@ -84,3 +84,18 @@ pub fn read_items_between_days(
             .map_err(|e| e.to_string())
     }
 }
+
+pub fn backup_database_file() -> Result<usize, String> {
+    let database_url = env::var("WEEKS_DATABASE_URL").expect("WEEKS_DATABASE_URL must be set");
+    // println!("database_url: {database_url}");
+    let mut timestamp = chrono::Local::now().to_rfc3339_opts(chrono::SecondsFormat::Secs, false);
+    timestamp = timestamp.replace(':', "-");
+    let mut filename = String::from(&database_url);
+    filename.push('.');
+    filename.push_str(&timestamp);
+    filename.push_str(".backup");
+    // println!("filename: {filename}");
+    std::fs::copy(database_url, filename)
+        .map(|x| x as usize)
+        .map_err(|e| e.to_string())
+}

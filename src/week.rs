@@ -8,7 +8,6 @@
 use crate::models::*;
 use chrono::{DateTime, Datelike, Local};
 use ptime;
-use rusqlite::ToSql;
 use serde::Serialize;
 use time::Timespec;
 
@@ -388,6 +387,10 @@ impl WeekState {
         } else {
             self.update();
         }
+    }
+
+    pub fn backup_database_file(&self) -> bool {
+        db_sqlite::backup_database_file().is_ok()
     }
 
     pub fn get_near_items_id(&self, id: i32) -> (Option<i32>, Option<i32>) {
