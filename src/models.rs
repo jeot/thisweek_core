@@ -30,6 +30,7 @@ pub const WEEKDAY_UNIX_OFFSET_WED: i32 = 6;
 )]
 #[diesel(table_name = crate::schema::items)]
 #[diesel(check_for_backend(diesel::sqlite::Sqlite))]
+#[diesel(treat_none_as_null = true)]
 pub struct Item {
     pub id: i32,
     pub calendar: i32,
@@ -53,6 +54,7 @@ pub struct Item {
 
 #[derive(Insertable)]
 #[diesel(table_name = crate::schema::items)]
+#[diesel(treat_none_as_null = true)]
 #[diesel(check_for_backend(diesel::sqlite::Sqlite))]
 pub struct NewItem {
     pub calendar: i32,

@@ -5,7 +5,7 @@
 
 // use std::time;
 
-use crate::{db_sqlite::update_item, models::*};
+use crate::models::*;
 use chrono::{DateTime, Datelike, Local};
 use ptime;
 use rusqlite::ToSql;
@@ -104,7 +104,7 @@ impl WeekState {
         }
         if fix {
             println!("fixing some invalid ordering keys...");
-            println!("items before ordering: {:?}", self.items);
+            // println!("items before ordering: {:?}", self.items);
             let mut top = String::from("");
             let bot = String::from("");
             let iter = self.items.iter_mut();
@@ -113,11 +113,10 @@ impl WeekState {
                 item.order_in_week = Some(key.clone());
                 top = key;
             }
-            println!("items after ordering: {:?}", self.items);
-            println!("commiting to database...");
+            // println!("items after ordering: {:?}", self.items);
             self.update_items_in_database();
         } else {
-            println!("ordering keys seems ok.");
+            // println!("ordering keys seems ok.");
         }
     }
 
@@ -214,23 +213,6 @@ impl WeekState {
             items: self.items.clone(),
         }
     }
-
-    // pub fn get_item(&self, _id: String) -> Option<Element> {
-    //     let item = self
-    //         .elements
-    //         .iter()
-    //         .find(|e| {
-    //             if let Element::Goal { id, .. } = e {
-    //                 *id == _id
-    //             } else if let Element::Note { id, .. } = e {
-    //                 *id == _id
-    //             } else {
-    //                 false
-    //             }
-    //         })
-    //         .cloned();
-    //     item
-    // }
 
     pub fn get_new_ordering_key(&self) -> String {
         // canculate based on adding new key after the last item
@@ -338,7 +320,7 @@ impl WeekState {
             }
             let new_key = midstring::mid_string(&prev_key, &next_key);
             self.items[pos].order_in_week = Some(new_key);
-            let _ = update_item(&self.items[pos]);
+            let _ = db_sqlite::update_item(&self.items[pos]);
         } else {
             return;
         }
@@ -375,11 +357,37 @@ impl WeekState {
             }
             let new_key = midstring::mid_string(&prev_key, &next_key);
             self.items[pos].order_in_week = Some(new_key);
-            let _ = update_item(&self.items[pos]);
+            let _ = db_sqlite::update_item(&self.items[pos]);
         } else {
             return;
         }
         self.update();
+    }
+
+    pub fn move_selected_item_to_next_week(&mut self, id: i32) {
+        if let Some(pos) = self.items.iter().position(|item| item.id == id) {
+            // println!("moving item {id} to next week...");
+            let mut item = self.items[pos].clone();
+            item.day += SEVEN_DAY_WEEK_SIZE;
+            item.order_in_week = None;
+            let _ = db_sqlite::update_item(&item);
+            self.next();
+        } else {
+            self.update();
+        }
+    }
+
+    pub fn move_selected_item_to_previous_week(&mut self, id: i32) {
+        if let Some(pos) = self.items.iter().position(|item| item.id == id) {
+            // println!("moving item {id} to previous week...");
+            let mut item = self.items[pos].clone();
+            item.day -= SEVEN_DAY_WEEK_SIZE;
+            item.order_in_week = None;
+            let _ = db_sqlite::update_item(&item);
+            self.previous();
+        } else {
+            self.update();
+        }
     }
 
     pub fn get_near_items_id(&self, id: i32) -> (Option<i32>, Option<i32>) {

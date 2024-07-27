@@ -34,6 +34,13 @@ pub fn remove_item(item_id: i32) -> Result<usize, String> {
 pub fn update_item(item: &Item) -> Result<usize, String> {
     let conn = &mut establish_connection();
 
+    // for test
+    // let query = diesel::update(item).set(item);
+    // println!(
+    //     "{}",
+    //     diesel::debug_query::<diesel::sqlite::Sqlite, _>(&query)
+    // );
+
     // https://diesel.rs/guides/all-about-updates.html
     diesel::update(item) // gets id from this object here
         .set(item) // updates all the other fields from this object
