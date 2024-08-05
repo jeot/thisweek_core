@@ -149,3 +149,10 @@ impl NewItem {
         )
     }
 }
+
+#[derive(Serialize)]
+pub struct WeekStateJs {
+    today: crate::today::TodayState,
+    week: crate::week::WeekState,
+    year: crate::year::YearState,
+}

@@ -1,3 +1,5 @@
+/* Week */
+
 // https://en.wikipedia.org/wiki/Unix_time
 // https://en.wikipedia.org/wiki/January_1970#January_1,_1970_(Thursday)
 // https://en.wikipedia.org/wiki/Leap_second
@@ -5,47 +7,34 @@
 
 // use std::time;
 
+use std::option::IterMut;
+
+use crate::db_sqlite;
 use crate::models::*;
+use crate::ordering::Ordering;
+use crate::today::Today;
 use chrono::{DateTime, Datelike, Local};
 use ptime;
 use serde::Serialize;
 use time::Timespec;
 
-use crate::db_sqlite;
-
 #[derive(Serialize)]
-pub struct WeekStateJs {
-    today_persian_date: String,
-    today_english_date: String,
-    week_title: String,
-    items: Vec<Item>,
-}
-
-pub struct WeekState {
+pub struct Week {
     pub start_day: i32,
     pub middle_day: i32,
     pub end_day: i32,
     pub items: Vec<Item>,
 }
 
-impl WeekState {
+impl Week {
     pub fn new() -> Self {
         // it's local persian date for now!
         let days_tuple = Self::calculate_week_start_middle_end_unix_day(
-            Self::get_current_unix_day(),
+            Today::get_unix_day(),
             WEEKDAY_UNIX_OFFSET_SAT,
             SEVEN_DAY_WEEK_SIZE,
         );
         Self::from_unix_days_tuple(days_tuple)
-    }
-
-    fn get_current_unix_day() -> i32 {
-        let a = std::time::SystemTime::now()
-            .duration_since(std::time::UNIX_EPOCH)
-            .unwrap()
-            .as_secs();
-        let days = (a / 3600 / 24) as i32;
-        days
     }
 
     // January 1, 1970 was Thursday
@@ -66,7 +55,7 @@ impl WeekState {
     }
 
     fn from_unix_days_tuple((start_day, middle_day, end_day): (i32, i32, i32)) -> Self {
-        let mut week = WeekState {
+        let mut week = Week {
             start_day,
             middle_day,
             end_day,
@@ -76,7 +65,7 @@ impl WeekState {
         week
     }
 
-    fn persian_first_and_last_week_days(&self) -> (ptime::Tm, ptime::Tm) {
+    fn get_persian_first_and_last_week_days(&self) -> (ptime::Tm, ptime::Tm) {
         let shanbeh = ptime::at(Timespec::new((self.start_day as i64) * 24 * 3600, 0));
         let jomeh = ptime::at(Timespec::new((self.end_day as i64) * 24 * 3600, 0));
         (shanbeh, jomeh)
@@ -86,36 +75,11 @@ impl WeekState {
         let db_result = db_sqlite::read_items_between_days(self.start_day, self.end_day, true);
         match db_result {
             Ok(vec) => {
+                // todo: exclude the objectives, include the ones that are fixed date
                 self.items = vec;
-                self.check_and_fix_week_ordering_keys();
+                self.items.check_and_fix_week_ordering_keys();
             }
             Err(err) => println!("db read failed. err: {}", err),
-        }
-    }
-
-    fn check_and_fix_week_ordering_keys(&mut self) {
-        let mut fix = false;
-        for item in self.items.clone() {
-            if item.order_in_week.is_none() {
-                fix = true;
-                break;
-            }
-        }
-        if fix {
-            println!("fixing some invalid ordering keys...");
-            // println!("items before ordering: {:?}", self.items);
-            let mut top = String::from("");
-            let bot = String::from("");
-            let iter = self.items.iter_mut();
-            for item in iter {
-                let key = midstring::mid_string(&top, &bot);
-                item.order_in_week = Some(key.clone());
-                top = key;
-            }
-            // println!("items after ordering: {:?}", self.items);
-            self.update_items_in_database();
-        } else {
-            // println!("ordering keys seems ok.");
         }
     }
 
@@ -182,7 +146,7 @@ impl WeekState {
 
     pub fn week_title(&self) -> String {
         let today = ptime::now();
-        let (shanbeh, jomeh) = self.persian_first_and_last_week_days();
+        let (shanbeh, jomeh) = self.get_persian_first_and_last_week_days();
         if shanbeh.tm_year == jomeh.tm_year && shanbeh.tm_year != today.tm_year {
             format!(
                 "{} - {}",
@@ -424,6 +388,19 @@ impl WeekState {
     }
 }
 
+impl Ordering for Week {
+    fn get_keys(&self) -> Vec<Option<String>> {
+        self.items.iter().map(|i| i.order_in_week.clone()).collect()
+    }
+
+    fn get_ordering_key_mut_iter(&mut self) -> IterMut<Option<String>> {
+        self.items
+            .iter_mut()
+            .map(|i| &mut i.order_in_week)
+            .collect()
+    }
+}
+
 #[cfg(test)]
 mod tests {
     use crate::week::{WeekState, SEVEN_DAY_WEEK_SIZE, WEEKDAY_UNIX_OFFSET_SAT};
@@ -443,7 +420,7 @@ mod tests {
                 end_day: e,
                 items: vec![],
             };
-            let (first, last) = week.persian_first_and_last_week_days();
+            let (first, last) = week.get_persian_first_and_last_week_days();
             let date = pt.to_string("yyyy-MM-dd HH:mm:ss");
             let shanbeh = first.to_string("yyyy-MM-dd HH:mm:ss");
             let jomeh = last.to_string("yyyy-MM-dd HH:mm:ss");
