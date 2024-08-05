@@ -225,17 +225,17 @@ impl WeekState {
     }
 
     pub fn add_new_goal(&mut self, text: String) {
-        println!("adding a new goal: {text}");
+        println!("adding a new weekly goal: {text}");
         let ordering_key = self.get_new_ordering_key();
-        let goal = NewItem::new_goal(self.middle_day, text, ordering_key);
+        let goal = NewItem::new_weekly_goal(self.middle_day, text, ordering_key);
         let _result = db_sqlite::create_item(&goal);
         self.update();
     }
 
     pub fn add_new_note(&mut self, text: String) {
-        println!("adding a new note: {text}");
+        println!("adding a new weekly note: {text}");
         let ordering_key = self.get_new_ordering_key();
-        let note = NewItem::new_note(self.middle_day, text, ordering_key);
+        let note = NewItem::new_weekly_note(self.middle_day, text, ordering_key);
         let _result = db_sqlite::create_item(&note);
         self.update();
     }

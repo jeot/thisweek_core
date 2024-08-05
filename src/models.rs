@@ -77,12 +77,20 @@ pub struct NewItem {
 }
 
 impl NewItem {
-    fn new(day: i32, kind: i32, text: String, ordering_key: String) -> Self {
+    fn new(
+        year: Option<i32>,
+        season: Option<i32>,
+        month: Option<i32>,
+        day: i32,
+        kind: i32,
+        text: String,
+        ordering_key: String,
+    ) -> Self {
         NewItem {
             calendar: CALENDAR_PERSIAN_ID,
-            year: None,
-            season: None,
-            month: None,
+            year,
+            season,
+            month,
             day,
             kind,
             fixed_date: false,
@@ -107,11 +115,37 @@ impl NewItem {
         }
     }
 
-    pub fn new_goal(day: i32, text: String, ordering_key: String) -> Self {
-        Self::new(day, ITEM_KIND_GOAL, text, ordering_key)
+    pub fn new_weekly_goal(day: i32, text: String, ordering_key: String) -> Self {
+        let year = None;
+        let season = None;
+        let month = None;
+        Self::new(year, season, month, day, ITEM_KIND_GOAL, text, ordering_key)
     }
 
-    pub fn new_note(day: i32, text: String, ordering_key: String) -> Self {
-        Self::new(day, ITEM_KIND_NOTE, text, ordering_key)
+    pub fn new_weekly_note(day: i32, text: String, ordering_key: String) -> Self {
+        let year = None;
+        let season = None;
+        let month = None;
+        Self::new(year, season, month, day, ITEM_KIND_NOTE, text, ordering_key)
+    }
+
+    pub fn new_objective(
+        year: i32,
+        season: i32,
+        month: i32,
+        day: i32,
+        kind: i32,
+        text: String,
+        ordering_key: String,
+    ) -> Self {
+        Self::new(
+            Some(year),
+            Some(season),
+            Some(month),
+            day,
+            kind,
+            text,
+            ordering_key,
+        )
     }
 }
