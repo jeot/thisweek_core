@@ -1,5 +1,7 @@
 use crate::models::Item;
 use crate::models::NewItem;
+use crate::models::{ITEM_KIND_GOAL, ITEM_KIND_NOTE};
+use crate::models::{STATUS_DONE, STATUS_UNDONE};
 use diesel::prelude::*;
 use dotenvy::dotenv;
 use std::env;
@@ -85,7 +87,20 @@ pub fn read_items_between_days(
     }
 }
 
-pub fn backup_database_file() -> Result<usize, String> {
+pub fn read_items_in_calendar_year(_calendar: i32, _year: i32) -> Result<Vec<Item>, String> {
+    use crate::schema::items::dsl::*;
+    let conn = &mut establish_connection();
+
+    items
+        .filter(calendar.eq(_calendar))
+        .filter(year.eq(Some(_year)))
+        .order(order_in_resolution.asc())
+        .select(Item::as_select())
+        .load(conn)
+        .map_err(|e| e.to_string())
+}
+
+pub fn backup_database_file() -> Result<(), String> {
     let database_url = env::var("WEEKS_DATABASE_URL").expect("WEEKS_DATABASE_URL must be set");
     // println!("database_url: {database_url}");
     let mut timestamp = chrono::Local::now().to_rfc3339_opts(chrono::SecondsFormat::Secs, false);
@@ -96,6 +111,57 @@ pub fn backup_database_file() -> Result<usize, String> {
     filename.push_str(".backup");
     // println!("filename: {filename}");
     std::fs::copy(database_url, filename)
-        .map(|x| x as usize)
+        .map(|_| ())
         .map_err(|e| e.to_string())
+}
+
+fn check_valid_id_range(id: i32) -> Result<(), String> {
+    if id < 0 {
+        let err = format!("invalid id. ignored. id {id}");
+        println!("error: {err}");
+        Err(err)
+    } else {
+        Ok(())
+    }
+}
+
+pub fn update_item_text(id: i32, text: String) -> Result<usize, String> {
+    println!("update_item_text: {}", id);
+    check_valid_id_range(id)?;
+    let mut item = get_item(id)?;
+    if item.kind == ITEM_KIND_GOAL {
+        item.title = Some(text.clone());
+    }
+    if item.kind == ITEM_KIND_NOTE {
+        item.note = Some(text.clone());
+    }
+    update_item(&item)
+}
+
+pub fn toggle_item_state(id: i32) -> Result<usize, String> {
+    println!("toggle_item_state: id: {id}");
+    check_valid_id_range(id)?;
+    let mut item = get_item(id)?;
+    if item.status == Some(STATUS_DONE) {
+        item.status = Some(STATUS_UNDONE)
+    } else {
+        item.status = Some(STATUS_DONE);
+    }
+    update_item(&item)
+}
+
+pub fn update_item_week_ordering_key(id: i32, key: String) -> Result<usize, String> {
+    println!("update_item_week_ordering_key: id: {id}");
+    check_valid_id_range(id)?;
+    let mut item = get_item(id)?;
+    item.order_in_week = Some(key);
+    update_item(&item)
+}
+
+pub fn update_item_year_ordering_key(id: i32, key: String) -> Result<usize, String> {
+    println!("update_item_year_ordering_key: id: {id}");
+    check_valid_id_range(id)?;
+    let mut item = get_item(id)?;
+    item.order_in_resolution = Some(key);
+    update_item(&item)
 }

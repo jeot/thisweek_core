@@ -3,10 +3,8 @@ use diesel::prelude::*;
 use serde::Deserialize;
 use serde::Serialize;
 
-pub const CALENDAR_PERSIAN_ID: i32 = 1;
-pub const CALENDAR_GREGORIAN_ID: i32 = 2;
-
-pub const SEVEN_DAY_WEEK_SIZE: i32 = 7;
+pub const CALENDAR_PERSIAN: i32 = 1;
+pub const CALENDAR_GREGORIAN: i32 = 2;
 
 pub const ITEM_KIND_GOAL: i32 = 1;
 pub const ITEM_KIND_NOTE: i32 = 2;
@@ -14,16 +12,8 @@ pub const ITEM_KIND_EVENT: i32 = 3;
 pub const STATUS_UNDONE: i32 = 0;
 pub const STATUS_DONE: i32 = 1;
 
-// January 1, 1970 was Thursday
-// Thu, Fri, Sat, Sun, Mon, Tue, Wed
-// 0  , 1  , 2  , 3  , 4  , 5  , 6
-pub const WEEKDAY_UNIX_OFFSET_THU: i32 = 0;
-pub const WEEKDAY_UNIX_OFFSET_FRI: i32 = 1;
-pub const WEEKDAY_UNIX_OFFSET_SAT: i32 = 2;
-pub const WEEKDAY_UNIX_OFFSET_SUN: i32 = 3;
-pub const WEEKDAY_UNIX_OFFSET_MON: i32 = 4;
-pub const WEEKDAY_UNIX_OFFSET_TUE: i32 = 5;
-pub const WEEKDAY_UNIX_OFFSET_WED: i32 = 6;
+pub const LIST_TYPE_WEEKS: i32 = 1;
+pub const LIST_TYPE_OBJECTIVES: i32 = 2;
 
 #[derive(
     Queryable, Selectable, Identifiable, AsChangeset, Debug, Serialize, Deserialize, Clone,
@@ -52,6 +42,42 @@ pub struct Item {
     pub uuid: Option<String>,
 }
 
+pub trait ItemsList {
+    fn get_near_items_id(&self, id: i32) -> (Option<i32>, Option<i32>);
+}
+
+impl ItemsList for Vec<Item> {
+    fn get_near_items_id(&self, id: i32) -> (Option<i32>, Option<i32>) {
+        let mut previous = None;
+        let mut next = None;
+        let mut iter = self.iter();
+        if id < 0 {
+            // this case is when nothing is selected.
+            // return first and last item's id
+            if let Some(item) = iter.next() {
+                next = Some(item.id);
+            }
+            if let Some(item) = iter.last() {
+                previous = Some(item.id);
+            }
+            (previous, next)
+        } else {
+            let position = iter.position(|i| (i.id == id));
+            if let Some(pos) = position {
+                if pos > 0 {
+                    previous = Some(self[pos - 1].id);
+                }
+                if pos < (self.len() - 1) {
+                    next = Some(self[pos + 1].id);
+                }
+                (previous, next)
+            } else {
+                (None, None)
+            }
+        }
+    }
+}
+
 #[derive(Insertable)]
 #[diesel(table_name = crate::schema::items)]
 #[diesel(treat_none_as_null = true)]
@@ -77,7 +103,8 @@ pub struct NewItem {
 }
 
 impl NewItem {
-    fn new(
+    pub fn new(
+        calendar: i32,
         year: Option<i32>,
         season: Option<i32>,
         month: Option<i32>,
@@ -85,9 +112,10 @@ impl NewItem {
         kind: i32,
         text: String,
         ordering_key: String,
+        is_resolution: bool,
     ) -> Self {
         NewItem {
-            calendar: CALENDAR_PERSIAN_ID,
+            calendar,
             year,
             season,
             month,
@@ -108,51 +136,59 @@ impl NewItem {
             datetime: None,
             duration: None,
             status: Some(STATUS_UNDONE),
-            order_in_week: Some(ordering_key),
-            order_in_resolution: None,
+            order_in_week: if is_resolution {
+                None
+            } else {
+                Some(ordering_key.clone())
+            },
+            order_in_resolution: if is_resolution {
+                Some(ordering_key.clone())
+            } else {
+                None
+            },
             sync: None,
             uuid: Some(cuid2::create_id()),
         }
     }
 
-    pub fn new_weekly_goal(day: i32, text: String, ordering_key: String) -> Self {
+    pub fn new_weekly_goal(calendar: i32, day: i32, text: String, ordering_key: String) -> Self {
         let year = None;
         let season = None;
         let month = None;
-        Self::new(year, season, month, day, ITEM_KIND_GOAL, text, ordering_key)
-    }
-
-    pub fn new_weekly_note(day: i32, text: String, ordering_key: String) -> Self {
-        let year = None;
-        let season = None;
-        let month = None;
-        Self::new(year, season, month, day, ITEM_KIND_NOTE, text, ordering_key)
-    }
-
-    pub fn new_objective(
-        year: i32,
-        season: i32,
-        month: i32,
-        day: i32,
-        kind: i32,
-        text: String,
-        ordering_key: String,
-    ) -> Self {
         Self::new(
-            Some(year),
-            Some(season),
-            Some(month),
+            calendar,
+            year,
+            season,
+            month,
             day,
-            kind,
+            ITEM_KIND_GOAL,
             text,
             ordering_key,
+            false,
+        )
+    }
+
+    pub fn new_weekly_note(calendar: i32, day: i32, text: String, ordering_key: String) -> Self {
+        let year = None;
+        let season = None;
+        let month = None;
+        Self::new(
+            calendar,
+            year,
+            season,
+            month,
+            day,
+            ITEM_KIND_NOTE,
+            text,
+            ordering_key,
+            false,
         )
     }
 }
 
 #[derive(Serialize)]
-pub struct WeekStateJs {
-    today: crate::today::TodayState,
-    week: crate::week::WeekState,
-    year: crate::year::YearState,
+pub struct FullState {
+    today: crate::today::Today,
+    week: crate::week::Week,
+    year: crate::year::Year,
 }
