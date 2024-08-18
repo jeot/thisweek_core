@@ -47,7 +47,6 @@ impl Year {
         self.title = format!("سال {}", self.year);
         match db_result {
             Ok(vec) => {
-                // println!("read year ok: items: {vec:?}");
                 self.items = vec;
                 self.check_and_fix_ordering();
                 Ok(())
@@ -109,6 +108,21 @@ impl Year {
         let _ = self.update();
         result
     }
+
+    pub fn move_item_to_other_time_period_offset(&mut self, id: i32, offset: i32) -> Result<usize> {
+        if let Some(pos) = self.items.iter().position(|item| item.id == id) {
+            let mut item = self.items[pos].clone();
+            let year = item.year.unwrap_or(self.year) + offset;
+            item.year = Some(year);
+            item.order_in_resolution = None;
+            let result = db_sqlite::update_item(&item);
+            let _ = self.update();
+            result
+        } else {
+            let _ = self.update();
+            Err("id not in list!".into())
+        }
+    }
 }
 
 impl Ordering for Year {
@@ -147,5 +161,9 @@ impl Ordering for Year {
             .ok_or("invalid position".to_string())?
             .order_in_resolution
             .clone())
+    }
+
+    fn new_ordering_finished(&self) {
+        db_sqlite::update_items(&self.items);
     }
 }

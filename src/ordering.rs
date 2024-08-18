@@ -6,6 +6,7 @@ pub trait Ordering {
     fn set_ordering_key_of_posision(&mut self, i: usize, key: Option<String>) -> Result<()>;
     // fn get_posision_of_id(&self, id: i32) -> Result<usize>;
     fn get_ordering_key_of_id(&self, id: i32) -> Result<Option<String>>;
+    fn new_ordering_finished(&self);
 
     fn needs_reordering(&self) -> bool {
         let mut fix = false;
@@ -31,6 +32,7 @@ pub trait Ordering {
             i += 1;
             top = new_key;
         }
+        self.new_ordering_finished();
     }
 
     fn check_and_fix_ordering(&mut self) {

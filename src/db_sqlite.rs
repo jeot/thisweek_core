@@ -33,6 +33,23 @@ pub fn remove_item(item_id: i32) -> Result<usize, String> {
         .map_err(|err| err.to_string())
 }
 
+pub fn update_items(items: &Vec<Item>) -> Result<usize, String> {
+    println!("updating all self items in database...");
+    let mut count: usize = 0;
+    for item in items {
+        let result = update_item(item);
+        match result {
+            Ok(_) => {
+                count += 1;
+            }
+            Err(e) => {
+                println!("error! {e}");
+            }
+        }
+    }
+    Ok(count)
+}
+
 pub fn update_item(item: &Item) -> Result<usize, String> {
     let conn = &mut establish_connection();
 

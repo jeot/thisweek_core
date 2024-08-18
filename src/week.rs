@@ -103,15 +103,6 @@ impl Week {
         }
     }
 
-    // fn update_items_in_database(&self) {
-    //     println!("updating all self items in database");
-    //     for item in self.items.clone() {
-    //         if let Err(e) = db_sqlite::update_item(&item) {
-    //             println!("error! {e}");
-    //         }
-    //     }
-    // }
-
     pub fn next(&mut self) -> Result<()> {
         self.start_day += SEVEN_DAY_WEEK_SIZE;
         self.middle_day += SEVEN_DAY_WEEK_SIZE;
@@ -167,7 +158,7 @@ impl Week {
         let ordering_key = self.get_new_ordering_key();
         let goal = NewItem::new_weekly_goal(self.calendar, self.middle_day, text, ordering_key);
         let result = db_sqlite::create_item(&goal);
-        self.update();
+        let _ = self.update();
         result
     }
 
@@ -176,36 +167,20 @@ impl Week {
         let ordering_key = self.get_new_ordering_key();
         let note = NewItem::new_weekly_note(self.calendar, self.middle_day, text, ordering_key);
         let result = db_sqlite::create_item(&note);
-        self.update();
+        let _ = self.update();
         result
     }
 
-    pub fn move_selected_item_to_next_week(&mut self, id: i32) -> Result<usize> {
+    pub fn move_item_to_other_time_period_offset(&mut self, id: i32, offset: i32) -> Result<usize> {
         if let Some(pos) = self.items.iter().position(|item| item.id == id) {
-            // println!("moving item {id} to next week...");
             let mut item = self.items[pos].clone();
-            item.day += SEVEN_DAY_WEEK_SIZE;
+            item.day += SEVEN_DAY_WEEK_SIZE * offset;
             item.order_in_week = None;
             let result = db_sqlite::update_item(&item);
-            self.next();
+            let _ = self.update();
             result
         } else {
-            self.update();
-            Err("id not in list!".into())
-        }
-    }
-
-    pub fn move_selected_item_to_previous_week(&mut self, id: i32) -> Result<usize> {
-        if let Some(pos) = self.items.iter().position(|item| item.id == id) {
-            // println!("moving item {id} to previous week...");
-            let mut item = self.items[pos].clone();
-            item.day -= SEVEN_DAY_WEEK_SIZE;
-            item.order_in_week = None;
-            let result = db_sqlite::update_item(&item);
-            self.previous();
-            result
-        } else {
-            self.update();
+            let _ = self.update();
             Err("id not in list!".into())
         }
     }
@@ -213,36 +188,6 @@ impl Week {
     pub fn backup_database_file(&self) -> Result<()> {
         db_sqlite::backup_database_file()
     }
-
-    // pub fn get_near_items_id(&self, id: i32) -> (Option<i32>, Option<i32>) {
-    //     let mut previous = None;
-    //     let mut next = None;
-    //     let mut iter = self.items.iter();
-    //     if id < 0 {
-    //         // this case is when nothing is selected.
-    //         // return first and last item's id
-    //         if let Some(item) = iter.next() {
-    //             next = Some(item.id);
-    //         }
-    //         if let Some(item) = iter.last() {
-    //             previous = Some(item.id);
-    //         }
-    //         (previous, next)
-    //     } else {
-    //         let position = iter.position(|i| (i.id == id));
-    //         if let Some(pos) = position {
-    //             if pos > 0 {
-    //                 previous = Some(self.items[pos - 1].id);
-    //             }
-    //             if pos < (self.items.len() - 1) {
-    //                 next = Some(self.items[pos + 1].id);
-    //             }
-    //             (previous, next)
-    //         } else {
-    //             (None, None)
-    //         }
-    //     }
-    // }
 }
 
 impl Ordering for Week {
@@ -278,6 +223,10 @@ impl Ordering for Week {
             .ok_or("invalid position".to_string())?
             .order_in_week
             .clone())
+    }
+
+    fn new_ordering_finished(&self) {
+        db_sqlite::update_items(&self.items);
     }
 }
 
