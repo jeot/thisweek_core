@@ -123,7 +123,7 @@ impl NewItem {
             kind,
             fixed_date: false,
             all_day: false,
-            title: if kind != ITEM_KIND_NOTE {
+            title: if kind == ITEM_KIND_GOAL {
                 Some(text.clone())
             } else {
                 None
@@ -146,6 +146,28 @@ impl NewItem {
             } else {
                 None
             },
+            sync: None,
+            uuid: Some(cuid2::create_id()),
+        }
+    }
+
+    pub fn from(item: &Item) -> NewItem {
+        NewItem {
+            calendar: item.calendar,
+            year: item.year,
+            season: item.season,
+            month: item.month,
+            day: item.day,
+            kind: item.kind,
+            fixed_date: item.fixed_date,
+            all_day: item.all_day,
+            title: item.title.clone(),
+            note: item.note.clone(),
+            datetime: item.datetime.clone(),
+            duration: item.duration,
+            status: item.status,
+            order_in_week: item.order_in_week.clone(),
+            order_in_resolution: item.order_in_resolution.clone(),
             sync: None,
             uuid: Some(cuid2::create_id()),
         }

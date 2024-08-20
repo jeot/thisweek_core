@@ -79,7 +79,7 @@ impl Week {
             info: "".into(),
             items: Vec::new(),
         };
-        week.update();
+        let _ = week.update();
         week
     }
 
@@ -153,24 +153,6 @@ impl Week {
         }
     }
 
-    pub fn add_new_goal(&mut self, text: String) -> Result<usize> {
-        println!("adding a new weekly goal: {text}");
-        let ordering_key = self.get_new_ordering_key();
-        let goal = NewItem::new_weekly_goal(self.calendar, self.middle_day, text, ordering_key);
-        let result = db_sqlite::create_item(&goal);
-        let _ = self.update();
-        result
-    }
-
-    pub fn add_new_note(&mut self, text: String) -> Result<usize> {
-        println!("adding a new weekly note: {text}");
-        let ordering_key = self.get_new_ordering_key();
-        let note = NewItem::new_weekly_note(self.calendar, self.middle_day, text, ordering_key);
-        let result = db_sqlite::create_item(&note);
-        let _ = self.update();
-        result
-    }
-
     pub fn move_item_to_other_time_period_offset(&mut self, id: i32, offset: i32) -> Result<usize> {
         if let Some(pos) = self.items.iter().position(|item| item.id == id) {
             let mut item = self.items[pos].clone();
@@ -226,7 +208,7 @@ impl Ordering for Week {
     }
 
     fn new_ordering_finished(&self) {
-        db_sqlite::update_items(&self.items);
+        let _ = db_sqlite::update_items(&self.items);
     }
 }
 

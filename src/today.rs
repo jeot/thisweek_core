@@ -7,13 +7,29 @@ use serde::Serialize;
 
 #[derive(Serialize, Clone)]
 pub struct Today {
+    calendar: i32,
+    year: i32,
+    month: i32,
+    day: i32,
     today_persian_date: String,
     today_english_date: String,
 }
 
+impl Default for Today {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl Today {
     pub fn new() -> Today {
+        // it's local persian date for now!
+        let date = today_date_tupple(CALENDAR_PERSIAN);
         Today {
+            calendar: CALENDAR_PERSIAN,
+            year: date.0,
+            month: date.1,
+            day: date.2,
             today_persian_date: today_persian_date(),
             today_english_date: today_english_date(),
         }
@@ -25,8 +41,7 @@ pub fn get_unix_day() -> i32 {
         .duration_since(std::time::UNIX_EPOCH)
         .unwrap()
         .as_secs();
-    let days = (a / 3600 / 24) as i32;
-    days
+    (a / 3600 / 24) as i32
 }
 
 pub fn get_year(calendar: i32) -> i32 {
@@ -39,6 +54,19 @@ pub fn get_year(calendar: i32) -> i32 {
     } else {
         println!("calendar not implemented yet!");
         0
+    }
+}
+
+pub fn today_date_tupple(calendar: i32) -> (i32, i32, i32) {
+    if calendar == CALENDAR_PERSIAN {
+        let today = ptime::now();
+        (today.tm_year, today.tm_mon + 1, today.tm_mday)
+    } else if calendar == CALENDAR_GREGORIAN {
+        let today: DateTime<Local> = Local::now();
+        (today.year(), today.month() as i32, today.day() as i32)
+    } else {
+        println!("calendar not implemented yet!");
+        (0, 0, 0)
     }
 }
 
