@@ -167,6 +167,21 @@ pub fn toggle_item_state(id: i32) -> Result<usize, String> {
     update_item(&item)
 }
 
+pub fn update_item_objective_period(
+    id: i32,
+    year: Option<i32>,
+    season: Option<i32>,
+    month: Option<i32>,
+) -> Result<usize, String> {
+    println!("update_item_objective_period: id: {id}, {year:?}, {season:?}, {month:?}");
+    check_valid_id_range(id)?;
+    let mut item = get_item(id)?;
+    item.year = year;
+    item.season = season;
+    item.month = month;
+    update_item(&item)
+}
+
 pub fn update_item_week_ordering_key(id: i32, key: String) -> Result<usize, String> {
     println!("update_item_week_ordering_key: id: {id}");
     check_valid_id_range(id)?;
