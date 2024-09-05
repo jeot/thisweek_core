@@ -1,3 +1,4 @@
+use crate::config;
 use crate::models::Item;
 use crate::models::NewItem;
 use crate::models::{ITEM_KIND_GOAL, ITEM_KIND_NOTE};
@@ -9,7 +10,8 @@ use std::env;
 pub fn establish_connection() -> SqliteConnection {
     dotenv().ok();
 
-    let database_url = env::var("WEEKS_DATABASE_URL").expect("WEEKS_DATABASE_URL must be set");
+    // let database_url = env::var("WEEKS_DATABASE_URL").expect("WEEKS_DATABASE_URL must be set");
+    let database_url = config::get_config().database;
     SqliteConnection::establish(&database_url)
         .unwrap_or_else(|_| panic!("Error connecting to {}", database_url))
 }

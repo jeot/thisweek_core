@@ -1001,6 +1001,7 @@ dependencies = [
  "dotenvy",
  "homedir",
  "midstring",
+ "once_cell",
  "ptime",
  "redb",
  "rusqlite",

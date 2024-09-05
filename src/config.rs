@@ -3,29 +3,48 @@ use crate::prelude::Result as AppResult;
 use serde::{Deserialize, Serialize};
 use std::{fs, path::PathBuf};
 
-#[derive(Debug, Default, Serialize, Deserialize)]
-pub struct Config {
-    database: String,
-    main_calendar: Option<String>,
-    secondary_calendar: Option<String>,
+use once_cell::sync::OnceCell;
+static CONFIG: OnceCell<Config> = OnceCell::new();
+
+pub fn get_config() -> Config {
+    let config: &Config = CONFIG.get_or_init(|| {
+        println!("Init CONFIG (global OnceCell first run init)");
+        let path = default_config_path();
+        let config = load_from_filepath(path).unwrap_or_default();
+        println!("config: {config:?}");
+        config
+    });
+    config.clone()
 }
 
-pub fn load(path: PathBuf) -> AppResult<Config> {
+fn default_config_path() -> PathBuf {
+    let path = homedir::get_my_home().unwrap().unwrap();
+    path.join(".weeks.config")
+}
+
+// todo: no config file! create? ask user? probably first run!?
+fn load_from_filepath(path: PathBuf) -> AppResult<Config> {
+    println!("reading config file {}...", path.to_string_lossy());
     if let Ok(config) = fs::read_to_string(path) {
-        toml::from_str(&config).map_err(AppError::BadConfigError)
+        toml::from_str(&config).map_err(AppError::ConfigSyntaxError)
     } else {
-        // no config file, return error
         Err(AppError::ConfigNotFoundError)
-        // todo: no config file, create
-        /*
-        let config = Config {
-            database: Some("".to_string()),
-            main_calendar: Some("Gregorian".to_string()),
+    }
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct Config {
+    pub database: String,
+    pub main_calendar: String,
+    pub secondary_calendar: Option<String>,
+}
+
+impl Default for Config {
+    fn default() -> Self {
+        Self {
+            database: String::from("weeks_default_db"),
+            main_calendar: "Gregorian".into(),
             secondary_calendar: None,
-        };
-        let toml = toml::to_string(&config).unwrap();
-        fs::write(path, toml);
-        Ok(config)
-        */
+        }
     }
 }
