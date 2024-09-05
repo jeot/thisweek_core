@@ -1,6 +1,9 @@
+pub mod config;
 pub mod db_sqlite;
+pub mod error;
 pub mod models;
 pub mod ordering;
+pub mod prelude;
 pub mod schema;
 pub mod today;
 pub mod week;
