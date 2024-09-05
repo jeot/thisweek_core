@@ -7,11 +7,14 @@
 
 // use std::time;
 
+use crate::calendar::Calendar;
+use crate::config;
 use crate::db_sqlite;
 use crate::models::*;
 use crate::ordering::Ordering;
 use crate::ordering::Result;
 use crate::today;
+use crate::week_info::WeekInfo;
 use ptime;
 use serde::Serialize;
 use time::Timespec;
@@ -33,7 +36,8 @@ pub const SEVEN_DAY_WEEK_SIZE: i32 = 7;
 pub struct Week {
     pub title: String,
     pub info: String,
-    pub calendar: i32,
+    pub week_info: WeekInfo,
+    pub aux_week_info: Option<WeekInfo>,
     pub start_day: i32,
     pub middle_day: i32,
     pub end_day: i32,
@@ -42,7 +46,8 @@ pub struct Week {
 
 impl Week {
     pub fn new() -> Self {
-        // it's local persian date for now!
+        let _main_cal: Calendar = config::get_config().main_calendar.into();
+        let _aux_cal: Option<Calendar> = config::get_config().secondary_calendar.map(|s| s.into());
         let days_tuple = Self::calculate_week_start_middle_end_unix_day(
             today::get_unix_day(),
             WEEKDAY_UNIX_OFFSET_SAT,
@@ -71,7 +76,6 @@ impl Week {
     fn from_unix_days_tuple((start_day, middle_day, end_day): (i32, i32, i32)) -> Self {
         // it's local persian date for now!
         let mut week = Week {
-            calendar: CALENDAR_PERSIAN,
             start_day,
             middle_day,
             end_day,

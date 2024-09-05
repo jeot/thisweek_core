@@ -3,9 +3,6 @@ use diesel::prelude::*;
 use serde::Deserialize;
 use serde::Serialize;
 
-pub const CALENDAR_PERSIAN: i32 = 1;
-pub const CALENDAR_GREGORIAN: i32 = 2;
-
 pub const ITEM_KIND_GOAL: i32 = 1;
 pub const ITEM_KIND_NOTE: i32 = 2;
 pub const ITEM_KIND_EVENT: i32 = 3;

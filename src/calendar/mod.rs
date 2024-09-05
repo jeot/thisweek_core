@@ -19,7 +19,19 @@ impl Into<Calendar> for i32 {
     fn into(self) -> Calendar {
         if self == CALENDAR_PERSIAN {
             Calendar::Persian(persian::PersianCalendar)
-        } else if self == CALENDAR_PERSIAN {
+        } else if self == CALENDAR_GREGORIAN {
+            Calendar::Gregorian(gregorian::GregorianCalendar)
+        } else {
+            Calendar::Gregorian(gregorian::GregorianCalendar)
+        }
+    }
+}
+
+impl Into<Calendar> for String {
+    fn into(self) -> Calendar {
+        if self == "Persian" {
+            Calendar::Persian(persian::PersianCalendar)
+        } else if self == "Gregorian" {
             Calendar::Gregorian(gregorian::GregorianCalendar)
         } else {
             Calendar::Gregorian(gregorian::GregorianCalendar)
