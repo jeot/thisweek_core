@@ -12,4 +12,7 @@ pub enum Error {
 
     #[error("invalid timestamp: sec: {sec}, nano: {nano}")]
     InvalidTimestampError { sec: i64, nano: u32 },
+
+    #[error("database error: {0}")]
+    DatabaseError(String),
 }

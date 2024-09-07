@@ -1,36 +1,81 @@
+use crate::{calendar::Calendar, language::Language, prelude::Result as AppResult};
 use serde::Serialize;
-use crate::calendar::CALENDAR_PERSIAN;
 
-#[derive(Serialize, Clone)]
+#[derive(Debug, Serialize, Clone, Default)]
 pub struct WeekInfo {
-    calendar: i32,
+    calendar: Calendar,
+    language: Language,
     dates: Vec<DateView>,
     direction: String,
-    language: String,
     month_year_info: String,
 }
 
-#[derive(Serialize, Clone, Default)]
+pub struct Date {
+    pub calendar: Calendar,
+    pub weekday: u32,
+    pub day: u32,
+    pub month: u32,
+    pub year: i32,
+}
+
+#[derive(Debug, Serialize, Clone, Default)]
 pub struct DateView {
     pub day: String,
     pub month: String,
-    pub weekday: String,
     pub year: String,
+    pub weekday: String,
 }
 
 impl WeekInfo {
-    fn from_unix_start_end_days((start_day, end_day): (i32, i32), calendar: i32, language: String, first_day_of_the_week: i32) -> Self {
-        let direction = if calendar == CALENDAR_PERSIAN { "rtl" } else { "ltr" };
-        let direction = direction.into();
+    pub fn from_unix_start_end_days(
+        start_day: i32,
+        end_day: i32,
+        today: i32,
+        calendar: Calendar,
+        language: Language,
+    ) -> AppResult<Self> {
+        let direction = calendar.into_direction();
+        let dates = calendar.get_dates_view(start_day, end_day, &language)?;
+        let today_view = calendar.get_date_view(today, &language);
+        let month_year_info = Self::calculate_month_year_info(&dates, &today_view);
+        Ok(WeekInfo {
+            calendar,
+            dates,
+            direction,
+            language,
+            month_year_info,
+        })
+    }
 
-        // Calendar::from_unix_start_end_days((start_day, end_day), calendar);
-        let month_year_info = ???;
-        WeekInfo {
-                calendar,
-                dates,
-                direction,
-                language,
-                month_year_info,
+    fn calculate_month_year_info(dates: &Vec<DateView>, today: &DateView) -> String {
+        let first_day_year = dates.first().unwrap().year.clone();
+        let last_day_year = dates.last().unwrap().year.clone();
+        let first_day_month = dates.first().unwrap().year.clone();
+        let last_day_month = dates.last().unwrap().year.clone();
+        let today_year = today.year.clone();
+        let today_month = today.month.clone();
+
+        if first_day_month == last_day_month && first_day_year == today_year {
+            return format!("{}", today_month);
         }
+
+        if first_day_month != last_day_month
+            && first_day_year == today_year
+            && last_day_year == today_year
+        {
+            return format!("{} - {}", first_day_month, last_day_month);
+        }
+
+        if first_day_year != last_day_year {
+            return format!(
+                "{} {} - {} {}",
+                first_day_month, first_day_year, last_day_month, last_day_year
+            );
+        }
+
+        return format!(
+            "{} {} - {} {}",
+            first_day_month, first_day_year, last_day_month, last_day_year
+        );
     }
 }

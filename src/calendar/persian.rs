@@ -1,26 +1,114 @@
-use crate::language::Language;
-use crate::prelude::Result as AppResult;
-use crate::week_info::DateView;
+use crate::week::WeekDaysUnixOffset;
+use crate::{language::Language, week_info::Date, week_info::DateView};
 use chrono::{DateTime, Local};
 use ptime;
+use serde::Serialize;
 use time::Timespec;
 
-use super::DateViewTrait;
+use super::{Calendar, CalendarSpecificDateView};
 
+include!("../week_names.rs");
+
+#[derive(Debug, Serialize, Clone)]
 pub struct PersianCalendar;
 
-impl DateViewTrait for PersianCalendar {
-    // todo: how to implement language?
-    fn new_date_view(datetime: DateTime<Local>, lang: &Language) -> AppResult<DateView> {
+fn convert_weekday(weekday: i32) -> WeekDaysUnixOffset {
+    // Weekday since Shanbe - [0, 6](<0, 6>). 0 = Shanbeh, ..., 6 = Jomeh.
+    match weekday {
+        0 => WeekDaysUnixOffset::Sat,
+        1 => WeekDaysUnixOffset::Sun,
+        2 => WeekDaysUnixOffset::Mon,
+        3 => WeekDaysUnixOffset::Tue,
+        4 => WeekDaysUnixOffset::Wed,
+        5 => WeekDaysUnixOffset::Thu,
+        6 => WeekDaysUnixOffset::Fri,
+        _ => WeekDaysUnixOffset::Sat,
+    }
+}
+
+const MONTH_NAME_FULL_EN: [&str; 12] = [
+    "Farvardin",
+    "Ordibehesht",
+    "Khordad",
+    "Tir",
+    "Mordad",
+    "Shahrivar",
+    "Mehr",
+    "Aban",
+    "Azar",
+    "Dey",
+    "Bahman",
+    "Esfand",
+];
+
+const MONTH_NAME_FULL_FA: [&str; 12] = [
+    "فروردین",
+    "اردیبهشت",
+    "خرداد",
+    "تیر",
+    "مرداد",
+    "شهریور",
+    "مهر",
+    "آبان",
+    "آذر",
+    "دی",
+    "بهمن",
+    "اسفند",
+];
+
+impl CalendarSpecificDateView for PersianCalendar {
+    fn new_date(datetime: DateTime<Local>) -> Date {
         let ts = datetime.timestamp();
         let pdate = ptime::at(Timespec::new(ts, 0));
-        let date = DateView {
-            day: pdate.to_string("dd"),
-            month: pdate.to_string("MMM"),
-            weekday: pdate.to_string("E"),
-            year: pdate.to_string("yyyy"),
+        let weekday: i32 = pdate.tm_wday;
+        let weekday: WeekDaysUnixOffset = convert_weekday(weekday);
+        Date {
+            calendar: Calendar::Persian(PersianCalendar),
+            day: pdate.tm_mday as u32,
+            month: (pdate.tm_mon + 1) as u32,
+            weekday: weekday as u32,
+            year: pdate.tm_year,
+        }
+    }
+
+    fn new_date_view(datetime: DateTime<Local>, lang: &Language) -> DateView {
+        let ts = datetime.timestamp();
+        let pt = ptime::at(Timespec::new(ts, 0));
+
+        let day = pt.tm_mday.to_string();
+        let day = match lang {
+            Language::English => day,
+            Language::Farsi => Language::change_numbers_to_farsi(&day),
+            // _ => datetime.day().to_string(),
         };
-        Ok(date)
+        let month = pt.tm_mon as usize;
+        let month = match lang {
+            Language::English => MONTH_NAME_FULL_EN[month],
+            Language::Farsi => MONTH_NAME_FULL_FA[month],
+            // _ => MONTH_NAME_FULL_EN[month],
+        };
+        let month = month.to_string();
+        let weekday = pt.tm_wday;
+        let weekday: WeekDaysUnixOffset = convert_weekday(weekday);
+        let weekday = match lang {
+            Language::English => WEEKDAY_NAME_HALF_CAP_EN[weekday as usize],
+            Language::Farsi => WEEKDAY_NAME_FULL_FA[weekday as usize],
+            // _ => WEEKDAY_NAME_HALF_CAP_EN[weekday as usize],
+        };
+        let weekday = weekday.to_string();
+        let year = pt.tm_year;
+        let year = match lang {
+            Language::English => year.to_string(),
+            Language::Farsi => Language::change_numbers_to_farsi(&year.to_string()),
+            // _ => datetime.year().to_string(),
+        };
+
+        DateView {
+            day,
+            month,
+            weekday,
+            year,
+        }
     }
 }
 

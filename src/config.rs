@@ -10,7 +10,9 @@ pub fn get_config() -> Config {
     let config: &Config = CONFIG.get_or_init(|| {
         println!("Init CONFIG (global OnceCell first run init)");
         let path = default_config_path();
-        let config = load_from_filepath(path).unwrap_or_default();
+        // todo: panic or not?
+        // let config = load_from_filepath(path).unwrap_or_default();
+        let config = load_from_filepath(path).unwrap();
         println!("config: {config:?}");
         config
     });
@@ -35,16 +37,24 @@ fn load_from_filepath(path: PathBuf) -> AppResult<Config> {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct Config {
     pub database: String,
-    pub main_calendar: String,
+    pub main_calendar_type: String,
+    pub main_calendar_language: String,
+    pub main_calendar_start_weekday: String,
     pub secondary_calendar: Option<String>,
+    pub secondary_calendar_language: Option<String>,
+    pub secondary_calendar_start_weekday: Option<String>,
 }
 
 impl Default for Config {
     fn default() -> Self {
         Self {
             database: String::from("weeks_default_db"),
-            main_calendar: "Gregorian".into(),
+            main_calendar_type: "Gregorian".into(),
+            main_calendar_language: "en".into(),
+            main_calendar_start_weekday: "MON".into(),
             secondary_calendar: None,
+            secondary_calendar_language: None,
+            secondary_calendar_start_weekday: None,
         }
     }
 }

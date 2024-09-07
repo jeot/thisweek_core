@@ -1,17 +1,17 @@
 /* Today */
-use chrono::{DateTime, Datelike, Local};
-use ptime;
+use crate::calendar::gregorian::GregorianCalendar;
+use crate::calendar::persian::PersianCalendar;
+use crate::calendar::Calendar;
+use crate::config;
+use crate::language::Language;
 use serde::Serialize;
 
-use crate::calendar::CALENDAR_GREGORIAN;
-use crate::calendar::CALENDAR_PERSIAN;
+use crate::week_info::{Date, DateView};
 
 #[derive(Serialize, Clone)]
 pub struct Today {
-    calendar: i32,
-    year: i32,
-    month: i32,
-    day: i32,
+    calendar: Calendar,
+    date_view: DateView,
     today_persian_date: String,
     today_english_date: String,
 }
@@ -24,15 +24,16 @@ impl Default for Today {
 
 impl Today {
     pub fn new() -> Today {
-        // it's local persian date for now!
-        let date = today_date_tupple(CALENDAR_PERSIAN);
+        let calendar: Calendar = config::get_config().main_calendar_type.into();
+        let language: Language = config::get_config().main_calendar_language.into();
+        let day = get_unix_day();
+        // let date = calendar.get_date(day);
+        let date_view = calendar.get_date_view(day, &language);
         Today {
-            calendar: CALENDAR_PERSIAN,
-            year: date.0,
-            month: date.1,
-            day: date.2,
-            today_persian_date: today_persian_date(),
-            today_english_date: today_english_date(),
+            calendar,
+            date_view,
+            today_persian_date: today_persian_date_string(),
+            today_english_date: today_english_date_string(),
         }
     }
 }
@@ -45,54 +46,34 @@ pub fn get_unix_day() -> i32 {
     (a / 3600 / 24) as i32
 }
 
-pub fn get_year(calendar: i32) -> i32 {
-    if calendar == CALENDAR_PERSIAN {
-        let today = ptime::now();
-        today.tm_year
-    } else if calendar == CALENDAR_GREGORIAN {
-        let today: DateTime<Local> = Local::now();
-        today.year()
-    } else {
-        println!("calendar not implemented yet!");
-        0
-    }
+pub fn get_today_date(calendar: &Calendar) -> Date {
+    let day = get_unix_day();
+    calendar.get_date(day)
 }
 
-pub fn today_date_tupple(calendar: i32) -> (i32, i32, i32) {
-    if calendar == CALENDAR_PERSIAN {
-        let today = ptime::now();
-        (today.tm_year, today.tm_mon + 1, today.tm_mday)
-    } else if calendar == CALENDAR_GREGORIAN {
-        let today: DateTime<Local> = Local::now();
-        (today.year(), today.month() as i32, today.day() as i32)
-    } else {
-        println!("calendar not implemented yet!");
-        (0, 0, 0)
-    }
-}
-
-pub fn today_persian_date() -> String {
-    let today = ptime::now();
-    if today.tm_mday == 6 && today.tm_mon == 11 {
+pub fn today_persian_date_string() -> String {
+    let day = get_unix_day();
+    let cal = Calendar::Persian(PersianCalendar);
+    let date: Date = cal.get_date(day);
+    let mut date_string: String = cal.get_date_string(day, &Language::Farsi);
+    if date.day == 6 && date.month == 12 {
         // my birthday
-        today.to_string("E d MMM yyyy 🎉")
-    } else if today.tm_mday == 1 && today.tm_mon == 0 {
+        date_string.push_str(" 🎉");
+    } else if date.day == 1 && date.month == 1 {
         // new year
-        today.to_string("E d MMM yyyy 🎆️")
-    } else {
-        today.to_string("E d MMM yyyy")
+        date_string.push_str(" 🎆️");
     }
+    date_string
 }
 
-pub fn today_english_date() -> String {
-    let today: DateTime<Local> = Local::now();
-    if today.day() == 25 && today.month() == 2 {
-        // my birthday
-        today.format("%Y-%m-%d 🎉").to_string()
-    } else if today.day() == 1 && today.month() == 1 {
+pub fn today_english_date_string() -> String {
+    let day = get_unix_day();
+    let cal = Calendar::Gregorian(GregorianCalendar);
+    let date: Date = cal.get_date(day);
+    let mut date_string: String = cal.get_date_string(day, &Language::English);
+    if date.day == 1 && date.month == 1 {
         // new year
-        today.format("%Y-%m-%d 🎆️").to_string()
-    } else {
-        today.format("%Y-%m-%d").to_string()
+        date_string.push_str(" 🎆️");
     }
+    date_string
 }

@@ -3,6 +3,8 @@ use crate::models::Item;
 use crate::models::NewItem;
 use crate::models::{ITEM_KIND_GOAL, ITEM_KIND_NOTE};
 use crate::models::{STATUS_DONE, STATUS_UNDONE};
+use crate::prelude::Error as AppError;
+use crate::prelude::Result as AppResult;
 use diesel::prelude::*;
 use dotenvy::dotenv;
 use std::env;
@@ -84,7 +86,7 @@ pub fn read_items_between_days(
     end_day: i32,
     week_order: bool,
     /* for the future: resolution_order: bool */
-) -> Result<Vec<Item>, String> {
+) -> AppResult<Vec<Item>> {
     use crate::schema::items::dsl::*;
     let conn = &mut establish_connection();
 
@@ -95,14 +97,14 @@ pub fn read_items_between_days(
             .order(order_in_week.asc())
             .select(Item::as_select())
             .load(conn)
-            .map_err(|e| e.to_string())
+            .map_err(|e| AppError::DatabaseError(e.to_string()))
     } else {
         items
             .filter(day.ge(start_day)) // >=
             .filter(day.le(end_day)) // <=
             .select(Item::as_select())
             .load(conn)
-            .map_err(|e| e.to_string())
+            .map_err(|e| AppError::DatabaseError(e.to_string()))
     }
 }
 

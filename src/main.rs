@@ -1,11 +1,9 @@
-use weeks_core::config::{self, Config};
+use weeks_core::{week::Week, year::Year};
 
 fn main() {
-    println!("hello test");
-    let c: Config = config::get_config();
-    println!("config: {c:?}");
-    let c: Config = config::get_config();
-    println!("config: {c:?}");
-    let c: Config = config::get_config();
-    println!("config: {c:?}");
+    println!("hello rust");
+    let w = Week::new();
+    println!("week info: {:#?}", w.week_info);
+    // let y = Year::new();
+    // println!("year : {:#?}", y);
 }

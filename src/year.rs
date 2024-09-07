@@ -1,18 +1,22 @@
+use crate::calendar::Calendar;
 /* Year */
-
+use crate::config;
 use crate::db_sqlite;
+use crate::language::Language;
 use crate::ordering;
 use crate::ordering::Result;
 use crate::today;
+use crate::week_info::Date;
 use crate::{models::*, ordering::Ordering};
 use serde::Serialize;
 
-#[derive(Serialize, Clone)]
+#[derive(Serialize, Clone, Debug, Default)]
 pub struct Year {
+    pub calendar: Calendar,
+    pub language: Language,
+    pub year: i32,
     pub title: String,
     pub info: String,
-    pub calendar: i32,
-    pub year: i32,
     pub items: Vec<Item>,
 }
 
@@ -24,17 +28,15 @@ pub struct Year {
 
 impl Year {
     pub fn new() -> Year {
-        // it's local persian year for now!
-        let year: i32 = today::get_year(CALENDAR_PERSIAN);
-        Self::from_calendar_and_year(CALENDAR_PERSIAN, year)
-    }
-
-    pub fn from_calendar_and_year(calendar: i32, year_number: i32) -> Year {
+        let calendar: Calendar = config::get_config().main_calendar_type.into();
+        let language: Language = config::get_config().main_calendar_language.into();
+        let date: Date = today::get_today_date(&calendar);
         let mut year = Year {
+            calendar,
+            language,
+            year: date.year,
             title: String::new(),
             info: String::new(),
-            calendar,
-            year: year_number,
             items: Vec::new(),
         };
         let _ = year.update();
@@ -42,8 +44,9 @@ impl Year {
     }
 
     pub fn update(&mut self) -> Result<()> {
-        let db_result = db_sqlite::read_items_in_calendar_year(self.calendar, self.year);
-        self.title = format!("سال {}", self.year);
+        let db_result =
+            db_sqlite::read_items_in_calendar_year(self.calendar.clone().into(), self.year);
+        self.create_year_title();
         match db_result {
             Ok(vec) => {
                 self.items = vec;
@@ -52,6 +55,13 @@ impl Year {
             }
             Err(err) => Err(err),
         }
+    }
+
+    fn create_year_title(&mut self) {
+        self.title = match self.language {
+            Language::Farsi => Language::change_numbers_to_farsi(&format!("سال {}", self.year)),
+            Language::English => format!("Year {}", self.year),
+        };
     }
 
     pub fn next(&mut self) -> Result<()> {
@@ -65,8 +75,8 @@ impl Year {
     }
 
     pub fn current(&mut self) -> Result<()> {
-        let year: i32 = today::get_year(CALENDAR_PERSIAN);
-        self.year = year;
+        let date: Date = today::get_today_date(&self.calendar);
+        self.year = date.year;
         self.update()
     }
 
