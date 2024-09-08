@@ -4,6 +4,7 @@ pub mod db_sqlite;
 pub mod error;
 pub mod language;
 pub mod models;
+pub mod notify;
 pub mod ordering;
 pub mod prelude;
 pub mod schema;

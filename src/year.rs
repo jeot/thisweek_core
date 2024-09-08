@@ -44,6 +44,8 @@ impl Year {
     }
 
     pub fn update(&mut self) -> Result<()> {
+        self.calendar = config::get_config().main_calendar_type.into();
+        self.language = config::get_config().main_calendar_language.into();
         let db_result =
             db_sqlite::read_items_in_calendar_year(self.calendar.clone().into(), self.year);
         self.create_year_title();

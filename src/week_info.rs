@@ -50,8 +50,8 @@ impl WeekInfo {
     fn calculate_month_year_info(dates: &Vec<DateView>, today: &DateView) -> String {
         let first_day_year = dates.first().unwrap().year.clone();
         let last_day_year = dates.last().unwrap().year.clone();
-        let first_day_month = dates.first().unwrap().year.clone();
-        let last_day_month = dates.last().unwrap().year.clone();
+        let first_day_month = dates.first().unwrap().month.clone();
+        let last_day_month = dates.last().unwrap().month.clone();
         let today_year = today.year.clone();
         let today_month = today.month.clone();
 

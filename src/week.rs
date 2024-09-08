@@ -10,7 +10,6 @@
 use crate::calendar::Calendar;
 use crate::config;
 use crate::db_sqlite;
-use crate::language::Language;
 use crate::models::*;
 use crate::ordering::Ordering;
 use crate::ordering::Result;

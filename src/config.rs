@@ -1,22 +1,45 @@
 use crate::prelude::Error as AppError;
 use crate::prelude::Result as AppResult;
+use arc_swap::ArcSwap;
+use once_cell::sync::OnceCell;
 use serde::{Deserialize, Serialize};
+use std::sync::Arc;
 use std::{fs, path::PathBuf};
 
-use once_cell::sync::OnceCell;
-static CONFIG: OnceCell<Config> = OnceCell::new();
+// global ref to static value
+// static CONFIG: OnceCell<Config> = OnceCell::new();
+pub static CONFIG: OnceCell<ArcSwap<Config>> = OnceCell::new();
+
+pub fn init_config() -> Result<Config, AppError> {
+    // instantiate the configuration
+    let path = default_config_path();
+    let new_cfg = load_from_filepath(path).unwrap();
+    println!("init config: {new_cfg:?}");
+    // set or get the handle to arc
+    if CONFIG.get().is_none() {
+        CONFIG.set(ArcSwap::from_pointee(new_cfg.clone())).unwrap();
+    } else {
+        CONFIG.get().unwrap().store(Arc::new(new_cfg.clone()));
+    }
+    Ok(new_cfg)
+}
 
 pub fn get_config() -> Config {
-    let config: &Config = CONFIG.get_or_init(|| {
+    let gaurd = CONFIG.get_or_init(|| {
         println!("Init CONFIG (global OnceCell first run init)");
         let path = default_config_path();
-        // todo: panic or not?
-        // let config = load_from_filepath(path).unwrap_or_default();
-        let config = load_from_filepath(path).unwrap();
-        println!("config: {config:?}");
-        config
+        let new_cfg = load_from_filepath(path).unwrap();
+        ArcSwap::from_pointee(new_cfg)
     });
-    config.clone()
+    // println!("gaurd: {gaurd:?}");
+    let gaurd = gaurd.load();
+    gaurd.get_copy()
+    // println!("gaurd: {gaurd:?}");
+    // let value = gaurd.clone();
+    // println!("value: {value:?}");
+    // let x = std::sync::Arc::<Config>::try_unwrap(value).unwrap();
+    // println!("x: {x:?}");
+    // x.clone()
 }
 
 fn default_config_path() -> PathBuf {
@@ -43,6 +66,20 @@ pub struct Config {
     pub secondary_calendar: Option<String>,
     pub secondary_calendar_language: Option<String>,
     pub secondary_calendar_start_weekday: Option<String>,
+}
+
+impl Config {
+    pub fn get_copy(&self) -> Config {
+        Config {
+            database: self.database.clone(),
+            main_calendar_type: self.main_calendar_type.clone(),
+            main_calendar_language: self.main_calendar_language.clone(),
+            main_calendar_start_weekday: self.main_calendar_start_weekday.clone(),
+            secondary_calendar: self.secondary_calendar.clone(),
+            secondary_calendar_language: self.secondary_calendar_language.clone(),
+            secondary_calendar_start_weekday: self.secondary_calendar_start_weekday.clone(),
+        }
+    }
 }
 
 impl Default for Config {

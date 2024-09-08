@@ -2,8 +2,11 @@ use weeks_core::{week::Week, year::Year};
 
 fn main() {
     println!("hello rust");
-    let w = Week::new();
+    let mut w = Week::new();
+    w.next();
+    w.next();
     println!("week info: {:#?}", w.week_info);
-    // let y = Year::new();
-    // println!("year : {:#?}", y);
+    let mut y = Year::new();
+    y.next();
+    println!("year : {:#?}", y);
 }

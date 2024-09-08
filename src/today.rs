@@ -4,6 +4,7 @@ use crate::calendar::persian::PersianCalendar;
 use crate::calendar::Calendar;
 use crate::config;
 use crate::language::Language;
+use crate::prelude::Result as AppResult;
 use serde::Serialize;
 
 use crate::week_info::{Date, DateView};
@@ -11,6 +12,7 @@ use crate::week_info::{Date, DateView};
 #[derive(Serialize, Clone)]
 pub struct Today {
     calendar: Calendar,
+    language: Language,
     date_view: DateView,
     today_persian_date: String,
     today_english_date: String,
@@ -27,14 +29,19 @@ impl Today {
         let calendar: Calendar = config::get_config().main_calendar_type.into();
         let language: Language = config::get_config().main_calendar_language.into();
         let day = get_unix_day();
-        // let date = calendar.get_date(day);
         let date_view = calendar.get_date_view(day, &language);
         Today {
             calendar,
+            language,
             date_view,
             today_persian_date: today_persian_date_string(),
             today_english_date: today_english_date_string(),
         }
+    }
+
+    pub fn update(&mut self) -> AppResult<()> {
+        *self = Today::new();
+        Ok(())
     }
 }
 
