@@ -20,6 +20,7 @@ pub struct Date {
 
 #[derive(Debug, Serialize, Clone, Default)]
 pub struct DateView {
+    pub unix_day: i32,
     pub day: String,
     pub month: String,
     pub year: String,
@@ -56,7 +57,7 @@ impl WeekInfo {
         let today_month = today.month.clone();
 
         if first_day_month == last_day_month && first_day_year == today_year {
-            return format!("{}", today_month);
+            return first_day_month.to_string();
         }
 
         if first_day_month != last_day_month
@@ -73,9 +74,13 @@ impl WeekInfo {
             );
         }
 
-        return format!(
+        if first_day_month == last_day_month && first_day_year == last_day_year {
+            return format!("{} {}", first_day_month, first_day_year);
+        }
+
+        format!(
             "{} {} - {} {}",
             first_day_month, first_day_year, last_day_month, last_day_year
-        );
+        )
     }
 }

@@ -35,10 +35,10 @@ impl Calendar {
         }
     }
 
-    pub fn get_date_view(&self, day: i32, _lang: &Language) -> DateView {
+    pub fn get_date_view(&self, day: i32, lang: &Language) -> DateView {
         match self {
-            Calendar::Gregorian(_) => GregorianCalendar::get_date_view(day, _lang),
-            Calendar::Persian(_) => PersianCalendar::get_date_view(day, _lang),
+            Calendar::Gregorian(_) => GregorianCalendar::get_date_view(day, lang),
+            Calendar::Persian(_) => PersianCalendar::get_date_view(day, lang),
         }
     }
 
@@ -136,11 +136,13 @@ pub trait CalendarSpecificDateView {
     }
 
     fn get_date_view(day: i32, lang: &Language) -> DateView {
-        let sec: i64 = day as i64 * 3600 * 24;
+        let sec: i64 = day as i64 * 24 * 3600;
         let nano: u32 = 0;
         let datetime = DateTime::from_timestamp(sec, nano).expect("this should never happen!!");
         let datetime: DateTime<Local> = datetime.into();
-        Self::new_date_view(datetime, lang)
+        let mut dateview = Self::new_date_view(datetime, lang);
+        dateview.unix_day = day;
+        dateview
     }
 
     fn get_dates_view(start_day: i32, end_day: i32, lang: &Language) -> AppResult<Vec<DateView>> {

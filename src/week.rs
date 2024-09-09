@@ -80,6 +80,7 @@ pub struct Week {
     pub info: String,
     pub week_info: WeekInfo,
     pub aux_week_info: Option<WeekInfo>,
+    pub reference_day: i32,
     pub start_day: i32,
     pub middle_day: i32,
     pub end_day: i32,
@@ -88,25 +89,8 @@ pub struct Week {
 
 impl Week {
     pub fn new() -> Self {
-        let start_week_day: WeekDaysUnixOffset =
-            config::get_config().main_calendar_start_weekday.into();
-        let start_week_day_offset: i32 = start_week_day as i32;
-        let (start_day, middle_day, end_day) = Self::calculate_week_start_middle_end_unix_day(
-            today::get_unix_day(),
-            start_week_day_offset,
-            SEVEN_DAY_WEEK_SIZE,
-        );
-        let mut week = Week {
-            start_day,
-            middle_day,
-            end_day,
-            week_info: WeekInfo::default(),
-            aux_week_info: None,
-            title: "".into(),
-            info: "".into(),
-            items: Vec::new(),
-        };
-        let _ = week.update();
+        let mut week = Week::default();
+        let _ = week.current();
         week
     }
 
@@ -135,8 +119,20 @@ impl Week {
     }
 
     pub fn update(&mut self) -> AppResult<()> {
+        // update general week start/middle/end unix days
+        let start_week_day: WeekDaysUnixOffset =
+            config::get_config().main_calendar_start_weekday.into();
+        let start_week_day_offset: i32 = start_week_day as i32;
+        let (start_day, middle_day, end_day) = Self::calculate_week_start_middle_end_unix_day(
+            self.reference_day,
+            start_week_day_offset,
+            SEVEN_DAY_WEEK_SIZE,
+        );
+        self.start_day = start_day;
+        self.middle_day = middle_day;
+        self.end_day = end_day;
         // todo: seperate updating week_info and week_items... why?
-        // update week infos
+        // update calendar based week informations
         let today = today::get_unix_day();
         let main_cal: Calendar = config::get_config().main_calendar_type.into();
         let main_cal_lang = config::get_config().main_calendar_language.into();
@@ -163,7 +159,7 @@ impl Week {
         });
         // todo:
         // self.title = self.week_title();
-        self.title = "todo: the title goes here!".into();
+        self.title = "".into();
 
         // update items
         let result = db_sqlite::read_items_between_days(self.start_day, self.end_day, true);
@@ -179,31 +175,17 @@ impl Week {
     }
 
     pub fn next(&mut self) -> AppResult<()> {
-        self.start_day += SEVEN_DAY_WEEK_SIZE;
-        self.middle_day += SEVEN_DAY_WEEK_SIZE;
-        self.end_day += SEVEN_DAY_WEEK_SIZE;
+        self.reference_day += SEVEN_DAY_WEEK_SIZE;
         self.update()
     }
 
     pub fn previous(&mut self) -> AppResult<()> {
-        self.start_day -= SEVEN_DAY_WEEK_SIZE;
-        self.middle_day -= SEVEN_DAY_WEEK_SIZE;
-        self.end_day -= SEVEN_DAY_WEEK_SIZE;
+        self.reference_day -= SEVEN_DAY_WEEK_SIZE;
         self.update()
     }
 
     pub fn current(&mut self) -> AppResult<()> {
-        let start_week_day: WeekDaysUnixOffset =
-            config::get_config().main_calendar_start_weekday.into();
-        let start_week_day_offset: i32 = start_week_day as i32;
-        let (start_day, middle_day, end_day) = Self::calculate_week_start_middle_end_unix_day(
-            today::get_unix_day(),
-            start_week_day_offset,
-            SEVEN_DAY_WEEK_SIZE,
-        );
-        self.start_day = start_day;
-        self.middle_day = middle_day;
-        self.end_day = end_day;
+        self.reference_day = today::get_unix_day();
         self.update()
     }
 

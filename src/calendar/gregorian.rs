@@ -94,6 +94,7 @@ impl CalendarSpecificDateView for GregorianCalendar {
             // _ => datetime.year().to_string(),
         };
         DateView {
+            unix_day: 0,
             day,
             month,
             weekday,

@@ -104,6 +104,7 @@ impl CalendarSpecificDateView for PersianCalendar {
         };
 
         DateView {
+            unix_day: 0,
             day,
             month,
             weekday,
