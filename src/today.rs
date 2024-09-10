@@ -11,11 +11,11 @@ use crate::week_info::{Date, DateView};
 
 #[derive(Serialize, Clone)]
 pub struct Today {
-    calendar: Calendar,
-    language: Language,
-    date_view: DateView,
-    today_persian_date: String,
-    today_english_date: String,
+    main_date: Date,
+    main_date_view: DateView,
+    aux_date_view: Option<DateView>,
+    // today_persian_date: String,
+    // today_english_date: String,
 }
 
 impl Default for Today {
@@ -26,16 +26,26 @@ impl Default for Today {
 
 impl Today {
     pub fn new() -> Today {
-        let calendar: Calendar = config::get_config().main_calendar_type.into();
-        let language: Language = config::get_config().main_calendar_language.into();
+        let main_calendar: Calendar = config::get_config().main_calendar_type.into();
+        let main_language: Language = config::get_config().main_calendar_language.into();
+        let aux_calendar: Option<Calendar> = config::get_config()
+            .secondary_calendar_type
+            .map(|cal| cal.into());
+
         let day = get_unix_day();
-        let date_view = calendar.get_date_view(day, &language);
+        let main_date = get_today_date(&main_calendar);
+        let main_date_view = main_calendar.get_date_view(day, &main_language);
+        let aux_date_view = aux_calendar.map(|cal| {
+            let aux_language: Language = config::get_config()
+                .secondary_calendar_language
+                .unwrap_or_default()
+                .into();
+            cal.get_date_view(day, &aux_language)
+        });
         Today {
-            calendar,
-            language,
-            date_view,
-            today_persian_date: today_persian_date_string(),
-            today_english_date: today_english_date_string(),
+            main_date,
+            main_date_view,
+            aux_date_view,
         }
     }
 

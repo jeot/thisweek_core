@@ -10,6 +10,7 @@
 use crate::calendar::Calendar;
 use crate::config;
 use crate::db_sqlite;
+use crate::language::Language;
 use crate::models::*;
 use crate::ordering::Ordering;
 use crate::ordering::Result;
@@ -143,17 +144,20 @@ impl Week {
             main_cal,
             main_cal_lang,
         )?;
-        let aux_cal: Option<Calendar> = config::get_config().secondary_calendar.map(|s| s.into());
+        let aux_cal: Option<Calendar> = config::get_config()
+            .secondary_calendar_type
+            .map(|s| s.into());
         self.aux_week_info = aux_cal.map(|cal| {
-            let aux_cal_lang: String = config::get_config()
+            let aux_language: Language = config::get_config()
                 .secondary_calendar_language
-                .unwrap_or_default();
+                .unwrap_or_default()
+                .into();
             WeekInfo::from_unix_start_end_days(
                 self.start_day,
                 self.end_day,
                 today,
                 cal,
-                aux_cal_lang.into(),
+                aux_language.into(),
             )
             .unwrap_or_default()
         });

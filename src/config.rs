@@ -63,9 +63,9 @@ pub struct Config {
     pub main_calendar_type: String,
     pub main_calendar_language: String,
     pub main_calendar_start_weekday: String,
-    pub secondary_calendar: Option<String>,
+    pub secondary_calendar_type: Option<String>,
     pub secondary_calendar_language: Option<String>,
-    pub secondary_calendar_start_weekday: Option<String>,
+    pub secondary_calendar_start_weekday: Option<String>, // todo: delete this, no need!
 }
 
 impl Config {
@@ -75,7 +75,7 @@ impl Config {
             main_calendar_type: self.main_calendar_type.clone(),
             main_calendar_language: self.main_calendar_language.clone(),
             main_calendar_start_weekday: self.main_calendar_start_weekday.clone(),
-            secondary_calendar: self.secondary_calendar.clone(),
+            secondary_calendar_type: self.secondary_calendar_type.clone(),
             secondary_calendar_language: self.secondary_calendar_language.clone(),
             secondary_calendar_start_weekday: self.secondary_calendar_start_weekday.clone(),
         }
@@ -89,7 +89,7 @@ impl Default for Config {
             main_calendar_type: "Gregorian".into(),
             main_calendar_language: "en".into(),
             main_calendar_start_weekday: "MON".into(),
-            secondary_calendar: None,
+            secondary_calendar_type: None,
             secondary_calendar_language: None,
             secondary_calendar_start_weekday: None,
         }
