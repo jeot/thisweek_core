@@ -20,11 +20,18 @@ impl Language {
         }
         s
     }
+
+    pub fn default_direction(&self) -> String {
+        match self {
+            Language::English => "ltr".into(),
+            Language::Farsi => "rtl".into(),
+        }
+    }
 }
 
-impl Into<Language> for i32 {
-    fn into(self) -> Language {
-        match self {
+impl From<i32> for Language {
+    fn from(val: i32) -> Self {
+        match val {
             1 => Language::English,
             2 => Language::Farsi,
             _ => Language::English,
@@ -32,9 +39,9 @@ impl Into<Language> for i32 {
     }
 }
 
-impl Into<Language> for String {
-    fn into(self) -> Language {
-        match self.as_str() {
+impl From<String> for Language {
+    fn from(val: String) -> Self {
+        match val.as_str() {
             "en" => Language::English,
             "fa" => Language::Farsi,
             &_ => Language::English, // default
@@ -42,11 +49,16 @@ impl Into<Language> for String {
     }
 }
 
-impl Into<String> for Language {
-    fn into(self) -> String {
-        match self {
+impl From<Language> for String {
+    fn from(val: Language) -> Self {
+        match val {
             Language::English => "en".to_string(),
             Language::Farsi => "fa".to_string(),
         }
     }
+}
+
+// convert from constant &str array to Vec
+pub fn str_to_vec(arr: &[&str]) -> Vec<String> {
+    arr.to_vec().into_iter().map(String::from).collect()
 }

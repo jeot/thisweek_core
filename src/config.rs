@@ -42,7 +42,7 @@ pub fn get_config() -> Config {
     // x.clone()
 }
 
-fn default_config_path() -> PathBuf {
+pub fn default_config_path() -> PathBuf {
     let path = homedir::get_my_home().unwrap().unwrap();
     path.join(".weeks.config")
 }

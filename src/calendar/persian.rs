@@ -1,3 +1,4 @@
+use crate::language::{self, str_to_vec};
 use crate::week::WeekDaysUnixOffset;
 use crate::{language::Language, week_info::Date, week_info::DateView};
 use chrono::{DateTime, Local};
@@ -5,7 +6,9 @@ use ptime;
 use serde::Serialize;
 use time::Timespec;
 
-use super::{Calendar, CalendarSpecificDateView};
+use super::{
+    Calendar, CalendarSpecificDateView, CalendarView, CALENDAR_PERSIAN, CALENDAR_PERSIAN_STRING,
+};
 
 include!("../week_names.rs");
 
@@ -55,6 +58,10 @@ const MONTH_NAME_FULL_FA: [&str; 12] = [
     "بهمن",
     "اسفند",
 ];
+
+const SEASON_NAME_FULL_EN: [&str; 4] = ["Bahaar", "Tabestan", "Paiz", "Zemestan"];
+
+const SEASON_NAME_FULL_FA: [&str; 4] = ["بهار", "تابستان", "پاییز", "زمستان"];
 
 impl CalendarSpecificDateView for PersianCalendar {
     fn new_date(datetime: DateTime<Local>) -> Date {
@@ -109,6 +116,25 @@ impl CalendarSpecificDateView for PersianCalendar {
             month,
             weekday,
             year,
+        }
+    }
+
+    fn get_calendar_view(lang: &Language) -> CalendarView {
+        let months_names: Vec<String> = match lang {
+            Language::English => str_to_vec(&MONTH_NAME_FULL_EN),
+            Language::Farsi => str_to_vec(&MONTH_NAME_FULL_FA),
+        };
+        let seasons_names: Vec<String> = match lang {
+            Language::English => str_to_vec(&SEASON_NAME_FULL_EN),
+            Language::Farsi => str_to_vec(&SEASON_NAME_FULL_FA),
+        };
+        CalendarView {
+            calendar: CALENDAR_PERSIAN,
+            calendar_name: CALENDAR_PERSIAN_STRING.into(),
+            language: lang.clone().into(),
+            direction: lang.default_direction(),
+            months_names,
+            seasons_names,
         }
     }
 }

@@ -1,5 +1,9 @@
 use super::Calendar;
 use super::CalendarSpecificDateView;
+use super::CalendarView;
+use super::CALENDAR_GREGORIAN;
+use super::CALENDAR_GREGORIAN_STRING;
+use crate::language::str_to_vec;
 use crate::language::Language;
 use crate::week::WeekDaysUnixOffset;
 use crate::week_info::Date;
@@ -55,6 +59,10 @@ const MONTH_NAME_FULL_FA: [&str; 12] = [
     "دسامبر",
 ];
 
+const SEASON_NAME_FULL_EN: [&str; 4] = ["Spring", "Summer", "Autumn", "Winter"];
+
+const SEASON_NAME_FULL_FA: [&str; 4] = ["بهار", "تابستان", "پاییز", "زمستان"];
+
 impl CalendarSpecificDateView for GregorianCalendar {
     fn new_date(datetime: DateTime<Local>) -> Date {
         Date {
@@ -99,6 +107,25 @@ impl CalendarSpecificDateView for GregorianCalendar {
             month,
             weekday,
             year,
+        }
+    }
+
+    fn get_calendar_view(lang: &Language) -> CalendarView {
+        let months_names: Vec<String> = match lang {
+            Language::English => str_to_vec(&MONTH_NAME_FULL_EN),
+            Language::Farsi => str_to_vec(&MONTH_NAME_FULL_FA),
+        };
+        let seasons_names: Vec<String> = match lang {
+            Language::English => str_to_vec(&SEASON_NAME_FULL_EN),
+            Language::Farsi => str_to_vec(&SEASON_NAME_FULL_FA),
+        };
+        CalendarView {
+            calendar: CALENDAR_GREGORIAN,
+            calendar_name: CALENDAR_GREGORIAN_STRING.into(),
+            language: lang.clone().into(),
+            direction: lang.default_direction(),
+            months_names,
+            seasons_names,
         }
     }
 }

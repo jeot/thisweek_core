@@ -12,6 +12,9 @@ use self::persian::PersianCalendar;
 pub mod gregorian;
 pub mod persian;
 
+pub const CALENDAR_GREGORIAN: i32 = 0;
+pub const CALENDAR_PERSIAN: i32 = 1;
+
 pub const CALENDAR_PERSIAN_STRING: &str = "Persian";
 pub const CALENDAR_GREGORIAN_STRING: &str = "Gregorian";
 
@@ -39,6 +42,13 @@ impl Calendar {
         match self {
             Calendar::Gregorian(_) => GregorianCalendar::get_date_view(day, lang),
             Calendar::Persian(_) => PersianCalendar::get_date_view(day, lang),
+        }
+    }
+
+    pub fn get_calendar_view(&self, lang: &Language) -> CalendarView {
+        match self {
+            Calendar::Gregorian(_) => GregorianCalendar::get_calendar_view(lang),
+            Calendar::Persian(_) => PersianCalendar::get_calendar_view(lang),
         }
     }
 
@@ -70,21 +80,18 @@ impl Calendar {
     }
 }
 
-pub const CALENDAR_GREGORIAN: i32 = 0;
-pub const CALENDAR_PERSIAN: i32 = 1;
-
-impl Into<i32> for Calendar {
-    fn into(self) -> i32 {
-        match self {
+impl From<Calendar> for i32 {
+    fn from(val: Calendar) -> Self {
+        match val {
             Calendar::Gregorian(_) => CALENDAR_GREGORIAN,
             Calendar::Persian(_) => CALENDAR_PERSIAN,
         }
     }
 }
 
-impl Into<String> for Calendar {
-    fn into(self) -> String {
-        match self {
+impl From<Calendar> for String {
+    fn from(val: Calendar) -> Self {
+        match val {
             Calendar::Gregorian(_) => CALENDAR_GREGORIAN_STRING.to_string(),
             Calendar::Persian(_) => CALENDAR_PERSIAN_STRING.to_string(),
         }
@@ -107,11 +114,11 @@ impl Into<String> for Calendar {
 //     }
 // }
 
-impl Into<Calendar> for String {
-    fn into(self) -> Calendar {
-        if self == "Persian" {
+impl From<String> for Calendar {
+    fn from(val: String) -> Self {
+        if val == "Persian" {
             Calendar::Persian(persian::PersianCalendar)
-        } else if self == "Gregorian" {
+        } else if val == "Gregorian" {
             Calendar::Gregorian(gregorian::GregorianCalendar)
         } else {
             Calendar::Gregorian(gregorian::GregorianCalendar)
@@ -119,9 +126,20 @@ impl Into<Calendar> for String {
     }
 }
 
+#[derive(Serialize)]
+pub struct CalendarView {
+    pub calendar: i32,
+    pub calendar_name: String,
+    pub language: String,
+    pub direction: String,
+    pub months_names: Vec<String>,
+    pub seasons_names: Vec<String>,
+}
+
 pub trait CalendarSpecificDateView {
     fn new_date(datetime: DateTime<Local>) -> Date;
     fn new_date_view(datetime: DateTime<Local>, lang: &Language) -> DateView;
+    fn get_calendar_view(lang: &Language) -> CalendarView;
 
     // maybe we should use something like this:
     // pub fn dateview_from_gregorian_date(g_year: i32, g_month: i32, g_day: i32, lang: Language) ->

@@ -5,11 +5,11 @@ use std::path::Path;
 type Callback = fn();
 
 pub struct Notify {
-    debouncer: notify_debouncer_mini::Debouncer<RecommendedWatcher>,
+    pub debouncer: notify_debouncer_mini::Debouncer<RecommendedWatcher>,
 }
 
 impl Notify {
-    pub fn new(callback: Callback) -> Self {
+    pub fn new(path: &Path, callback: Callback) -> Self {
         // Select recommended watcher for debouncer.
         // Using a callback here, could also be a channel.
         let mut debouncer = new_debouncer(
@@ -28,12 +28,10 @@ impl Notify {
 
         // Add a path to be watched. All files and directories at that path and
         // below will be monitored for changes.
+        // println!("watching {path}");
         debouncer
             .watcher()
-            .watch(
-                Path::new("C:\\Users\\shk\\.weeks.config"),
-                RecursiveMode::Recursive,
-            )
+            .watch(path, RecursiveMode::Recursive)
             .unwrap();
 
         Notify { debouncer }
