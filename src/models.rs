@@ -39,11 +39,11 @@ pub struct Item {
     pub uuid: Option<String>,
 }
 
-pub trait ItemsList {
+pub trait AsItemsList {
     fn get_near_items_id(&self, id: i32) -> (Option<i32>, Option<i32>);
 }
 
-impl ItemsList for Vec<Item> {
+impl AsItemsList for Vec<Item> {
     fn get_near_items_id(&self, id: i32) -> (Option<i32>, Option<i32>) {
         let mut previous = None;
         let mut next = None;

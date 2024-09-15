@@ -14,8 +14,6 @@ pub struct Today {
     main_date: Date,
     main_date_view: DateView,
     aux_date_view: Option<DateView>,
-    // today_persian_date: String,
-    // today_english_date: String,
 }
 
 impl Default for Today {
