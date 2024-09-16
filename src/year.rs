@@ -18,7 +18,7 @@ pub struct Year {
     pub reference_calendar: u32,
     pub calendar: Calendar,
     pub language: Language,
-    // pub year: String,
+    pub year: i32,
     pub title: String,
     pub info: String,
     pub items: Vec<Item>,
@@ -26,8 +26,10 @@ pub struct Year {
 
 impl Year {
     pub fn new() -> Year {
-        let mut year = Year::default();
-        year.reference_calendar = MAIN_CALENDAR;
+        let mut year = Year {
+            reference_calendar: MAIN_CALENDAR,
+            ..Default::default()
+        };
         let _ = year.current();
         year
     }
@@ -45,7 +47,8 @@ impl Year {
         if self.reference_calendar == SECONDARY_CALENDAR && aux_cal.is_some() {
             self.calendar = aux_cal.unwrap_or_default();
             self.language = aux_lang;
-        } else { // MAIN_CALENDAR
+        } else {
+            // MAIN_CALENDAR
             self.calendar = main_cal;
             self.language = main_lang;
         }
@@ -53,6 +56,7 @@ impl Year {
             self.calendar.clone().into(),
             self.reference_year,
         );
+        self.year = self.reference_year;
         self.create_yearly_title();
         match db_result {
             Ok(vec) => {
@@ -63,10 +67,15 @@ impl Year {
             Err(err) => Err(err),
         }
     }
+    pub fn get_calendar(&self) -> &Calendar {
+        &self.calendar
+    }
 
     fn create_yearly_title(&mut self) {
         self.title = match self.language {
-            Language::Farsi => Language::change_numbers_to_farsi(&format!("سال {}", self.reference_year)),
+            Language::Farsi => {
+                Language::change_numbers_to_farsi(&format!("سال {}", self.reference_year))
+            }
             Language::English => format!("Year {}", self.reference_year),
         };
         // println!("{}", self.title);
