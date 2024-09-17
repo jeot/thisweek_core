@@ -3,7 +3,7 @@
 
 use serde::Serialize;
 
-#[derive(Serialize, Clone, Debug, Default)]
+#[derive(Serialize, Clone, Debug, Default, PartialEq)]
 pub enum Language {
     #[default]
     English = 1,
@@ -11,6 +11,22 @@ pub enum Language {
 }
 
 impl Language {
+    pub fn change_numbers_language(&self, s: &str) -> String {
+        let numsen = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
+        let numsfa = ["۰", "۱", "۲", "۳", "۴", "۵", "۶", "۷", "۸", "۹"];
+        let mut s: String = String::from(s);
+        if *self == Language::Farsi {
+            for i in 0..10 {
+                s = s.replace(numsen[i], numsfa[i]);
+            }
+        } else {
+            for i in 0..10 {
+                s = s.replace(numsfa[i], numsen[i]);
+            }
+        }
+        s
+    }
+
     pub fn change_numbers_to_farsi(s: &str) -> String {
         let nums = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
         let numsfa = ["۰", "۱", "۲", "۳", "۴", "۵", "۶", "۷", "۸", "۹"];

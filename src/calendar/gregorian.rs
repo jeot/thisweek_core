@@ -5,16 +5,16 @@ use super::CALENDAR_GREGORIAN;
 use super::CALENDAR_GREGORIAN_STRING;
 use crate::language::str_to_vec;
 use crate::language::Language;
-use crate::week::WeekDaysUnixOffset;
 use crate::week_info::Date;
 use crate::week_info::DateView;
+use crate::weekdays::WeekDaysUnixOffset;
 use chrono::Datelike;
 use chrono::{DateTime, Local};
 use serde::Serialize;
 
 include!("../week_names.rs");
 
-#[derive(Debug, Serialize, Clone)]
+#[derive(Debug, Serialize, Clone, PartialEq)]
 pub struct GregorianCalendar;
 
 fn convert_weekday(weekday: chrono::prelude::Weekday) -> WeekDaysUnixOffset {
@@ -119,9 +119,13 @@ impl CalendarSpecificDateView for GregorianCalendar {
             Language::English => str_to_vec(&SEASON_NAME_FULL_EN),
             Language::Farsi => str_to_vec(&SEASON_NAME_FULL_FA),
         };
+        let calendar_name: String = match lang {
+            Language::English => "Gregorian Calendar".into(),
+            Language::Farsi => "تقویم میلادی".into(),
+        };
         CalendarView {
             calendar: CALENDAR_GREGORIAN,
-            calendar_name: CALENDAR_GREGORIAN_STRING.into(),
+            calendar_name,
             language: lang.clone().into(),
             direction: lang.default_direction(),
             months_names,

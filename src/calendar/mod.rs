@@ -1,10 +1,82 @@
+use crate::config;
 use crate::language::Language;
+use crate::models::ObjectiveTag;
+use crate::models::*;
 use crate::prelude::Error;
 use crate::prelude::Result as AppResult;
 use crate::week_info::Date;
 use crate::week_info::DateView;
 use chrono::{DateTime, Local};
 use serde::Serialize;
+
+#[derive(Clone)]
+pub struct CalendarLanguagePair {
+    pub calendar: Calendar,
+    pub language: Language,
+}
+
+impl CalendarLanguagePair {
+    pub fn get_objective_tag(
+        &self,
+        year: Option<i32>,
+        season: Option<i32>,
+        month: Option<i32>,
+    ) -> Option<ObjectiveTag> {
+        if let Some(year) = year {
+            let calview = self.calendar.get_calendar_view(&self.language);
+            let year_string = year.to_string();
+            let year_string = self.language.change_numbers_language(&year_string);
+            let (text, r#type) = if let Some(season) = season {
+                let season = season - 1;
+                let season = calview.seasons_names[season as usize].clone();
+                (format!("{season} {year_string}"), OBJECTIVE_TYPE_SEASONAL)
+            } else if let Some(month) = month {
+                let month = month - 1;
+                let month = calview.months_names[month as usize].clone();
+                (format!("{month} {year_string}"), OBJECTIVE_TYPE_MONTHLY)
+            } else {
+                (year_string.clone(), OBJECTIVE_TYPE_YEARLY)
+            };
+            Some(ObjectiveTag {
+                calendar: calview.calendar,
+                text,
+                r#type,
+                calendar_name: calview.calendar_name.clone(),
+                language: calview.language.clone(),
+                year_string,
+                year,
+                season: season.map(|i| i as usize),
+                month: month.map(|i| i as usize),
+            })
+        } else {
+            None
+        }
+    }
+}
+
+impl From<&Calendar> for CalendarLanguagePair {
+    fn from(val: &Calendar) -> Self {
+        let main_pair: CalendarLanguagePair = config::get_main_cal_lang_pair();
+        let second_pair: Option<CalendarLanguagePair> = config::get_second_cal_lang_pair();
+        if *val == main_pair.calendar {
+            main_pair
+        } else if let Some(pair) = second_pair {
+            if *val == pair.calendar {
+                pair
+            } else {
+                CalendarLanguagePair {
+                    calendar: val.clone(),
+                    language: Language::default(),
+                }
+            }
+        } else {
+            CalendarLanguagePair {
+                calendar: val.clone(),
+                language: Language::default(),
+            }
+        }
+    }
+}
 
 use self::gregorian::GregorianCalendar;
 use self::persian::PersianCalendar;
@@ -18,7 +90,7 @@ pub const CALENDAR_PERSIAN: i32 = 1;
 pub const CALENDAR_PERSIAN_STRING: &str = "Persian";
 pub const CALENDAR_GREGORIAN_STRING: &str = "Gregorian";
 
-#[derive(Debug, Serialize, Clone)]
+#[derive(Debug, Serialize, Clone, PartialEq)]
 pub enum Calendar {
     Gregorian(gregorian::GregorianCalendar),
     Persian(persian::PersianCalendar),
@@ -98,22 +170,6 @@ impl From<Calendar> for String {
     }
 }
 
-// impl Into<Calendar> for i32 {
-//     fn into(self) -> Calendar {
-//         self.into()
-// match self {
-//     self
-// }
-// if self == CALENDAR_PERSIAN {
-//     Calendar::Persian(persian::PersianCalendar)
-// } else if self == CALENDAR_GREGORIAN {
-//     Calendar::Gregorian(gregorian::GregorianCalendar)
-// } else {
-//     Calendar::Gregorian(gregorian::GregorianCalendar)
-// }
-//     }
-// }
-
 impl From<String> for Calendar {
     fn from(val: String) -> Self {
         if val == "Persian" {
@@ -122,6 +178,16 @@ impl From<String> for Calendar {
             Calendar::Gregorian(gregorian::GregorianCalendar)
         } else {
             Calendar::Gregorian(gregorian::GregorianCalendar)
+        }
+    }
+}
+
+impl From<i32> for Calendar {
+    fn from(val: i32) -> Self {
+        match val {
+            CALENDAR_PERSIAN => Calendar::Persian(persian::PersianCalendar),
+            CALENDAR_GREGORIAN => Calendar::Gregorian(gregorian::GregorianCalendar),
+            _ => panic!("@from() not a valid calendar number: {}", val),
         }
     }
 }

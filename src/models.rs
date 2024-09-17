@@ -1,3 +1,5 @@
+use crate::calendar::Calendar;
+use crate::calendar::CalendarLanguagePair;
 use cuid2;
 use diesel::prelude::*;
 use serde::Deserialize;
@@ -37,6 +39,75 @@ pub struct Item {
     pub order_in_resolution: Option<String>,
     pub sync: Option<i32>,
     pub uuid: Option<String>,
+}
+
+#[derive(Debug, Serialize, Clone, Default)]
+pub struct ItemView {
+    pub id: i32,
+    pub calendar: i32,
+    pub kind: i32,
+    pub text: String,
+    pub status: bool,
+    pub fixed_day_tag: Option<String>,
+    pub objective_tag: Option<ObjectiveTag>,
+    pub uuid: Option<String>,
+}
+
+pub const OBJECTIVE_TYPE_NONE: i32 = 0;
+pub const OBJECTIVE_TYPE_MONTHLY: i32 = 1;
+pub const OBJECTIVE_TYPE_SEASONAL: i32 = 2;
+pub const OBJECTIVE_TYPE_YEARLY: i32 = 3;
+
+#[derive(Debug, Serialize, Clone, Default)]
+pub struct ObjectiveTag {
+    pub calendar: i32,
+    pub text: String,
+    pub r#type: i32,
+    pub calendar_name: String,
+    pub language: String,
+    pub year_string: String,
+    pub year: i32,
+    pub season: Option<usize>,
+    pub month: Option<usize>,
+}
+
+impl From<&Item> for ItemView {
+    fn from(item: &Item) -> Self {
+        let text: String = match item.kind {
+            ITEM_KIND_GOAL => item.title.clone().unwrap_or_default(),
+            ITEM_KIND_NOTE => item.note.clone().unwrap_or_default(),
+            _ => "".into(),
+        };
+        let status = {
+            match item.status.unwrap_or_default() {
+                0 => false,
+                _ => true,
+            }
+        };
+        let fixed_day_tag = {
+            if item.day != 0 && item.fixed_date {
+                Some("todo: fixed date!".to_string())
+            } else {
+                None
+            }
+        };
+        let objective_tag = {
+            let cal: &Calendar = &item.calendar.into();
+            let cal_lang_pair: CalendarLanguagePair = cal.into();
+            cal_lang_pair.get_objective_tag(item.year, item.season, item.month)
+        };
+
+        ItemView {
+            id: item.id,
+            calendar: item.calendar,
+            kind: item.kind,
+            text,
+            status,
+            fixed_day_tag,
+            objective_tag,
+            uuid: item.uuid.clone(),
+        }
+    }
 }
 
 pub trait AsItemsList {
@@ -203,11 +274,4 @@ impl NewItem {
             false,
         )
     }
-}
-
-#[derive(Serialize)]
-pub struct FullState {
-    today: crate::today::Today,
-    week: crate::week::Week,
-    year: crate::year::Year,
 }

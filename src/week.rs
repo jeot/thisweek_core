@@ -17,75 +17,28 @@ use crate::ordering::Result;
 use crate::prelude::Result as AppResult;
 use crate::today;
 use crate::week_info::WeekInfo;
+use crate::weekdays::WeekDaysUnixOffset;
+use crate::weekdays::SEVEN_DAY_WEEK_SIZE;
 use ptime;
 use serde::Serialize;
 use time::Timespec;
 
-// January 1, 1970 was Thursday
-// Thu, Fri, Sat, Sun, Mon, Tue, Wed
-// 0  , 1  , 2  , 3  , 4  , 5  , 6
-// pub const WEEKDAY_UNIX_OFFSET_THU: i32 = 0;
-// pub const WEEKDAY_UNIX_OFFSET_FRI: i32 = 1;
-// pub const WEEKDAY_UNIX_OFFSET_SAT: i32 = 2;
-// pub const WEEKDAY_UNIX_OFFSET_SUN: i32 = 3;
-// pub const WEEKDAY_UNIX_OFFSET_MON: i32 = 4;
-// pub const WEEKDAY_UNIX_OFFSET_TUE: i32 = 5;
-// pub const WEEKDAY_UNIX_OFFSET_WED: i32 = 6;
-
-#[repr(i32)]
-pub enum WeekDaysUnixOffset {
-    Thu = 0,
-    Fri = 1,
-    Sat = 2,
-    Sun = 3,
-    Mon = 4,
-    Tue = 5,
-    Wed = 6,
-}
-
-impl Into<WeekDaysUnixOffset> for String {
-    fn into(self) -> WeekDaysUnixOffset {
-        match self.as_str() {
-            "THU" => WeekDaysUnixOffset::Thu,
-            "FRI" => WeekDaysUnixOffset::Fri,
-            "SAT" => WeekDaysUnixOffset::Sat,
-            "SUN" => WeekDaysUnixOffset::Sun,
-            "MON" => WeekDaysUnixOffset::Mon,
-            "TUE" => WeekDaysUnixOffset::Tue,
-            "WED" => WeekDaysUnixOffset::Wed,
-            s => panic!("invalid weekday string: {s}"),
-        }
-    }
-}
-
-impl Into<WeekDaysUnixOffset> for i32 {
-    fn into(self) -> WeekDaysUnixOffset {
-        match self {
-            0 => WeekDaysUnixOffset::Thu,
-            1 => WeekDaysUnixOffset::Fri,
-            2 => WeekDaysUnixOffset::Sat,
-            3 => WeekDaysUnixOffset::Sun,
-            4 => WeekDaysUnixOffset::Mon,
-            5 => WeekDaysUnixOffset::Tue,
-            6 => WeekDaysUnixOffset::Wed,
-            _ => WeekDaysUnixOffset::Thu,
-        }
-    }
-}
-
-pub const SEVEN_DAY_WEEK_SIZE: i32 = 7;
-
-#[derive(Debug, Serialize, Clone, Default)]
+#[derive(Debug, Clone, Default)]
 pub struct Week {
-    pub title: String,
-    pub info: String,
-    pub week_info: WeekInfo,
-    pub aux_week_info: Option<WeekInfo>,
     pub reference_day: i32,
     pub start_day: i32,
     pub middle_day: i32,
     pub end_day: i32,
     pub items: Vec<Item>,
+    // for frontend view only
+    pub week_view: WeekView,
+}
+
+#[derive(Debug, Serialize, Clone, Default)]
+pub struct WeekView {
+    pub week_info_main: WeekInfo,
+    pub week_info_aux: Option<WeekInfo>,
+    pub items: Vec<ItemView>,
 }
 
 impl Week {
@@ -132,12 +85,18 @@ impl Week {
         self.start_day = start_day;
         self.middle_day = middle_day;
         self.end_day = end_day;
-        // todo: seperate updating week_info and week_items... why?
-        // update calendar based week informations
+
+        // update items
+        let items = db_sqlite::read_items_between_days(self.start_day, self.end_day, true)?;
+        // todo: exclude the objectives, include the ones that are fixed date
+        self.items = items;
+        self.check_and_fix_ordering();
+
+        // update view items
         let today = today::get_unix_day();
         let main_cal: Calendar = config::get_config().main_calendar_type.into();
         let main_cal_lang = config::get_config().main_calendar_language.into();
-        self.week_info = WeekInfo::from_unix_start_end_days(
+        self.week_view.week_info_main = WeekInfo::from_unix_start_end_days(
             self.start_day,
             self.end_day,
             today,
@@ -147,7 +106,7 @@ impl Week {
         let aux_cal: Option<Calendar> = config::get_config()
             .secondary_calendar_type
             .map(|s| s.into());
-        self.aux_week_info = aux_cal.map(|cal| {
+        self.week_view.week_info_aux = aux_cal.map(|cal| {
             let aux_language: Language = config::get_config()
                 .secondary_calendar_language
                 .unwrap_or_default()
@@ -161,21 +120,12 @@ impl Week {
             )
             .unwrap_or_default()
         });
-        // todo:
-        // self.title = self.week_title();
-        self.title = "".into();
+        self.week_view.items = self.items.iter().map(|i| ItemView::from(i)).collect();
+        Ok(())
+    }
 
-        // update items
-        let result = db_sqlite::read_items_between_days(self.start_day, self.end_day, true);
-        match result {
-            Ok(vec) => {
-                // todo: exclude the objectives, include the ones that are fixed date
-                self.items = vec;
-                self.check_and_fix_ordering();
-                Ok(())
-            }
-            Err(e) => Err(e),
-        }
+    pub fn get_view(&self) -> WeekView {
+        self.week_view.clone()
     }
 
     pub fn next(&mut self) -> AppResult<()> {
@@ -230,10 +180,6 @@ impl Week {
             Err("id not in list!".into())
         }
     }
-
-    pub fn backup_database_file(&self) -> Result<()> {
-        db_sqlite::backup_database_file()
-    }
 }
 
 impl Ordering for Week {
@@ -278,7 +224,8 @@ impl Ordering for Week {
 
 #[cfg(test)]
 mod tests {
-    use crate::week::{Week, WeekDaysUnixOffset, SEVEN_DAY_WEEK_SIZE};
+    use crate::week::Week;
+    use crate::weekdays::{WeekDaysUnixOffset, SEVEN_DAY_WEEK_SIZE};
 
     fn check_correct_reference_from_persian_dates(
         dates: Vec<ptime::Tm>,

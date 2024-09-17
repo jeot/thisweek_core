@@ -12,16 +12,24 @@ use serde::Serialize;
 const MAIN_CALENDAR: u32 = 0;
 const SECONDARY_CALENDAR: u32 = 1;
 
-#[derive(Serialize, Clone, Debug, Default)]
+#[derive(Debug, Default)]
 pub struct Year {
     pub reference_year: i32,
     pub reference_calendar: u32,
     pub calendar: Calendar,
     pub language: Language,
-    pub year: i32,
+    pub items: Vec<Item>,
+
+    // for view only
+    pub year_view: YearView,
+}
+
+#[derive(Serialize, Clone, Debug, Default)]
+pub struct YearView {
+    pub year: String,
     pub title: String,
     pub info: String,
-    pub items: Vec<Item>,
+    pub items: Vec<ItemView>,
 }
 
 impl Year {
@@ -35,50 +43,47 @@ impl Year {
     }
 
     pub fn update(&mut self) -> Result<()> {
-        let main_cal: Calendar = config::get_config().main_calendar_type.into();
-        let main_lang = config::get_config().main_calendar_language.into();
-        let aux_cal: Option<Calendar> = config::get_config()
-            .secondary_calendar_type
-            .map(|s| s.into());
-        let aux_lang: Language = config::get_config()
-            .secondary_calendar_language
-            .unwrap_or_default()
-            .into();
-        if self.reference_calendar == SECONDARY_CALENDAR && aux_cal.is_some() {
-            self.calendar = aux_cal.unwrap_or_default();
-            self.language = aux_lang;
+        let main_pair = config::get_main_cal_lang_pair();
+        let second_pair = config::get_second_cal_lang_pair();
+        if self.reference_calendar == SECONDARY_CALENDAR && second_pair.is_some() {
+            self.calendar = second_pair.clone().unwrap().calendar;
+            self.language = second_pair.unwrap().language;
         } else {
             // MAIN_CALENDAR
-            self.calendar = main_cal;
-            self.language = main_lang;
+            self.calendar = main_pair.calendar;
+            self.language = main_pair.language;
         }
-        let db_result = db_sqlite::read_items_in_calendar_year(
+
+        // update items
+        let items = db_sqlite::read_items_in_calendar_year(
             self.calendar.clone().into(),
             self.reference_year,
-        );
-        self.year = self.reference_year;
-        self.create_yearly_title();
-        match db_result {
-            Ok(vec) => {
-                self.items = vec;
-                self.check_and_fix_ordering();
-                Ok(())
-            }
-            Err(err) => Err(err),
-        }
+        )?;
+        self.items = items;
+        self.check_and_fix_ordering();
+
+        // update yearly view
+        self.update_year_title_info();
+        self.year_view.items = self.items.iter().map(|i| ItemView::from(i)).collect();
+        Ok(())
     }
+
+    pub fn get_view(&self) -> YearView {
+        self.year_view.clone()
+    }
+
     pub fn get_calendar(&self) -> &Calendar {
         &self.calendar
     }
 
-    fn create_yearly_title(&mut self) {
-        self.title = match self.language {
-            Language::Farsi => {
-                Language::change_numbers_to_farsi(&format!("سال {}", self.reference_year))
-            }
-            Language::English => format!("Year {}", self.reference_year),
+    fn update_year_title_info(&mut self) {
+        self.year_view.year = self.reference_year.to_string();
+        self.year_view.year = self.language.change_numbers_language(&self.year_view.year);
+        self.year_view.title = match self.language {
+            Language::English => format!("Year {}", self.year_view.year),
+            Language::Farsi => format!("سال {}", self.year_view.year),
         };
-        // println!("{}", self.title);
+        self.year_view.info = String::new();
     }
 
     pub fn next(&mut self) -> Result<()> {

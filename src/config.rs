@@ -1,3 +1,6 @@
+use crate::calendar::Calendar;
+use crate::calendar::CalendarLanguagePair;
+use crate::language::Language;
 use crate::prelude::Error as AppError;
 use crate::prelude::Result as AppResult;
 use arc_swap::ArcSwap;
@@ -40,6 +43,23 @@ pub fn get_config() -> Config {
     // let x = std::sync::Arc::<Config>::try_unwrap(value).unwrap();
     // println!("x: {x:?}");
     // x.clone()
+}
+
+pub fn get_main_cal_lang_pair() -> CalendarLanguagePair {
+    let calendar: Calendar = get_config().main_calendar_type.into();
+    let language: Language = get_config().main_calendar_language.into();
+    CalendarLanguagePair { calendar, language }
+}
+
+pub fn get_second_cal_lang_pair() -> Option<CalendarLanguagePair> {
+    get_config().secondary_calendar_type.map(|cal| {
+        let language: Language = get_config()
+            .secondary_calendar_language
+            .unwrap_or_default()
+            .into();
+        let calendar: Calendar = cal.into();
+        CalendarLanguagePair { calendar, language }
+    })
 }
 
 pub fn default_config_path() -> PathBuf {

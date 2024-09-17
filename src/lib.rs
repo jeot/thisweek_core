@@ -11,4 +11,5 @@ pub mod schema;
 pub mod today;
 pub mod week;
 pub mod week_info;
+pub mod weekdays;
 pub mod year;

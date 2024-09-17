@@ -1,5 +1,5 @@
-use crate::language::{self, str_to_vec};
-use crate::week::WeekDaysUnixOffset;
+use crate::language::str_to_vec;
+use crate::weekdays::WeekDaysUnixOffset;
 use crate::{language::Language, week_info::Date, week_info::DateView};
 use chrono::{DateTime, Local};
 use ptime;
@@ -12,7 +12,7 @@ use super::{
 
 include!("../week_names.rs");
 
-#[derive(Debug, Serialize, Clone)]
+#[derive(Debug, Serialize, Clone, PartialEq)]
 pub struct PersianCalendar;
 
 fn convert_weekday(weekday: i32) -> WeekDaysUnixOffset {
@@ -128,9 +128,13 @@ impl CalendarSpecificDateView for PersianCalendar {
             Language::English => str_to_vec(&SEASON_NAME_FULL_EN),
             Language::Farsi => str_to_vec(&SEASON_NAME_FULL_FA),
         };
+        let calendar_name: String = match lang {
+            Language::English => "Persian Calendar".into(),
+            Language::Farsi => "تقویم شمسی هجری".into(),
+        };
         CalendarView {
             calendar: CALENDAR_PERSIAN,
-            calendar_name: CALENDAR_PERSIAN_STRING.into(),
+            calendar_name,
             language: lang.clone().into(),
             direction: lang.default_direction(),
             months_names,
