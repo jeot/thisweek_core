@@ -5,6 +5,7 @@ use crate::db_sqlite;
 use crate::language::Language;
 use crate::ordering;
 use crate::ordering::Result;
+use crate::prelude::Result as AppResult;
 use crate::today;
 use crate::{models::*, ordering::Ordering};
 use serde::Serialize;
@@ -99,6 +100,24 @@ impl Year {
     pub fn current(&mut self) -> Result<()> {
         self.reference_year = today::get_today_date(&self.calendar).year;
         self.update()
+    }
+
+    pub fn add_new_item(&mut self, kind: i32, text: String) -> AppResult<()> {
+        let current_year_calendar: Calendar = self.calendar.clone();
+        let calendar: i32 = current_year_calendar.into();
+        let year = Some(self.reference_year);
+        let ordering_key: String = self.get_new_ordering_key();
+        let new_item = NewItem::new(
+            calendar,
+            year,
+            None, //season,
+            None, //month,
+            0,    //day,
+            kind,
+            text,
+            ordering_key,
+        );
+        db_sqlite::create_item(&new_item)
     }
 
     pub fn switch_calendar(&mut self) -> Result<()> {

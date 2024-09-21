@@ -143,29 +143,22 @@ impl Week {
         self.update()
     }
 
-    // pub fn week_title(&self) -> String {
-    //     let today = ptime::now();
-    //     let (shanbeh, jomeh) = self.get_persian_first_and_last_week_days();
-    //     if shanbeh.tm_year == jomeh.tm_year && shanbeh.tm_year != today.tm_year {
-    //         format!(
-    //             "{} - {}",
-    //             shanbeh.to_string("E d MMM"),
-    //             jomeh.to_string("E d MMM، (سال yyyy)")
-    //         )
-    //     } else if shanbeh.tm_year == jomeh.tm_year && shanbeh.tm_year == today.tm_year {
-    //         format!(
-    //             "{} - {}",
-    //             shanbeh.to_string("E d MMM"),
-    //             jomeh.to_string("E d MMM")
-    //         )
-    //     } else {
-    //         format!(
-    //             "{} - {}",
-    //             shanbeh.to_string("E d MMM yyyy"),
-    //             jomeh.to_string("E d MMM yyyy")
-    //         )
-    //     }
-    // }
+    pub fn add_new_item(&mut self, kind: i32, text: String) -> AppResult<()> {
+        let main_cal: Calendar = config::get_config().main_calendar_type.into();
+        let calendar: i32 = main_cal.into();
+        let ordering_key: String = self.get_new_ordering_key();
+        let new_item = NewItem::new(
+            calendar,
+            None, //year,
+            None, //season,
+            None, //month,
+            self.middle_day,
+            kind,
+            text,
+            ordering_key,
+        );
+        db_sqlite::create_item(&new_item)
+    }
 
     pub fn move_item_to_other_time_period_offset(&mut self, id: i32, offset: i32) -> Result<usize> {
         if let Some(pos) = self.items.iter().position(|item| item.id == id) {

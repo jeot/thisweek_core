@@ -18,14 +18,15 @@ pub fn establish_connection() -> SqliteConnection {
         .unwrap_or_else(|_| panic!("Error connecting to {}", database_url))
 }
 
-pub fn create_item(new_item: &NewItem) -> Result<usize, String> {
+pub fn create_item(new_item: &NewItem) -> AppResult<()> {
     use crate::schema::items::dsl::*;
     let conn = &mut establish_connection();
 
     diesel::insert_into(items)
         .values(new_item)
         .execute(conn)
-        .map_err(|err| err.to_string())
+        .map(|_| ())
+        .map_err(|e| AppError::DatabaseError(e.to_string()))
 }
 
 pub fn remove_item(item_id: i32) -> Result<usize, String> {
@@ -147,8 +148,8 @@ fn check_valid_id_range(id: i32) -> Result<(), String> {
     }
 }
 
-pub fn update_item_text(id: i32, text: String) -> Result<usize, String> {
-    println!("update_item_text: {}", id);
+pub fn edit_item_text(id: i32, text: String) -> Result<usize, String> {
+    println!("edit_item_text: {}", id);
     check_valid_id_range(id)?;
     let mut item = get_item(id)?;
     if item.kind == ITEM_KIND_GOAL {

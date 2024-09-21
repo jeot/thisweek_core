@@ -180,8 +180,8 @@ impl NewItem {
         kind: i32,
         text: String,
         ordering_key: String,
-        is_resolution: bool,
     ) -> Self {
+        let is_objective: bool = if let Some(_) = year { true } else { false };
         NewItem {
             calendar,
             year,
@@ -204,12 +204,12 @@ impl NewItem {
             datetime: None,
             duration: None,
             status: Some(STATUS_UNDONE),
-            order_in_week: if is_resolution {
+            order_in_week: if is_objective {
                 None
             } else {
                 Some(ordering_key.clone())
             },
-            order_in_resolution: if is_resolution {
+            order_in_resolution: if is_objective {
                 Some(ordering_key.clone())
             } else {
                 None
@@ -239,39 +239,5 @@ impl NewItem {
             sync: None,
             uuid: Some(cuid2::create_id()),
         }
-    }
-
-    pub fn new_weekly_goal(calendar: i32, day: i32, text: String, ordering_key: String) -> Self {
-        let year = None;
-        let season = None;
-        let month = None;
-        Self::new(
-            calendar,
-            year,
-            season,
-            month,
-            day,
-            ITEM_KIND_GOAL,
-            text,
-            ordering_key,
-            false,
-        )
-    }
-
-    pub fn new_weekly_note(calendar: i32, day: i32, text: String, ordering_key: String) -> Self {
-        let year = None;
-        let season = None;
-        let month = None;
-        Self::new(
-            calendar,
-            year,
-            season,
-            month,
-            day,
-            ITEM_KIND_NOTE,
-            text,
-            ordering_key,
-            false,
-        )
     }
 }
