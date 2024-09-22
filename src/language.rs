@@ -8,6 +8,7 @@ pub enum Language {
     #[default]
     English = 1,
     Farsi = 2,
+    Chinese = 3,
 }
 
 impl Language {
@@ -41,6 +42,7 @@ impl Language {
         match self {
             Language::English => "ltr".into(),
             Language::Farsi => "rtl".into(),
+            Language::Chinese => "ltr".into(),
         }
     }
 }
@@ -50,6 +52,7 @@ impl From<i32> for Language {
         match val {
             1 => Language::English,
             2 => Language::Farsi,
+            3 => Language::Chinese,
             _ => Language::English,
         }
     }
@@ -60,6 +63,7 @@ impl From<String> for Language {
         match val.as_str() {
             "en" => Language::English,
             "fa" => Language::Farsi,
+            "cn" => Language::Chinese,
             &_ => Language::English, // default
         }
     }
@@ -70,6 +74,7 @@ impl From<Language> for String {
         match val {
             Language::English => "en".to_string(),
             Language::Farsi => "fa".to_string(),
+            Language::Chinese => "cn".to_string(),
         }
     }
 }

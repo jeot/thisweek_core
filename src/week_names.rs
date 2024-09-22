@@ -24,3 +24,22 @@ const WEEKDAY_NAME_FULL_FA: [&str; 7] = [
     "سه شنبه",
     "چهارشنبه",
 ];
+
+// Chinese	Pinyin	English
+// 星期一 	xīng qī yī	Monday
+// 星期二 	xīng qī èr	Tuesday
+// 星期三 	xīng qī sān	Wednesday
+// 星期四 	xīng qī sì	Thursday
+// 星期五 	xīng qī wǔ	Friday
+// 星期六 	xīng qī liù	Saturday
+// 星期日  / 星期天 	xīng qī rì / xīng qī tiān	Sunday
+
+const WEEKDAY_NAME_FULL_CN: [&str; 7] = [
+    "星期四",
+    "星期五",
+    "星期六",
+    "星期日",
+    "星期一",
+    "星期二",
+    "星期三",
+];

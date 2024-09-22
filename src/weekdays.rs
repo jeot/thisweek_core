@@ -51,3 +51,15 @@ impl Into<WeekDaysUnixOffset> for i32 {
         }
     }
 }
+
+pub fn convert_weekday(weekday: chrono::prelude::Weekday) -> WeekDaysUnixOffset {
+    match weekday {
+        chrono::Weekday::Mon => WeekDaysUnixOffset::Mon,
+        chrono::Weekday::Tue => WeekDaysUnixOffset::Tue,
+        chrono::Weekday::Wed => WeekDaysUnixOffset::Wed,
+        chrono::Weekday::Thu => WeekDaysUnixOffset::Thu,
+        chrono::Weekday::Fri => WeekDaysUnixOffset::Fri,
+        chrono::Weekday::Sat => WeekDaysUnixOffset::Sat,
+        chrono::Weekday::Sun => WeekDaysUnixOffset::Sun,
+    }
+}

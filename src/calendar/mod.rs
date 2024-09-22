@@ -9,7 +9,7 @@ use crate::week_info::DateView;
 use chrono::{DateTime, Local};
 use serde::Serialize;
 
-#[derive(Clone)]
+#[derive(Clone, Debug)]
 pub struct CalendarLanguagePair {
     pub calendar: Calendar,
     pub language: Language,
@@ -78,22 +78,27 @@ impl From<&Calendar> for CalendarLanguagePair {
     }
 }
 
+use self::chinese::ChineseCalendar;
 use self::gregorian::GregorianCalendar;
 use self::persian::PersianCalendar;
 
+pub mod chinese;
 pub mod gregorian;
 pub mod persian;
 
 pub const CALENDAR_GREGORIAN: i32 = 0;
 pub const CALENDAR_PERSIAN: i32 = 1;
+pub const CALENDAR_CHINESE: i32 = 2;
 
-pub const CALENDAR_PERSIAN_STRING: &str = "Persian";
 pub const CALENDAR_GREGORIAN_STRING: &str = "Gregorian";
+pub const CALENDAR_PERSIAN_STRING: &str = "Persian";
+pub const CALENDAR_CHINESE_STRING: &str = "Chinese";
 
 #[derive(Debug, Serialize, Clone, PartialEq)]
 pub enum Calendar {
     Gregorian(gregorian::GregorianCalendar),
     Persian(persian::PersianCalendar),
+    Chinese(chinese::ChineseCalendar),
 }
 
 impl Default for Calendar {
@@ -107,6 +112,7 @@ impl Calendar {
         match self {
             Calendar::Gregorian(_) => GregorianCalendar::get_date(day),
             Calendar::Persian(_) => PersianCalendar::get_date(day),
+            Calendar::Chinese(_) => ChineseCalendar::get_date(day),
         }
     }
 
@@ -114,6 +120,7 @@ impl Calendar {
         match self {
             Calendar::Gregorian(_) => GregorianCalendar::get_date_view(day, lang),
             Calendar::Persian(_) => PersianCalendar::get_date_view(day, lang),
+            Calendar::Chinese(_) => ChineseCalendar::get_date_view(day, lang),
         }
     }
 
@@ -121,6 +128,7 @@ impl Calendar {
         match self {
             Calendar::Gregorian(_) => GregorianCalendar::get_calendar_view(lang),
             Calendar::Persian(_) => PersianCalendar::get_calendar_view(lang),
+            Calendar::Chinese(_) => ChineseCalendar::get_calendar_view(lang),
         }
     }
 
@@ -133,6 +141,7 @@ impl Calendar {
         match self {
             Calendar::Gregorian(_) => GregorianCalendar::get_dates_view(start_day, end_day, _lang),
             Calendar::Persian(_) => PersianCalendar::get_dates_view(start_day, end_day, _lang),
+            Calendar::Chinese(_) => ChineseCalendar::get_dates_view(start_day, end_day, _lang),
         }
     }
 
@@ -140,6 +149,7 @@ impl Calendar {
         match self {
             Calendar::Gregorian(_) => "ltr".into(),
             Calendar::Persian(_) => "rtl".into(),
+            Calendar::Chinese(_) => "ltr".into(),
         }
     }
 
@@ -157,6 +167,7 @@ impl From<Calendar> for i32 {
         match val {
             Calendar::Gregorian(_) => CALENDAR_GREGORIAN,
             Calendar::Persian(_) => CALENDAR_PERSIAN,
+            Calendar::Chinese(_) => CALENDAR_CHINESE,
         }
     }
 }
@@ -166,6 +177,7 @@ impl From<Calendar> for String {
         match val {
             Calendar::Gregorian(_) => CALENDAR_GREGORIAN_STRING.to_string(),
             Calendar::Persian(_) => CALENDAR_PERSIAN_STRING.to_string(),
+            Calendar::Chinese(_) => CALENDAR_CHINESE_STRING.to_string(),
         }
     }
 }
@@ -176,6 +188,8 @@ impl From<String> for Calendar {
             Calendar::Persian(persian::PersianCalendar)
         } else if val == "Gregorian" {
             Calendar::Gregorian(gregorian::GregorianCalendar)
+        } else if val == "Chinese" {
+            Calendar::Chinese(chinese::ChineseCalendar)
         } else {
             Calendar::Gregorian(gregorian::GregorianCalendar)
         }
@@ -187,6 +201,7 @@ impl From<i32> for Calendar {
         match val {
             CALENDAR_PERSIAN => Calendar::Persian(persian::PersianCalendar),
             CALENDAR_GREGORIAN => Calendar::Gregorian(gregorian::GregorianCalendar),
+            CALENDAR_CHINESE => Calendar::Chinese(chinese::ChineseCalendar),
             _ => panic!("@from() not a valid calendar number: {}", val),
         }
     }

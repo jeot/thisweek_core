@@ -6,9 +6,7 @@ use ptime;
 use serde::Serialize;
 use time::Timespec;
 
-use super::{
-    Calendar, CalendarSpecificDateView, CalendarView, CALENDAR_PERSIAN, CALENDAR_PERSIAN_STRING,
-};
+use super::{Calendar, CalendarSpecificDateView, CalendarView, CALENDAR_PERSIAN};
 
 include!("../week_names.rs");
 
@@ -84,30 +82,26 @@ impl CalendarSpecificDateView for PersianCalendar {
 
         let day = pt.tm_mday.to_string();
         let day = match lang {
-            Language::English => day,
             Language::Farsi => Language::change_numbers_to_farsi(&day),
-            // _ => datetime.day().to_string(),
+            _ => day,
         };
         let month = pt.tm_mon as usize;
         let month = match lang {
-            Language::English => MONTH_NAME_FULL_EN[month],
             Language::Farsi => MONTH_NAME_FULL_FA[month],
-            // _ => MONTH_NAME_FULL_EN[month],
+            _ => MONTH_NAME_FULL_EN[month],
         };
         let month = month.to_string();
         let weekday = pt.tm_wday;
         let weekday: WeekDaysUnixOffset = convert_weekday(weekday);
         let weekday = match lang {
-            Language::English => WEEKDAY_NAME_HALF_CAP_EN[weekday as usize],
             Language::Farsi => WEEKDAY_NAME_FULL_FA[weekday as usize],
-            // _ => WEEKDAY_NAME_HALF_CAP_EN[weekday as usize],
+            _ => WEEKDAY_NAME_HALF_CAP_EN[weekday as usize],
         };
         let weekday = weekday.to_string();
         let year = pt.tm_year;
         let year = match lang {
-            Language::English => year.to_string(),
             Language::Farsi => Language::change_numbers_to_farsi(&year.to_string()),
-            // _ => datetime.year().to_string(),
+            _ => year.to_string(),
         };
 
         DateView {
@@ -121,16 +115,16 @@ impl CalendarSpecificDateView for PersianCalendar {
 
     fn get_calendar_view(lang: &Language) -> CalendarView {
         let months_names: Vec<String> = match lang {
-            Language::English => str_to_vec(&MONTH_NAME_FULL_EN),
             Language::Farsi => str_to_vec(&MONTH_NAME_FULL_FA),
+            _ => str_to_vec(&MONTH_NAME_FULL_EN),
         };
         let seasons_names: Vec<String> = match lang {
-            Language::English => str_to_vec(&SEASON_NAME_FULL_EN),
             Language::Farsi => str_to_vec(&SEASON_NAME_FULL_FA),
+            _ => str_to_vec(&SEASON_NAME_FULL_EN),
         };
         let calendar_name: String = match lang {
-            Language::English => "Persian Calendar".into(),
             Language::Farsi => "تقویم شمسی هجری".into(),
+            _ => "Persian Calendar".into(),
         };
         CalendarView {
             calendar: CALENDAR_PERSIAN,
@@ -142,29 +136,3 @@ impl CalendarSpecificDateView for PersianCalendar {
         }
     }
 }
-
-/*
-    pub fn week_title(&self) -> String {
-        let today = ptime::now();
-        let (shanbeh, jomeh) = self.get_persian_first_and_last_week_days();
-        if shanbeh.tm_year == jomeh.tm_year && shanbeh.tm_year != today.tm_year {
-            format!(
-                "{} - {}",
-                shanbeh.to_string("E d MMM"),
-                jomeh.to_string("E d MMM، (سال yyyy)")
-            )
-        } else if shanbeh.tm_year == jomeh.tm_year && shanbeh.tm_year == today.tm_year {
-            format!(
-                "{} - {}",
-                shanbeh.to_string("E d MMM"),
-                jomeh.to_string("E d MMM")
-            )
-        } else {
-            format!(
-                "{} - {}",
-                shanbeh.to_string("E d MMM yyyy"),
-                jomeh.to_string("E d MMM yyyy")
-            )
-        }
-    }
-*/
