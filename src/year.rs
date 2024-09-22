@@ -84,6 +84,7 @@ impl Year {
             Language::English => format!("Year {}", self.year_view.year),
             Language::Farsi => format!("سال {}", self.year_view.year),
             Language::Chinese => format!("{} 年", self.year_view.year),
+            Language::Arabic => format!("{} سنة", self.year_view.year),
         };
         self.year_view.info = String::new();
     }

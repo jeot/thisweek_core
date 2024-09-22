@@ -78,27 +78,32 @@ impl From<&Calendar> for CalendarLanguagePair {
     }
 }
 
-use self::chinese::ChineseCalendar;
-use self::gregorian::GregorianCalendar;
-use self::persian::PersianCalendar;
-
+pub mod arabic;
 pub mod chinese;
 pub mod gregorian;
 pub mod persian;
 
+use self::arabic::ArabicCalendar;
+use self::chinese::ChineseCalendar;
+use self::gregorian::GregorianCalendar;
+use self::persian::PersianCalendar;
+
 pub const CALENDAR_GREGORIAN: i32 = 0;
 pub const CALENDAR_PERSIAN: i32 = 1;
 pub const CALENDAR_CHINESE: i32 = 2;
+pub const CALENDAR_ARABIC: i32 = 3;
 
 pub const CALENDAR_GREGORIAN_STRING: &str = "Gregorian";
 pub const CALENDAR_PERSIAN_STRING: &str = "Persian";
 pub const CALENDAR_CHINESE_STRING: &str = "Chinese";
+pub const CALENDAR_ARABIC_STRING: &str = "Arabic";
 
 #[derive(Debug, Serialize, Clone, PartialEq)]
 pub enum Calendar {
     Gregorian(gregorian::GregorianCalendar),
     Persian(persian::PersianCalendar),
     Chinese(chinese::ChineseCalendar),
+    Arabic(arabic::ArabicCalendar),
 }
 
 impl Default for Calendar {
@@ -113,6 +118,7 @@ impl Calendar {
             Calendar::Gregorian(_) => GregorianCalendar::get_date(day),
             Calendar::Persian(_) => PersianCalendar::get_date(day),
             Calendar::Chinese(_) => ChineseCalendar::get_date(day),
+            Calendar::Arabic(_) => ArabicCalendar::get_date(day),
         }
     }
 
@@ -121,6 +127,7 @@ impl Calendar {
             Calendar::Gregorian(_) => GregorianCalendar::get_date_view(day, lang),
             Calendar::Persian(_) => PersianCalendar::get_date_view(day, lang),
             Calendar::Chinese(_) => ChineseCalendar::get_date_view(day, lang),
+            Calendar::Arabic(_) => ArabicCalendar::get_date_view(day, lang),
         }
     }
 
@@ -129,6 +136,7 @@ impl Calendar {
             Calendar::Gregorian(_) => GregorianCalendar::get_calendar_view(lang),
             Calendar::Persian(_) => PersianCalendar::get_calendar_view(lang),
             Calendar::Chinese(_) => ChineseCalendar::get_calendar_view(lang),
+            Calendar::Arabic(_) => ArabicCalendar::get_calendar_view(lang),
         }
     }
 
@@ -142,6 +150,7 @@ impl Calendar {
             Calendar::Gregorian(_) => GregorianCalendar::get_dates_view(start_day, end_day, _lang),
             Calendar::Persian(_) => PersianCalendar::get_dates_view(start_day, end_day, _lang),
             Calendar::Chinese(_) => ChineseCalendar::get_dates_view(start_day, end_day, _lang),
+            Calendar::Arabic(_) => ArabicCalendar::get_dates_view(start_day, end_day, _lang),
         }
     }
 
@@ -150,6 +159,7 @@ impl Calendar {
             Calendar::Gregorian(_) => "ltr".into(),
             Calendar::Persian(_) => "rtl".into(),
             Calendar::Chinese(_) => "ltr".into(),
+            Calendar::Arabic(_) => "rtl".into(),
         }
     }
 
@@ -168,6 +178,7 @@ impl From<Calendar> for i32 {
             Calendar::Gregorian(_) => CALENDAR_GREGORIAN,
             Calendar::Persian(_) => CALENDAR_PERSIAN,
             Calendar::Chinese(_) => CALENDAR_CHINESE,
+            Calendar::Arabic(_) => CALENDAR_ARABIC,
         }
     }
 }
@@ -178,6 +189,7 @@ impl From<Calendar> for String {
             Calendar::Gregorian(_) => CALENDAR_GREGORIAN_STRING.to_string(),
             Calendar::Persian(_) => CALENDAR_PERSIAN_STRING.to_string(),
             Calendar::Chinese(_) => CALENDAR_CHINESE_STRING.to_string(),
+            Calendar::Arabic(_) => CALENDAR_ARABIC_STRING.to_string(),
         }
     }
 }
@@ -190,6 +202,8 @@ impl From<String> for Calendar {
             Calendar::Gregorian(gregorian::GregorianCalendar)
         } else if val == "Chinese" {
             Calendar::Chinese(chinese::ChineseCalendar)
+        } else if val == "Arabic" {
+            Calendar::Arabic(arabic::ArabicCalendar)
         } else {
             Calendar::Gregorian(gregorian::GregorianCalendar)
         }
@@ -202,6 +216,7 @@ impl From<i32> for Calendar {
             CALENDAR_PERSIAN => Calendar::Persian(persian::PersianCalendar),
             CALENDAR_GREGORIAN => Calendar::Gregorian(gregorian::GregorianCalendar),
             CALENDAR_CHINESE => Calendar::Chinese(chinese::ChineseCalendar),
+            CALENDAR_ARABIC => Calendar::Arabic(arabic::ArabicCalendar),
             _ => panic!("@from() not a valid calendar number: {}", val),
         }
     }

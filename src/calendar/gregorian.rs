@@ -7,7 +7,6 @@ use crate::language::Language;
 use crate::week_info::Date;
 use crate::week_info::DateView;
 use crate::weekdays::convert_weekday;
-use crate::weekdays::WeekDaysUnixOffset;
 use chrono::Datelike;
 use chrono::{DateTime, Local};
 use serde::Serialize;
@@ -47,6 +46,37 @@ const MONTH_NAME_FULL_FA: [&str; 12] = [
     "دسامبر",
 ];
 
+// Arabic months names in English
+// In many Arab countries, the Gregorian calendar is used concurrently with the Hijri calendar. Here are the Arabic months’ names in English and their Arabic counterparts:
+//
+// January (يَنايِر): Yanāyir
+// February (فِبْرايِر): Fibrāyir
+// March (مارِس): Māris
+// April (أبْريل): Abreel
+// May (مايو): Māyu
+// June (يُونِيُو): Yūniyū
+// July (يُولِيُو): Yūliyū
+// August (أغُسْطُس): Aghustus
+// September (سِبْتَمْبِر): Sibtambir
+// October (أُكْتوبِر): Uktūbir
+// November (نُوفَمْبِر): Nūfambir
+// December (دِيسَمْبِر): Dīsambir
+
+const MONTH_NAME_FULL_AR: [&str; 12] = [
+    "يَنايِر",
+    "فِبْرايِر",
+    "مارِس",
+    "أبْريل",
+    "مايو",
+    "يُونِيُو",
+    "يُولِيُو",
+    "أغُسْطُس",
+    "سِبْتَمْبِر",
+    "أُكْتوبِر",
+    "نُوفَمْبِر",
+    "دِيسَمْبِر",
+];
+
 const SEASON_NAME_FULL_EN: [&str; 4] = ["Spring", "Summer", "Autumn", "Winter"];
 
 const SEASON_NAME_FULL_FA: [&str; 4] = ["بهار", "تابستان", "پاییز", "زمستان"];
@@ -63,11 +93,7 @@ impl CalendarSpecificDateView for GregorianCalendar {
     }
 
     fn new_date_view(datetime: DateTime<Local>, lang: &Language) -> DateView {
-        let day = match lang {
-            Language::English => datetime.day().to_string(),
-            Language::Farsi => Language::change_numbers_to_farsi(&datetime.day().to_string()),
-            _ => datetime.day().to_string(),
-        };
+        let day = lang.change_numbers_language(&datetime.day().to_string());
         let month = datetime.month0() as usize;
         let month = match lang {
             Language::English => MONTH_NAME_FULL_EN[month],
@@ -76,7 +102,7 @@ impl CalendarSpecificDateView for GregorianCalendar {
         };
         let month = month.to_string();
         let weekday = datetime.weekday();
-        let weekday: WeekDaysUnixOffset = convert_weekday(weekday);
+        let weekday = convert_weekday(weekday);
         let weekday = weekday as usize;
         let weekday = match lang {
             Language::English => WEEKDAY_NAME_HALF_CAP_EN[weekday],
@@ -84,11 +110,12 @@ impl CalendarSpecificDateView for GregorianCalendar {
             _ => WEEKDAY_NAME_HALF_CAP_EN[weekday],
         };
         let weekday = weekday.to_string();
-        let year = match lang {
-            Language::English => datetime.year().to_string(),
-            Language::Farsi => Language::change_numbers_to_farsi(&datetime.year().to_string()),
-            _ => datetime.year().to_string(),
-        };
+        // let year = match lang {
+        //     Language::English => datetime.year().to_string(),
+        //     Language::Farsi => Language::change_numbers_to_farsi(&datetime.year().to_string()),
+        //     _ => datetime.year().to_string(),
+        // };
+        let year = lang.change_numbers_language(&datetime.year().to_string());
         DateView {
             unix_day: 0,
             day,

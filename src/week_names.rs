@@ -25,6 +25,24 @@ const WEEKDAY_NAME_FULL_FA: [&str; 7] = [
     "چهارشنبه",
 ];
 
+// In Arabic	Pronounce	In English
+// السبت	As sabt	Saturday
+// الأحد	Al ‘ahad	Sunday
+// الأثنين	A lith nayn	Monday
+// الثلاثاء	Ath thu la tha’	Tuesday
+// الأربعاء	Al ar ba a’	Wednesday
+// الخميس	Al kha mis	Thursday
+// الجمعه	Al jum ah	Friday
+const WEEKDAY_NAME_FULL_AR: [&str; 7] = [
+    "الخميس",
+    "الجمعه",
+    "السبت",
+    "الأحد",
+    "الأثنين",
+    "الثلاثاء",
+    "الأربعاء",
+];
+
 // Chinese	Pinyin	English
 // 星期一 	xīng qī yī	Monday
 // 星期二 	xīng qī èr	Tuesday

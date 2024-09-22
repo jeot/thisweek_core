@@ -81,10 +81,7 @@ impl CalendarSpecificDateView for PersianCalendar {
         let pt = ptime::at(Timespec::new(ts, 0));
 
         let day = pt.tm_mday.to_string();
-        let day = match lang {
-            Language::Farsi => Language::change_numbers_to_farsi(&day),
-            _ => day,
-        };
+        let day = lang.change_numbers_language(&day);
         let month = pt.tm_mon as usize;
         let month = match lang {
             Language::Farsi => MONTH_NAME_FULL_FA[month],
@@ -98,11 +95,8 @@ impl CalendarSpecificDateView for PersianCalendar {
             _ => WEEKDAY_NAME_HALF_CAP_EN[weekday as usize],
         };
         let weekday = weekday.to_string();
-        let year = pt.tm_year;
-        let year = match lang {
-            Language::Farsi => Language::change_numbers_to_farsi(&year.to_string()),
-            _ => year.to_string(),
-        };
+        let year = pt.tm_year.to_string();
+        let year = lang.change_numbers_language(&year);
 
         DateView {
             unix_day: 0,

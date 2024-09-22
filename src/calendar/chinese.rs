@@ -6,6 +6,7 @@ use crate::{
 
 include!("../week_names.rs");
 
+use super::{Calendar, CalendarSpecificDateView, CalendarView, CALENDAR_CHINESE};
 use chinese_lunisolar_calendar::{LunisolarDate, SolarDate};
 use chrono::{DateTime, Datelike, Local};
 use serde::Serialize;
@@ -76,10 +77,6 @@ const SEASON_NAME_FULL_CN: [&str; 4] = ["春天", "夏天", "秋天", "冬天"];
 
 const SEASON_NAME_FULL_EN: [&str; 4] = ["Spring", "Summer", "Autumn", "Winter"];
 
-use super::{
-    Calendar, CalendarSpecificDateView, CalendarView, CALENDAR_CHINESE, CALENDAR_CHINESE_STRING,
-};
-
 #[derive(Debug, Serialize, Clone, PartialEq)]
 pub struct ChineseCalendar;
 
@@ -90,7 +87,7 @@ impl CalendarSpecificDateView for ChineseCalendar {
         let day = datetime.day() as u8;
         let solar_date = SolarDate::from_ymd(year, month, day).unwrap();
         let lunisolar_date = LunisolarDate::from_solar_date(solar_date).unwrap();
-        let mut month_number = lunisolar_date.to_lunar_month().to_u8() as u32;
+        let month_number = lunisolar_date.to_lunar_month().to_u8() as u32;
         Date {
             calendar: Calendar::Chinese(ChineseCalendar),
             weekday: convert_weekday(datetime.weekday()) as u32,
