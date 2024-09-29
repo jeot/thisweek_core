@@ -13,6 +13,14 @@ use std::{fs, path::PathBuf};
 // static CONFIG: OnceCell<Config> = OnceCell::new();
 pub static CONFIG: OnceCell<ArcSwap<Config>> = OnceCell::new();
 
+pub fn set_config(new_cfg: Config) {
+    if CONFIG.get().is_none() {
+        CONFIG.set(ArcSwap::from_pointee(new_cfg.clone())).unwrap();
+    } else {
+        CONFIG.get().unwrap().store(Arc::new(new_cfg.clone()));
+    }
+}
+
 pub fn init_config() -> Result<Config, AppError> {
     // instantiate the configuration
     let path = default_config_path();
@@ -37,12 +45,26 @@ pub fn get_config() -> Config {
     // println!("gaurd: {gaurd:?}");
     let gaurd = gaurd.load();
     gaurd.get_copy()
-    // println!("gaurd: {gaurd:?}");
-    // let value = gaurd.clone();
-    // println!("value: {value:?}");
-    // let x = std::sync::Arc::<Config>::try_unwrap(value).unwrap();
-    // println!("x: {x:?}");
-    // x.clone()
+}
+
+pub fn set_database_file(filepath: String) -> Result<(), AppError> {
+    let mut config = get_config();
+    let original_database = config.database;
+    // copy file
+    std::fs::copy(&original_database, &filepath).map_err(|_| AppError::DatabaseFileCopyError)?;
+    // change and save conifg
+    config.database = filepath;
+    set_config(config);
+    save_config()?;
+    // delete original database file
+    std::fs::remove_file(original_database).map_err(|_| AppError::DatabaseFileRemoveError)?;
+    Ok(())
+}
+
+pub fn save_config() -> Result<(), AppError> {
+    let toml_str = toml::to_string(&get_config()).map_err(|_| AppError::ConfigTomlGenerateError)?;
+    let path = default_config_path();
+    fs::write(path, toml_str).map_err(|_| AppError::ConfigFileWriteError)
 }
 
 pub fn get_main_cal_lang_pair() -> CalendarLanguagePair {
