@@ -7,7 +7,6 @@ use crate::prelude::Error as AppError;
 use crate::prelude::Result as AppResult;
 use diesel::prelude::*;
 use dotenvy::dotenv;
-use std::env;
 
 pub fn establish_connection() -> SqliteConnection {
     dotenv().ok();
@@ -26,7 +25,7 @@ pub fn create_item(new_item: &NewItem) -> AppResult<()> {
         .values(new_item)
         .execute(conn)
         .map(|_| ())
-        .map_err(|e| AppError::DatabaseError(e.to_string()))
+        .map_err(|e| AppError::DatabaseInsertError(e.to_string()))
 }
 
 pub fn remove_item(item_id: i32) -> Result<usize, String> {
@@ -98,14 +97,14 @@ pub fn read_items_between_days(
             .order(order_in_week.asc())
             .select(Item::as_select())
             .load(conn)
-            .map_err(|e| AppError::DatabaseError(e.to_string()))
+            .map_err(|e| AppError::DatabaseSelectError(e.to_string()))
     } else {
         items
             .filter(day.ge(start_day)) // >=
             .filter(day.le(end_day)) // <=
             .select(Item::as_select())
             .load(conn)
-            .map_err(|e| AppError::DatabaseError(e.to_string()))
+            .map_err(|e| AppError::DatabaseSelectError(e.to_string()))
     }
 }
 
@@ -202,4 +201,17 @@ pub fn update_item_year_ordering_key(id: i32, key: String) -> Result<usize, Stri
     let mut item = get_item(id)?;
     item.order_in_resolution = Some(key);
     update_item(&item)
+}
+
+pub(crate) fn is_correct_db(filepath: &str) -> bool {
+    if !Path::new(&filepath).exists() {
+        return false;
+    }
+    let con_ok = SqliteConnection::establish(&filepath).is_ok();
+    println!("is_correct_db: {con_ok}");
+    con_ok
+}
+
+pub(crate) fn create_db(filepath: &str) -> AppResult<()> {
+    todo!()
 }

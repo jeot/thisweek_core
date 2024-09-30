@@ -1,11 +1,13 @@
 use crate::calendar::Calendar;
 use crate::calendar::CalendarLanguagePair;
+use crate::db_sqlite;
 use crate::language::Language;
 use crate::prelude::Error as AppError;
 use crate::prelude::Result as AppResult;
 use arc_swap::ArcSwap;
 use once_cell::sync::OnceCell;
 use serde::{Deserialize, Serialize};
+use std::path::Path;
 use std::sync::Arc;
 use std::{fs, path::PathBuf};
 
@@ -47,18 +49,42 @@ pub fn get_config() -> Config {
     gaurd.get_copy()
 }
 
+/// check if the new filepath exists or not
+/// if exists, it should be a valid database and we only switch to it.
+/// if the path don't exists, we will move our database to that location.
 pub fn set_database_file(filepath: String) -> Result<(), AppError> {
     let mut config = get_config();
-    let original_database = config.database;
-    // copy file
-    std::fs::copy(&original_database, &filepath).map_err(|_| AppError::DatabaseFileCopyError)?;
-    // change and save conifg
-    config.database = filepath;
-    set_config(config);
-    save_config()?;
-    // delete original database file
-    std::fs::remove_file(original_database).map_err(|_| AppError::DatabaseFileRemoveError)?;
-    Ok(())
+    let current_db_path = config.database;
+    let current_db_valid = db_sqlite::is_correct_db(&current_db_path);
+    let exists = Path::new(&filepath).exists();
+    let valid = db_sqlite::is_correct_db(&filepath);
+    if !exists {
+        if !current_db_valid {
+            // create new db
+            db_sqlite::create_db(&filepath)
+        } else {
+            // move current db
+            // copy database file
+            std::fs::copy(&current_db_path, &filepath)
+                .map_err(|_| AppError::DatabaseFileCopyError)?;
+            // change and save conifg
+            config.database = filepath;
+            set_config(config);
+            save_config()?;
+            // delete original database file
+            std::fs::remove_file(&current_db_path)
+                .map(|_| ())
+                .map_err(|_| AppError::DatabaseFileRemoveError)
+        }
+    } else if exists && valid {
+        // switch database
+        // change and save conifg
+        config.database = filepath;
+        set_config(config);
+        save_config()
+    } else {
+        Err(AppError::DatabaseFileInvalidError)
+    }
 }
 
 pub fn save_config() -> Result<(), AppError> {

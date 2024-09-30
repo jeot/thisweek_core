@@ -18,9 +18,13 @@ pub enum Error {
     InvalidTimestampError { sec: i64, nano: u32 },
 
     #[error("database error: {0}")]
-    DatabaseError(String),
+    DatabaseInsertError(String),
+    #[error("database error: {0}")]
+    DatabaseSelectError(String),
     #[error("can not copy database file")]
     DatabaseFileCopyError,
     #[error("can not delete database file")]
     DatabaseFileRemoveError,
+    #[error("the data file is not valid")]
+    DatabaseFileInvalidError,
 }
