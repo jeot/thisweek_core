@@ -1,3 +1,5 @@
+use std::path::Path;
+
 use crate::config;
 use crate::models::Item;
 use crate::models::NewItem;
@@ -203,15 +205,49 @@ pub fn update_item_year_ordering_key(id: i32, key: String) -> Result<usize, Stri
     update_item(&item)
 }
 
-pub(crate) fn is_correct_db(filepath: &str) -> bool {
+diesel::table! {
+    sqlite_schema(name) {
+        r#type -> Text,
+        name -> Text,
+        tbl_name -> Text,
+        rootpage -> Nullable<Integer>,
+        sql -> Nullable<Text>,
+    }
+}
+
+#[derive(Queryable, Selectable, Debug)]
+#[diesel(table_name = sqlite_schema)]
+#[diesel(check_for_backend(diesel::sqlite::Sqlite))]
+#[diesel(treat_none_as_null = true)]
+pub struct SqliteSchema {
+    pub r#type: String,
+    pub name: String,
+    pub tbl_name: String,
+    pub rootpage: Option<i32>,
+    pub sql: Option<String>,
+}
+
+pub fn is_correct_db(filepath: &str) -> bool {
     if !Path::new(&filepath).exists() {
         return false;
     }
-    let con_ok = SqliteConnection::establish(&filepath).is_ok();
-    println!("is_correct_db: {con_ok}");
-    con_ok
+    if let Ok(mut conn) = SqliteConnection::establish(filepath) {
+        // todo: get table content...
+        let schema: Result<Vec<SqliteSchema>, diesel::result::Error> = sqlite_schema::table
+            .filter(sqlite_schema::tbl_name.eq("items"))
+            .select(SqliteSchema::as_select())
+            .load(&mut conn);
+        // println!("{:#?}", schema);
+        if let Ok(table) = schema {
+            table.len() == 1
+        } else {
+            false
+        }
+    } else {
+        false
+    }
 }
 
-pub(crate) fn create_db(filepath: &str) -> AppResult<()> {
+pub fn create_db(filepath: &str) -> AppResult<()> {
     todo!()
 }
