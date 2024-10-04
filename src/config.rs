@@ -100,6 +100,17 @@ pub fn set_main_cal_config(
     save_config()
 }
 
+pub fn set_secondary_cal_config(
+    secondary_calendar_type: Option<String>,
+    secondary_calendar_language: Option<String>,
+) -> Result<(), AppError> {
+    let mut config = get_config();
+    config.secondary_calendar_type = secondary_calendar_type;
+    config.secondary_calendar_language = secondary_calendar_language;
+    set_config(config);
+    save_config()
+}
+
 pub fn save_config() -> Result<(), AppError> {
     let toml_str = toml::to_string(&get_config()).map_err(|_| AppError::ConfigTomlGenerateError)?;
     let path = default_config_path();
@@ -146,7 +157,7 @@ pub struct Config {
     pub main_calendar_start_weekday: String,
     pub secondary_calendar_type: Option<String>,
     pub secondary_calendar_language: Option<String>,
-    pub secondary_calendar_start_weekday: Option<String>, // todo: delete this, no need!
+    // pub secondary_calendar_start_weekday: Option<String>, // todo: delete this, no need!
 }
 
 impl Config {
@@ -158,7 +169,6 @@ impl Config {
             main_calendar_start_weekday: self.main_calendar_start_weekday.clone(),
             secondary_calendar_type: self.secondary_calendar_type.clone(),
             secondary_calendar_language: self.secondary_calendar_language.clone(),
-            secondary_calendar_start_weekday: self.secondary_calendar_start_weekday.clone(),
         }
     }
 }
@@ -172,7 +182,6 @@ impl Default for Config {
             main_calendar_start_weekday: "MON".into(),
             secondary_calendar_type: None,
             secondary_calendar_language: None,
-            secondary_calendar_start_weekday: None,
         }
     }
 }
