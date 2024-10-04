@@ -87,6 +87,19 @@ pub fn set_database_file(filepath: String) -> Result<(), AppError> {
     }
 }
 
+pub fn set_main_cal_config(
+    main_calendar_type: String,
+    main_calendar_language: String,
+    main_calendar_start_weekday: String,
+) -> Result<(), AppError> {
+    let mut config = get_config();
+    config.main_calendar_type = main_calendar_type;
+    config.main_calendar_language = main_calendar_language;
+    config.main_calendar_start_weekday = main_calendar_start_weekday;
+    set_config(config);
+    save_config()
+}
+
 pub fn save_config() -> Result<(), AppError> {
     let toml_str = toml::to_string(&get_config()).map_err(|_| AppError::ConfigTomlGenerateError)?;
     let path = default_config_path();
