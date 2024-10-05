@@ -1,7 +1,6 @@
-// pub const LANGUAGE_EN: i32 = 1;
-// pub const LANGUAGE_FA: i32 = 2;
-
 use serde::Serialize;
+
+//https://en.wikipedia.org/wiki/List_of_ISO_639_language_codes
 
 #[derive(Serialize, Clone, Debug, Default, PartialEq)]
 pub enum Language {
@@ -61,7 +60,7 @@ impl From<String> for Language {
         match val.as_str() {
             "en" => Language::English,
             "fa" => Language::Farsi,
-            "cn" => Language::Chinese,
+            "zh" => Language::Chinese,
             "ar" => Language::Arabic,
             &_ => Language::English, // default
         }
@@ -73,7 +72,7 @@ impl From<Language> for String {
         match val {
             Language::English => "en".to_string(),
             Language::Farsi => "fa".to_string(),
-            Language::Chinese => "cn".to_string(),
+            Language::Chinese => "zh".to_string(),
             Language::Arabic => "ar".to_string(),
         }
     }
@@ -81,5 +80,6 @@ impl From<Language> for String {
 
 // convert from constant &str array to Vec
 pub fn str_to_vec(arr: &[&str]) -> Vec<String> {
-    arr.to_vec().into_iter().map(String::from).collect()
+    // arr.to_vec().into_iter().map(String::from).collect()
+    arr.iter().copied().map(String::from).collect()
 }

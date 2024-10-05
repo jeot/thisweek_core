@@ -117,7 +117,7 @@ impl CalendarSpecificDateView for PersianCalendar {
             _ => str_to_vec(&SEASON_NAME_FULL_EN),
         };
         let calendar_name: String = match lang {
-            Language::Farsi => "تقویم شمسی هجری".into(),
+            Language::Farsi => "تقویم هجری شمسی".into(),
             _ => "Persian Calendar".into(),
         };
         CalendarView {
