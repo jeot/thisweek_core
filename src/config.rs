@@ -91,11 +91,13 @@ pub fn set_main_cal_config(
     main_calendar_type: String,
     main_calendar_language: String,
     main_calendar_start_weekday: String,
+    weekdates_display_direction: String,
 ) -> Result<(), AppError> {
     let mut config = get_config();
     config.main_calendar_type = main_calendar_type;
     config.main_calendar_language = main_calendar_language;
     config.main_calendar_start_weekday = main_calendar_start_weekday;
+    config.weekdates_display_direction = weekdates_display_direction;
     set_config(config);
     save_config()
 }
@@ -143,7 +145,7 @@ pub fn default_config_path() -> PathBuf {
 fn load_from_filepath(path: PathBuf) -> AppResult<Config> {
     println!("reading config file {}...", path.to_string_lossy());
     if let Ok(config) = fs::read_to_string(path) {
-        toml::from_str(&config).map_err(AppError::ConfigSyntaxError)
+        Ok(toml::from_str(&config).unwrap_or_default())
     } else {
         Err(AppError::ConfigNotFoundError)
     }
@@ -157,7 +159,7 @@ pub struct Config {
     pub main_calendar_start_weekday: String,
     pub secondary_calendar_type: Option<String>,
     pub secondary_calendar_language: Option<String>,
-    // pub secondary_calendar_start_weekday: Option<String>, // todo: delete this, no need!
+    pub weekdates_display_direction: String,
 }
 
 impl Config {
@@ -169,6 +171,7 @@ impl Config {
             main_calendar_start_weekday: self.main_calendar_start_weekday.clone(),
             secondary_calendar_type: self.secondary_calendar_type.clone(),
             secondary_calendar_language: self.secondary_calendar_language.clone(),
+            weekdates_display_direction: self.weekdates_display_direction.clone(),
         }
     }
 }
@@ -176,12 +179,13 @@ impl Config {
 impl Default for Config {
     fn default() -> Self {
         Self {
-            database: String::from("weeks_default_db"),
+            database: String::from("weeks_local_database.db"),
             main_calendar_type: "Gregorian".into(),
             main_calendar_language: "en".into(),
             main_calendar_start_weekday: "MON".into(),
             secondary_calendar_type: None,
             secondary_calendar_language: None,
+            weekdates_display_direction: "ltr".into(),
         }
     }
 }
