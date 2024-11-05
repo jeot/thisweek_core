@@ -113,6 +113,13 @@ pub fn set_secondary_cal_config(
     save_config()
 }
 
+pub fn set_items_display_direction_config(items_direction: String) -> Result<(), AppError> {
+    let mut config = get_config();
+    config.items_display_direction = items_direction;
+    set_config(config);
+    save_config()
+}
+
 pub fn save_config() -> Result<(), AppError> {
     let toml_str = toml::to_string(&get_config()).map_err(|_| AppError::ConfigTomlGenerateError)?;
     let path = default_config_path();
@@ -160,6 +167,7 @@ pub struct Config {
     pub secondary_calendar_type: Option<String>,
     pub secondary_calendar_language: Option<String>,
     pub weekdates_display_direction: String,
+    pub items_display_direction: String,
 }
 
 impl Config {
@@ -172,6 +180,7 @@ impl Config {
             secondary_calendar_type: self.secondary_calendar_type.clone(),
             secondary_calendar_language: self.secondary_calendar_language.clone(),
             weekdates_display_direction: self.weekdates_display_direction.clone(),
+            items_display_direction: self.items_display_direction.clone(),
         }
     }
 }
@@ -186,6 +195,7 @@ impl Default for Config {
             secondary_calendar_type: None,
             secondary_calendar_language: None,
             weekdates_display_direction: "ltr".into(),
+            items_display_direction: "auto".into(),
         }
     }
 }
