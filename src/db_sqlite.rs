@@ -7,6 +7,7 @@ use crate::models::{ITEM_KIND_GOAL, ITEM_KIND_NOTE};
 use crate::models::{STATUS_DONE, STATUS_UNDONE};
 use crate::prelude::Error as AppError;
 use crate::prelude::Result as AppResult;
+use diesel::dsl::sql;
 use diesel::prelude::*;
 use dotenvy::dotenv;
 
@@ -19,15 +20,23 @@ pub fn establish_connection() -> SqliteConnection {
         .unwrap_or_else(|_| panic!("Error connecting to {}", database_url))
 }
 
-pub fn create_item(new_item: &NewItem) -> AppResult<()> {
+use diesel::sql_types::Integer;
+
+fn last_inserted_id(conn: &mut SqliteConnection) -> Result<i32, diesel::result::Error> {
+    diesel::select(sql::<Integer>("last_insert_rowid()")).get_result(conn)
+}
+
+pub fn create_item(new_item: &NewItem) -> AppResult<i32> {
     use crate::schema::items::dsl::*;
     let conn = &mut establish_connection();
 
     diesel::insert_into(items)
         .values(new_item)
         .execute(conn)
-        .map(|_| ())
-        .map_err(|e| AppError::DatabaseInsertError(e.to_string()))
+        .map_err(|e| AppError::DatabaseInsertError(e.to_string()))?;
+
+    // Retrieve last inserted ID
+    last_inserted_id(conn).map_err(|e| AppError::DatabaseInsertError(e.to_string()))
 }
 
 pub fn remove_item(item_id: i32) -> Result<usize, String> {

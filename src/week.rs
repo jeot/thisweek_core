@@ -143,7 +143,7 @@ impl Week {
         self.update()
     }
 
-    pub fn add_new_item(&mut self, kind: i32, text: String) -> AppResult<()> {
+    pub fn add_new_item(&mut self, kind: i32, text: String) -> AppResult<i32> {
         let main_cal: Calendar = config::get_config().main_calendar_type.into();
         let calendar: i32 = main_cal.into();
         let ordering_key: String = self.get_new_ordering_key();

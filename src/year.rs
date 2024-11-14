@@ -104,7 +104,7 @@ impl Year {
         self.update()
     }
 
-    pub fn add_new_item(&mut self, kind: i32, text: String) -> AppResult<()> {
+    pub fn add_new_item(&mut self, kind: i32, text: String) -> AppResult<i32> {
         let current_year_calendar: Calendar = self.calendar.clone();
         let calendar: i32 = current_year_calendar.into();
         let year = Some(self.reference_year);
