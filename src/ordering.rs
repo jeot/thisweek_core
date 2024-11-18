@@ -122,4 +122,72 @@ pub trait Ordering {
             Err("invalid key".to_string())
         }
     }
+
+    fn generate_key_for_reordering_item_index(
+        &self,
+        src_index: usize,
+        dest_index: usize,
+    ) -> Result<String> {
+        let keys = self.get_keys();
+
+        // Validate indices
+        if src_index >= keys.len() || dest_index >= keys.len() {
+            return Err("Index out of bounds".into());
+        }
+        if src_index == dest_index {
+            return Err("Source and destination indices are the same".into());
+        }
+
+        if dest_index == 0 {
+            // Moving to the very top
+            let next_key = keys[0].as_ref().ok_or("Invalid key at index 0")?;
+            return Ok(midstring::mid_string("", next_key));
+        }
+
+        if dest_index == keys.len() - 1 {
+            // Moving to the very bottom
+            let prev_key = keys[dest_index]
+                .as_ref()
+                .ok_or("Invalid key at last index")?;
+            return Ok(midstring::mid_string(prev_key, ""));
+        }
+
+        // For all other cases
+        let prev_key;
+        let next_key;
+        if dest_index < src_index {
+            prev_key = keys[dest_index - 1]
+                .as_ref()
+                .ok_or("Invalid previous key")?;
+            next_key = keys[dest_index].as_ref().ok_or("Invalid next key")?;
+        } else {
+            prev_key = keys[dest_index].as_ref().ok_or("Invalid previous key")?;
+            next_key = keys[dest_index + 1].as_ref().ok_or("Invalid next key")?;
+        }
+
+        Ok(midstring::mid_string(prev_key, next_key))
+    }
+
+    // fn generate_key_for_reordering_item_index(
+    //     &mut self,
+    //     src_index: usize,
+    //     dest_index: usize,
+    // ) -> Result<String> {
+    //     // generate new key and update
+    //     let prev_key;
+    //     let next_key;
+    //     let keys = self.get_keys();
+    //     let dest_key = keys.get(dest_index)??;
+    //     let before_dest_key = keys.get(dest_index - 1).unwrap_or("".to_string().clone());
+    //     let after_dest_key = keys.get(dest_index + 1).unwrap_or("".to_string().clone());
+    //     if dest_index < src_index {
+    //         // moving up
+    //         Ok(midstring::mid_string(before_dest_key, dest_key))
+    //     } else if dest_index > src_index {
+    //         // moving down
+    //         Ok(midstring::mid_string(dest_key, after_dest_key))
+    //     } else {
+    //         Err("failed generating reordering item index key".into())
+    //     }
+    // }
 }
