@@ -5,8 +5,17 @@ pub trait Ordering {
     // fn get_ordering_key_of_posision(&self, i: usize) -> Result<Option<String>>;
     fn set_ordering_key_of_posision(&mut self, i: usize, key: Option<String>) -> Result<()>;
     // fn get_posision_of_id(&self, id: i32) -> Result<usize>;
-    fn get_ordering_key_of_id(&self, id: i32) -> Result<Option<String>>;
+    fn get_ordering_key_of_id(&self, id: i32) -> Option<Option<String>>;
     fn new_ordering_finished(&self);
+
+    fn get_key_pos_of_id(&self, id: i32) -> Option<(String, usize)> {
+        let ordering_key = self.get_ordering_key_of_id(id)??;
+        let pos = self
+            .get_keys()
+            .iter()
+            .position(|key| *key == Some(ordering_key.clone()))?;
+        Some((ordering_key, pos))
+    }
 
     fn needs_reordering(&self) -> bool {
         let mut fix = false;
@@ -47,20 +56,40 @@ pub trait Ordering {
         }
     }
 
-    fn get_new_ordering_key(&self) -> String {
-        // canculate based on adding new key after the last item
-        let keys = self.get_keys();
-        let last_key = keys.last();
-        if let Some(Some(key)) = last_key {
-            midstring::mid_string(key, "")
+    fn get_new_ordering_key(&self, after_id: Option<i32>) -> String {
+        // after_id: None: canculate based on adding new key after the last item
+        // after_id: Some: canculate based on adding new key after the provided id
+        let last_key = self
+            .get_keys()
+            .last()
+            .map(|x| x.to_owned())
+            .unwrap_or(None)
+            .unwrap_or("".to_string());
+        if let Some(id) = after_id {
+            self.generate_key_for_after_id(id).unwrap_or("".into())
         } else {
-            midstring::mid_string("", "")
+            midstring::mid_string(&last_key, "")
         }
+    }
+
+    fn generate_key_for_after_id(&self, id: i32) -> Result<String> {
+        let (key, pos) = self
+            .get_key_pos_of_id(id)
+            .ok_or("invalid id or key".to_string())?;
+        let next_key = self
+            .get_keys()
+            .get(pos + 1)
+            .map(|x| x.to_owned())
+            .unwrap_or(Some(String::new()))
+            .ok_or("invalid_key".to_string())?
+            .clone();
+        Ok(midstring::mid_string(&key, &next_key))
     }
 
     fn generate_key_for_move_up_with_id(&mut self, id: i32) -> Result<String> {
         let key = self
-            .get_ordering_key_of_id(id)?
+            .get_ordering_key_of_id(id)
+            .ok_or("invalid id".to_string())?
             .ok_or("invalid key".to_string())?;
         self.generate_key_for_move_up_with_key(key)
     }
@@ -92,7 +121,8 @@ pub trait Ordering {
 
     fn generate_key_for_move_down_with_id(&mut self, id: i32) -> Result<String> {
         let key = self
-            .get_ordering_key_of_id(id)?
+            .get_ordering_key_of_id(id)
+            .ok_or("invalid id".to_string())?
             .ok_or("invalid key".to_string())?;
         self.generate_key_for_move_down_with_key(key)
     }

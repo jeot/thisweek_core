@@ -143,10 +143,15 @@ impl Week {
         self.update()
     }
 
-    pub fn add_new_item(&mut self, kind: i32, text: String) -> AppResult<i32> {
+    pub fn add_new_item(
+        &mut self,
+        kind: i32,
+        text: String,
+        after_id: Option<i32>,
+    ) -> AppResult<i32> {
         let main_cal: Calendar = config::get_config().main_calendar_type.into();
         let calendar: i32 = main_cal.into();
-        let ordering_key: String = self.get_new_ordering_key();
+        let ordering_key: String = self.get_new_ordering_key(after_id);
         let new_item = NewItem::new(
             calendar,
             None, //year,
@@ -196,18 +201,9 @@ impl Ordering for Week {
     //     self.items.iter().position(|item| item.id == id)
     // }
 
-    fn get_ordering_key_of_id(&self, id: i32) -> Result<Option<String>> {
-        let pos = self
-            .items
-            .iter()
-            .position(|item| item.id == id)
-            .ok_or("invalid ordering key".to_string())?;
-        Ok(self
-            .items
-            .get(pos)
-            .ok_or("invalid position".to_string())?
-            .order_in_week
-            .clone())
+    fn get_ordering_key_of_id(&self, id: i32) -> Option<Option<String>> {
+        let pos = self.items.iter().position(|item| item.id == id)?;
+        Some(self.items.get(pos).unwrap().order_in_week.clone())
     }
 
     fn new_ordering_finished(&self) {

@@ -104,11 +104,16 @@ impl Year {
         self.update()
     }
 
-    pub fn add_new_item(&mut self, kind: i32, text: String) -> AppResult<i32> {
+    pub fn add_new_item(
+        &mut self,
+        kind: i32,
+        text: String,
+        after_id: Option<i32>,
+    ) -> AppResult<i32> {
         let current_year_calendar: Calendar = self.calendar.clone();
         let calendar: i32 = current_year_calendar.into();
         let year = Some(self.reference_year);
-        let ordering_key: String = self.get_new_ordering_key();
+        let ordering_key: String = self.get_new_ordering_key(after_id);
         let new_item = NewItem::new(
             calendar,
             year,
@@ -178,18 +183,9 @@ impl Ordering for Year {
     //     self.items.iter().position(|item| item.id == id)
     // }
 
-    fn get_ordering_key_of_id(&self, id: i32) -> ordering::Result<Option<String>> {
-        let pos = self
-            .items
-            .iter()
-            .position(|item| item.id == id)
-            .ok_or("invalid ordering key".to_string())?;
-        Ok(self
-            .items
-            .get(pos)
-            .ok_or("invalid position".to_string())?
-            .order_in_resolution
-            .clone())
+    fn get_ordering_key_of_id(&self, id: i32) -> Option<Option<String>> {
+        let pos = self.items.iter().position(|item| item.id == id)?;
+        Some(self.items.get(pos).unwrap().order_in_resolution.clone())
     }
 
     fn new_ordering_finished(&self) {
