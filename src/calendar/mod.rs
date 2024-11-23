@@ -162,14 +162,6 @@ impl Calendar {
             Calendar::Arabic(_) => "rtl".into(),
         }
     }
-
-    // todo: this should be specific for each calendar
-    pub fn get_date_string(&self, day: i32, lang: &Language) -> String {
-        let dw = self.get_date_view(day, lang);
-        // persian example: ("E d MMM yyyy")
-        // Sat, 17 Jul 2022
-        format!("{} {} {} {}", dw.weekday, dw.day, dw.month, dw.year)
-    }
 }
 
 impl From<Calendar> for i32 {

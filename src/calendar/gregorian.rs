@@ -11,75 +11,13 @@ use chrono::Datelike;
 use chrono::{DateTime, Local};
 use serde::Serialize;
 
-include!("../week_names.rs");
+include!("../weekday_names.rs");
+include!("../month_names.rs");
+include!("../season_names.rs");
+include!("./calendar_names.rs");
 
 #[derive(Debug, Serialize, Clone, PartialEq)]
 pub struct GregorianCalendar;
-
-const MONTH_NAME_FULL_EN: [&str; 12] = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December",
-];
-
-const MONTH_NAME_FULL_FA: [&str; 12] = [
-    "ژانویه",
-    "فوریه",
-    "مارس",
-    "آوریل",
-    "می",
-    "جون",
-    "جولای",
-    "آگوست",
-    "سپتامبر",
-    "اکتبر",
-    "نوامبر",
-    "دسامبر",
-];
-
-// Arabic months names in English
-// In many Arab countries, the Gregorian calendar is used concurrently with the Hijri calendar. Here are the Arabic months’ names in English and their Arabic counterparts:
-//
-// January (يَنايِر): Yanāyir
-// February (فِبْرايِر): Fibrāyir
-// March (مارِس): Māris
-// April (أبْريل): Abreel
-// May (مايو): Māyu
-// June (يُونِيُو): Yūniyū
-// July (يُولِيُو): Yūliyū
-// August (أغُسْطُس): Aghustus
-// September (سِبْتَمْبِر): Sibtambir
-// October (أُكْتوبِر): Uktūbir
-// November (نُوفَمْبِر): Nūfambir
-// December (دِيسَمْبِر): Dīsambir
-
-const MONTH_NAME_FULL_AR: [&str; 12] = [
-    "يَنايِر",
-    "فِبْرايِر",
-    "مارِس",
-    "أبْريل",
-    "مايو",
-    "يُونِيُو",
-    "يُولِيُو",
-    "أغُسْطُس",
-    "سِبْتَمْبِر",
-    "أُكْتوبِر",
-    "نُوفَمْبِر",
-    "دِيسَمْبِر",
-];
-
-const SEASON_NAME_FULL_EN: [&str; 4] = ["Spring", "Summer", "Autumn", "Winter"];
-
-const SEASON_NAME_FULL_FA: [&str; 4] = ["بهار", "تابستان", "پاییز", "زمستان"];
 
 impl CalendarSpecificDateView for GregorianCalendar {
     fn new_date(datetime: DateTime<Local>) -> Date {
@@ -96,50 +34,57 @@ impl CalendarSpecificDateView for GregorianCalendar {
         let day = lang.change_numbers_language(&datetime.day().to_string());
         let month = datetime.month0() as usize;
         let month = match lang {
-            Language::English => MONTH_NAME_FULL_EN[month],
-            Language::Farsi => MONTH_NAME_FULL_FA[month],
-            _ => MONTH_NAME_FULL_EN[month],
+            Language::English => GREGORIAN_MONTH_NAME_EN[month],
+            Language::Farsi => GREGORIAN_MONTH_NAME_FA[month],
+            Language::Chinese => GREGORIAN_MONTH_NAME_ZH[month],
+            Language::Arabic => GREGORIAN_MONTH_NAME_AR[month],
         };
         let month = month.to_string();
-        let weekday = datetime.weekday();
-        let weekday = convert_weekday(weekday);
-        let weekday = weekday as usize;
-        let weekday = match lang {
-            Language::English => WEEKDAY_NAME_HALF_CAP_EN[weekday],
-            Language::Farsi => WEEKDAY_NAME_FULL_FA[weekday],
-            _ => WEEKDAY_NAME_HALF_CAP_EN[weekday],
-        };
-        let weekday = weekday.to_string();
-        // let year = match lang {
-        //     Language::English => datetime.year().to_string(),
-        //     Language::Farsi => Language::change_numbers_to_farsi(&datetime.year().to_string()),
-        //     _ => datetime.year().to_string(),
-        // };
         let year = lang.change_numbers_language(&datetime.year().to_string());
+
+        let weekday = datetime.weekday();
+        let weekday = convert_weekday(weekday) as usize;
+        let full_format = match lang {
+            Language::English => format!("{}, {} {} {}", WEEKDAY_NAME_FULL_EN[weekday], day, month, year),
+            Language::Farsi => format!("{}، {} {} {}", WEEKDAY_NAME_FULL_FA[weekday], day, month, year),
+            Language::Chinese => format!("{}, {} {} {}", WEEKDAY_NAME_FULL_CN[weekday], day, month, year),
+            Language::Arabic => format!("{}، {} {} {}", WEEKDAY_NAME_FULL_AR[weekday], day, month, year),
+        }.to_string();
+        let weekday = match lang {
+            Language::English => WEEKDAY_NAME_FULL_EN[weekday],
+            Language::Farsi => WEEKDAY_NAME_FULL_FA[weekday],
+            Language::Chinese => WEEKDAY_NAME_FULL_CN[weekday],
+            Language::Arabic => WEEKDAY_NAME_FULL_AR[weekday],
+        }.to_string();
+
         DateView {
             unix_day: 0,
             day,
             month,
             weekday,
             year,
+            full_format,
         }
     }
 
     fn get_calendar_view(lang: &Language) -> CalendarView {
         let months_names: Vec<String> = match lang {
-            Language::English => str_to_vec(&MONTH_NAME_FULL_EN),
-            Language::Farsi => str_to_vec(&MONTH_NAME_FULL_FA),
-            _ => str_to_vec(&MONTH_NAME_FULL_EN),
+            Language::English => str_to_vec(&GREGORIAN_MONTH_NAME_EN),
+            Language::Farsi => str_to_vec(&GREGORIAN_MONTH_NAME_FA),
+            Language::Chinese => str_to_vec(&GREGORIAN_MONTH_NAME_ZH),
+            Language::Arabic => str_to_vec(&GREGORIAN_MONTH_NAME_AR),
         };
         let seasons_names: Vec<String> = match lang {
-            Language::English => str_to_vec(&SEASON_NAME_FULL_EN),
-            Language::Farsi => str_to_vec(&SEASON_NAME_FULL_FA),
-            _ => str_to_vec(&SEASON_NAME_FULL_EN),
+            Language::English => str_to_vec(&SEASON_NAME_EN),
+            Language::Farsi => str_to_vec(&SEASON_NAME_FA),
+            Language::Chinese => str_to_vec(&SEASON_NAME_ZH),
+            Language::Arabic => str_to_vec(&SEASON_NAME_AR),
         };
         let calendar_name: String = match lang {
-            Language::English => "Gregorian Calendar".into(),
-            Language::Farsi => "تقویم میلادی".into(),
-            _ => "Gregorian Calendar".into(),
+            Language::English => GREGORIAN_CALENDAR_NAME_EN.into(),
+            Language::Farsi => GREGORIAN_CALENDAR_NAME_FA.into(),
+            Language::Chinese => GREGORIAN_CALENDAR_NAME_ZH.into(),
+            Language::Arabic => GREGORIAN_CALENDAR_NAME_AR.into(),
         };
         CalendarView {
             calendar: CALENDAR_GREGORIAN,

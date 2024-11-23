@@ -26,6 +26,7 @@ pub struct DateView {
     pub month: String,
     pub year: String,
     pub weekday: String,
+    pub full_format: String,
 }
 
 impl WeekInfo {

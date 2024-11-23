@@ -66,6 +66,7 @@ pub fn get_today_date(calendar: &Calendar) -> Date {
     calendar.get_date(day)
 }
 
+/*
 pub fn today_persian_date_string() -> String {
     let day = get_unix_day();
     let cal = Calendar::Persian(PersianCalendar);
@@ -92,3 +93,4 @@ pub fn today_english_date_string() -> String {
     }
     date_string
 }
+*/
