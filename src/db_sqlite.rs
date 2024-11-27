@@ -9,12 +9,8 @@ use crate::prelude::Error as AppError;
 use crate::prelude::Result as AppResult;
 use diesel::dsl::sql;
 use diesel::prelude::*;
-use dotenvy::dotenv;
 
 pub fn establish_connection() -> SqliteConnection {
-    dotenv().ok();
-
-    // let database_url = env::var("WEEKS_DATABASE_URL").expect("WEEKS_DATABASE_URL must be set");
     let database_url = config::get_config().database;
     SqliteConnection::establish(&database_url)
         .unwrap_or_else(|_| panic!("Error connecting to {}", database_url))
@@ -133,7 +129,6 @@ pub fn read_items_in_calendar_year(_calendar: i32, _year: i32) -> Result<Vec<Ite
 }
 
 pub fn backup_database_file() -> Result<(), String> {
-    // let database_url = env::var("WEEKS_DATABASE_URL").expect("WEEKS_DATABASE_URL must be set");
     let database_url = config::get_config().database;
     // println!("database_url: {database_url}");
     let mut timestamp = chrono::Local::now().to_rfc3339_opts(chrono::SecondsFormat::Secs, false);
