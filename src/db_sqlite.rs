@@ -1,3 +1,4 @@
+use std::fs;
 use std::path::Path;
 
 use crate::config;
@@ -10,7 +11,18 @@ use crate::prelude::Result as AppResult;
 use diesel::dsl::sql;
 use diesel::prelude::*;
 
-pub fn establish_connection() -> SqliteConnection {
+use diesel_migrations::{embed_migrations, EmbeddedMigrations, MigrationHarness};
+
+const MIGRATIONS: EmbeddedMigrations = embed_migrations!("./migrations");
+
+pub fn run_migrations() {
+    let connection = &mut establish_connection();
+    connection
+        .run_pending_migrations(MIGRATIONS)
+        .expect("Failed to run migrations");
+}
+
+fn establish_connection() -> SqliteConnection {
     let database_url = config::get_config().database;
     SqliteConnection::establish(&database_url)
         .unwrap_or_else(|_| panic!("Error connecting to {}", database_url))
@@ -253,5 +265,12 @@ pub fn is_correct_db(filepath: &str) -> bool {
 }
 
 pub fn create_db(filepath: &str) -> AppResult<()> {
-    todo!()
+    // it seems there is no need to!
+    // the migration, take care of creating initial database!
+    todo!();
+
+    // ensure target directory exists
+    // if let Some(parent) = Path::new(&filepath).parent() {
+    //     fs::create_dir_all(parent).map_err(|_| AppError::DatabaseFileCopyError)?;
+    // }
 }

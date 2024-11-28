@@ -16,6 +16,7 @@ redb = "1.5.0"
 cuid2 = "0.1.2"
 homedir = "0.2.1"
 diesel = { version = "2.2.1", features = ["sqlite"] }
+diesel_migrations = "2.0"
 rusqlite = { version = "0.31.0", features = ["bundled"] }
 midstring = "0.1.3"
 toml = "0.8.19"
@@ -25,3 +26,4 @@ arc-swap = "1.7.1"
 notify-debouncer-mini = "0.4.1"
 chinese-lunisolar-calendar = "0.2.0"
 icu = "1.5.0"
+directories = "5.0.1"

@@ -1,13 +1,16 @@
 #[derive(thiserror::Error, Debug)]
 pub enum Error {
+    #[error("can not get OS default application path!")]
+    DefaultAppPathError,
+
     #[error("this is a ConfigError from toml deserialization!")]
     ConfigSyntaxError(#[from] toml::de::Error),
     #[error("the config file not found!")]
     ConfigNotFoundError,
     #[error("can not generate toml file")]
     ConfigTomlGenerateError,
-    #[error("can not write config toml file")]
-    ConfigFileWriteError,
+    #[error("can not save (write) config toml file")]
+    ConfigFileSaveError,
 
     #[error("provided days range is not correct")]
     BadDaysRangeError,
@@ -23,6 +26,8 @@ pub enum Error {
     DatabaseSelectError(String),
     #[error("can not copy database file")]
     DatabaseFileCopyError,
+    #[error("can not create database file")]
+    DatabaseFileCreateError,
     #[error("can not delete database file")]
     DatabaseFileRemoveError,
     #[error("the data file is not valid")]

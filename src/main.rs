@@ -1,4 +1,4 @@
-use weeks_core::{db_sqlite, week::Week, year::Year};
+use ThisWeek_core::{db_sqlite, week::Week, year::Year};
 
 fn main() {
     let path = "C:\\Users\\shk\\Dropbox\\Online\\weeksapp.db.2024-09-30T10-17-50+03-30.backup";
