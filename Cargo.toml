@@ -1,8 +1,12 @@
 [package]
 name = "ThisWeek_core"
 version = "0.0.1"
+license = "MIT"
 description = "The core rust backend for ThisWeek application"
+homepage = "https://github.com/jeot/thisweek_core"
+repository = "https://github.com/jeot/thisweek_core"
 authors = ["Shamim Keshani <sh.keshani@gmail.com>"]
+keywords = ["task-management", "todo", "goals", "notes"]
 edition = "2021"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
