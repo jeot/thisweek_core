@@ -3,31 +3,6 @@
 version = 3
 
 [[package]]
-name = "ThisWeek_core"
-version = "0.0.1"
-dependencies = [
- "arc-swap",
- "chinese-lunisolar-calendar",
- "chrono",
- "cuid2",
- "diesel",
- "diesel_migrations",
- "directories",
- "homedir",
- "icu",
- "midstring",
- "notify-debouncer-mini",
- "once_cell",
- "ptime",
- "redb",
- "rusqlite",
- "serde",
- "thiserror",
- "time 0.1.45",
- "toml",
-]
-
-[[package]]
 name = "ahash"
 version = "0.8.11"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1575,6 +1550,31 @@ dependencies = [
  "proc-macro2",
  "quote",
  "syn",
+]
+
+[[package]]
+name = "thisweek-core"
+version = "0.1.0"
+dependencies = [
+ "arc-swap",
+ "chinese-lunisolar-calendar",
+ "chrono",
+ "cuid2",
+ "diesel",
+ "diesel_migrations",
+ "directories",
+ "homedir",
+ "icu",
+ "midstring",
+ "notify-debouncer-mini",
+ "once_cell",
+ "ptime",
+ "redb",
+ "rusqlite",
+ "serde",
+ "thiserror",
+ "time 0.1.45",
+ "toml",
 ]
 
 [[package]]

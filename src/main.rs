@@ -1,7 +1,8 @@
-use ThisWeek_core::{db_sqlite, week::Week, year::Year};
+use thisweek_core::{db_sqlite, week::Week, year::Year};
 
+/// only for testing. ignore.
 fn main() {
-    let path = "C:\\Users\\shk\\Dropbox\\Online\\weeksapp.db.2024-09-30T10-17-50+03-30.backup";
+    let path = "weeksapp.db.2024-09-30T10-17-50+03-30.backup";
     let result = db_sqlite::is_correct_db(path);
     println!("path: {path}\nresult: {result}");
 
