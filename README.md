@@ -1,14 +1,31 @@
-# thisweek_core
+# thisweek-core
 
-`thisweek_core` is a core module written in Rust that powers the functionality of the `thisweek` task management app. It provides core logic and utilities for managing goals, and notes efficiently.
+`thisweek-core` is a library written in Rust that powers the functionality of the `ThisWeek` task management desktop application. It provides core logic and utilities for managing weekly goals and notes in different calendar system efficiently.
 
-It's primary role is to be used inside `ThisWeek` GUI desktop application.
+Currently, its primary role is to be used inside the [ThisWeek](https://github.com/jeot/thisweek) (a Tauri desktop application).
 
 ## Features
 
-- **Weekly Goal Management**: Create, update, delete, goals (tasks) or notes for each week.
-- **Objectives Management**: Create, update, delete, goals (tasks) or notes for each year/season/month.
-- **Lightweight and Fast**: Built with Rust for performance and reliability.
+- **Weekly Item Management**
+  - Create, update, and delete items for each week: goals (tasks), notes
+  - Organize items by priority
+  - completion status
+
+- **Objectives Management**
+  - Manage long-term goals/notes for year/season/month periods
+  - Organize items by priority
+  - completion status
+
+- **Multiple Calendar Support**
+  - Support for users who want to use two different calendar systems simultaneously
+  - Compatible with Gregorian, Chinese, Persian, and Arabic calendars
+  - Support for specific calendar language
+
+- **Performance**
+  - Built with Rust for optimal performance and reliability
+  - Lightweight and fast execution
+  - Use SQLite for simple local storage
+  - Minimal resource usage
 
 ## Installation
 
@@ -31,6 +48,10 @@ To use `thisweek_core` as a standalone library or integrate it into your project
    ```bash
    cargo test
    ```
+
+## Related Projects
+
+- [ThisWeek App](https://github.com/jeot/thisweek) - The main desktop application
 
 ## License
 
