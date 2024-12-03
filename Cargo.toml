@@ -6,7 +6,7 @@ description = "The core rust backend for ThisWeek application"
 homepage = "https://github.com/jeot/thisweek_core"
 repository = "https://github.com/jeot/thisweek_core"
 authors = ["Shamim Keshani <sh.keshani@gmail.com>"]
-keywords = ["weekly-task-management", "goals", "notes", "multiple-calendar"]
+keywords = ["task-management", "goals", "notes", "multiple-calendar"]
 edition = "2021"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
