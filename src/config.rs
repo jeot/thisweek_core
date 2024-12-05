@@ -84,6 +84,60 @@ pub fn get_config() -> Config {
     gaurd.get_copy()
 }
 
+pub fn move_database<P: AsRef<str>>(filepath: P) -> Result<(), AppError> {
+    let filepath = filepath.as_ref();
+    let mut config = get_config();
+    let current_db_path = config.database;
+    let current_db_valid = db_sqlite::is_correct_db(&current_db_path);
+    let exists = Path::new(filepath).exists();
+    if !exists {
+        if !current_db_valid {
+            // create new db
+            println!("Attempting to creating new database file: {}", filepath);
+            db_sqlite::create_db(filepath)
+        } else {
+            // move current db
+            // ensure target directory exists
+            if let Some(parent) = Path::new(filepath).parent() {
+                fs::create_dir_all(parent).map_err(|_| AppError::DatabaseFileCopyError)?;
+            }
+            // copy database file
+            std::fs::copy(&current_db_path, filepath)
+                .map_err(|_| AppError::DatabaseFileCopyError)?;
+            // change and save config
+            config.database = filepath.to_string();
+            set_config(config.clone());
+            save_config(config)?;
+            // delete original database file
+            std::fs::remove_file(&current_db_path)
+                .map(|_| ())
+                .map_err(|_| AppError::DatabaseFileRemoveError)
+        }
+    } else {
+        Err(AppError::DatabaseFileNotEmptyError)
+    }
+}
+
+pub fn open_database<P: AsRef<str>>(filepath: P) -> Result<(), AppError> {
+    let filepath = filepath.as_ref();
+    let mut config = get_config();
+    let exists = Path::new(filepath).exists();
+    if !exists {
+        Err(AppError::DatabaseFileDontExistsError)
+    } else {
+        let db_valid = db_sqlite::is_correct_db(filepath);
+        if !db_valid {
+            Err(AppError::DatabaseFileInvalidError)
+        } else {
+            // switch database
+            // change and save config
+            config.database = filepath.to_string();
+            set_config(config.clone());
+            save_config(config)
+        }
+    }
+}
+
 /// check if the new filepath exists or not
 /// if exists, it should be a valid database and we only switch to it.
 /// if the path don't exists, we will move our database to that location.

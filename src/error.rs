@@ -32,4 +32,8 @@ pub enum Error {
     DatabaseFileRemoveError,
     #[error("the data file is not valid")]
     DatabaseFileInvalidError,
+    #[error("the data file is not available")]
+    DatabaseFileDontExistsError,
+    #[error("the file location should be empty")]
+    DatabaseFileNotEmptyError,
 }
