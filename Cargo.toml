@@ -1,6 +1,6 @@
 [package]
 name = "thisweek-core"
-version = "0.1.0"
+version = "0.1.1"
 license = "MIT"
 description = "The core rust backend for ThisWeek application"
 homepage = "https://github.com/jeot/thisweek_core"
