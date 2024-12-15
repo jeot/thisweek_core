@@ -78,12 +78,7 @@ impl From<&Item> for ItemView {
             ITEM_KIND_NOTE => item.note.clone().unwrap_or_default(),
             _ => "".into(),
         };
-        let status = {
-            match item.status.unwrap_or_default() {
-                0 => false,
-                _ => true,
-            }
-        };
+        let status = { !matches!(item.status.unwrap_or_default(), 0) };
         let fixed_day_tag = {
             if item.day != 0 && item.fixed_date {
                 Some("todo: fixed date!".to_string())
@@ -171,6 +166,7 @@ pub struct NewItem {
 }
 
 impl NewItem {
+    #[allow(clippy::too_many_arguments)]
     pub fn new(
         calendar: i32,
         year: Option<i32>,
@@ -181,7 +177,7 @@ impl NewItem {
         text: String,
         ordering_key: String,
     ) -> Self {
-        let is_objective: bool = if let Some(_) = year { true } else { false };
+        let is_objective: bool = year.is_some();
         NewItem {
             calendar,
             year,

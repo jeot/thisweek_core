@@ -4,10 +4,17 @@ use crate::models::ObjectiveTag;
 use crate::models::*;
 use crate::prelude::Error;
 use crate::prelude::Result as AppResult;
+use crate::time;
 use crate::week_info::Date;
 use crate::week_info::DateView;
 use chrono::{DateTime, Local};
 use serde::Serialize;
+
+pub mod arabic;
+pub mod calendar_names;
+pub mod chinese;
+pub mod gregorian;
+pub mod persian;
 
 #[derive(Clone, Debug)]
 pub struct CalendarLanguagePair {
@@ -77,11 +84,6 @@ impl From<&Calendar> for CalendarLanguagePair {
         }
     }
 }
-
-pub mod arabic;
-pub mod chinese;
-pub mod gregorian;
-pub mod persian;
 
 use self::arabic::ArabicCalendar;
 use self::chinese::ChineseCalendar;
@@ -229,23 +231,13 @@ pub trait CalendarSpecificDateView {
     fn new_date_view(datetime: DateTime<Local>, lang: &Language) -> DateView;
     fn get_calendar_view(lang: &Language) -> CalendarView;
 
-    // maybe we should use something like this:
-    // pub fn dateview_from_gregorian_date(g_year: i32, g_month: i32, g_day: i32, lang: Language) ->
-    // AppResult<DateView>;
-
     fn get_date(day: i32) -> Date {
-        let sec: i64 = day as i64 * 3600 * 24;
-        let nano: u32 = 0;
-        let datetime = DateTime::from_timestamp(sec, nano).expect("this should never happen!!");
-        let datetime: DateTime<Local> = datetime.into();
+        let datetime: DateTime<Local> = time::get_local_datetime_form_unix_day(day);
         Self::new_date(datetime)
     }
 
     fn get_date_view(day: i32, lang: &Language) -> DateView {
-        let sec: i64 = day as i64 * 24 * 3600;
-        let nano: u32 = 0;
-        let datetime = DateTime::from_timestamp(sec, nano).expect("this should never happen!!");
-        let datetime: DateTime<Local> = datetime.into();
+        let datetime: DateTime<Local> = time::get_local_datetime_form_unix_day(day);
         let mut dateview = Self::new_date_view(datetime, lang);
         dateview.unix_day = day;
         dateview

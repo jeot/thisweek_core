@@ -1,17 +1,17 @@
-const GREGORIAN_CALENDAR_NAME_EN: &str = "Gregorian Calendar";
-const GREGORIAN_CALENDAR_NAME_FA: &str = "تقویم میلادی";
-const GREGORIAN_CALENDAR_NAME_ZH: &str = "公历";
-const GREGORIAN_CALENDAR_NAME_AR: &str = "التقويم الميلادي";
+pub const GREGORIAN_CALENDAR_NAME_EN: &str = "Gregorian Calendar";
+pub const GREGORIAN_CALENDAR_NAME_FA: &str = "تقویم میلادی";
+pub const GREGORIAN_CALENDAR_NAME_ZH: &str = "公历";
+pub const GREGORIAN_CALENDAR_NAME_AR: &str = "التقويم الميلادي";
 
-const PERSIAN_CALENDAR_NAME_EN: &str = "Persian Calendar";
-const PERSIAN_CALENDAR_NAME_FA: &str = "تقویم هجری شمسی";
+pub const PERSIAN_CALENDAR_NAME_EN: &str = "Persian Calendar";
+pub const PERSIAN_CALENDAR_NAME_FA: &str = "تقویم هجری شمسی";
 
-const CHINESE_CALENDAR_NAME_EN: &str = "Chinese Calendar";
-const CHINESE_CALENDAR_NAME_ZH: &str = "农历";
+pub const CHINESE_CALENDAR_NAME_EN: &str = "Chinese Calendar";
+pub const CHINESE_CALENDAR_NAME_ZH: &str = "农历";
 
-const ARABIC_CALENDAR_NAME_EN: &str = "Arabic Calendar";
-const ARABIC_CALENDAR_NAME_AR: &str = "التقويم الهجري";
-const ARABIC_CALENDAR_NAME_FA: &str = "تقویم هجری قمری";
+pub const ARABIC_CALENDAR_NAME_EN: &str = "Arabic Calendar";
+pub const ARABIC_CALENDAR_NAME_AR: &str = "التقويم الهجري";
+pub const ARABIC_CALENDAR_NAME_FA: &str = "تقویم هجری قمری";
 
 /*
 In Chinese, **"Gregorian Calendar"** is written as:

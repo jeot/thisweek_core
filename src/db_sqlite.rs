@@ -1,4 +1,3 @@
-use std::fs;
 use std::path::Path;
 
 use crate::config;
@@ -264,7 +263,7 @@ pub fn is_correct_db(filepath: &str) -> bool {
     }
 }
 
-pub fn create_db(filepath: &str) -> AppResult<()> {
+pub fn create_db(_filepath: &str) -> AppResult<()> {
     // it seems there is no need to!
     // the migration, take care of creating initial database!
     todo!();

@@ -11,10 +11,15 @@ use chrono::Datelike;
 use chrono::{DateTime, Local};
 use serde::Serialize;
 
-include!("../weekday_names.rs");
-include!("../month_names.rs");
-include!("../season_names.rs");
-include!("./calendar_names.rs");
+use crate::calendar::calendar_names::*;
+use crate::month_names::*;
+use crate::season_names::*;
+use crate::weekday_names::*;
+
+// include!("../weekday_names.rs");
+// include!("../month_names.rs");
+// include!("../season_names.rs");
+// include!("./calendar_names.rs");
 
 #[derive(Debug, Serialize, Clone, PartialEq)]
 pub struct GregorianCalendar;
@@ -45,17 +50,31 @@ impl CalendarSpecificDateView for GregorianCalendar {
         let weekday = datetime.weekday();
         let weekday = convert_weekday(weekday) as usize;
         let full_format = match lang {
-            Language::English => format!("{}, {} {} {}", WEEKDAY_NAME_FULL_EN[weekday], day, month, year),
-            Language::Farsi => format!("{}، {} {} {}", WEEKDAY_NAME_FULL_FA[weekday], day, month, year),
-            Language::Chinese => format!("{}, {} {} {}", WEEKDAY_NAME_FULL_CN[weekday], day, month, year),
-            Language::Arabic => format!("{}، {} {} {}", WEEKDAY_NAME_FULL_AR[weekday], day, month, year),
-        }.to_string();
+            Language::English => format!(
+                "{}, {} {} {}",
+                WEEKDAY_NAME_FULL_EN[weekday], day, month, year
+            ),
+            Language::Farsi => format!(
+                "{}، {} {} {}",
+                WEEKDAY_NAME_FULL_FA[weekday], day, month, year
+            ),
+            Language::Chinese => format!(
+                "{}, {} {} {}",
+                WEEKDAY_NAME_FULL_CN[weekday], day, month, year
+            ),
+            Language::Arabic => format!(
+                "{}، {} {} {}",
+                WEEKDAY_NAME_FULL_AR[weekday], day, month, year
+            ),
+        }
+        .to_string();
         let weekday = match lang {
             Language::English => WEEKDAY_NAME_FULL_EN[weekday],
             Language::Farsi => WEEKDAY_NAME_FULL_FA[weekday],
             Language::Chinese => WEEKDAY_NAME_FULL_CN[weekday],
             Language::Arabic => WEEKDAY_NAME_FULL_AR[weekday],
-        }.to_string();
+        }
+        .to_string();
 
         DateView {
             unix_day: 0,

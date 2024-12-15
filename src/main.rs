@@ -1,5 +1,6 @@
 use thisweek_core::{db_sqlite, week::Week, year::Year};
 
+#[allow(unreachable_code)]
 /// only for testing. ignore.
 fn main() {
     let path = "weeksapp.db.2024-09-30T10-17-50+03-30.backup";

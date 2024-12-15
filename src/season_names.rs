@@ -1,7 +1,7 @@
-const SEASON_NAME_EN: [&str; 4] = ["Spring", "Summer", "Autumn", "Winter"];
-const SEASON_NAME_FA: [&str; 4] = ["بهار", "تابستان", "پاییز", "زمستان"];
-const SEASON_NAME_ZH: [&str; 4] = ["春季", "夏季", "秋季", "冬季"];
-const SEASON_NAME_AR: [&str; 4] = ["فصل الربیع", "فصل الصیف", "فصل الخریف", "فصل الشتاء"];
+pub const SEASON_NAME_EN: [&str; 4] = ["Spring", "Summer", "Autumn", "Winter"];
+pub const SEASON_NAME_FA: [&str; 4] = ["بهار", "تابستان", "پاییز", "زمستان"];
+pub const SEASON_NAME_ZH: [&str; 4] = ["春季", "夏季", "秋季", "冬季"];
+pub const SEASON_NAME_AR: [&str; 4] = ["فصل الربیع", "فصل الصیف", "فصل الخریف", "فصل الشتاء"];
 
 /*
 In Chinese, the seasons are represented by their respective characters, and they directly correspond to **spring**, **summer**, **autumn**, and **winter**. Here’s the list:

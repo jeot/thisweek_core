@@ -22,9 +22,9 @@ pub enum WeekDaysUnixOffset {
     Wed = 6,
 }
 
-impl Into<WeekDaysUnixOffset> for String {
-    fn into(self) -> WeekDaysUnixOffset {
-        match self.as_str() {
+impl From<String> for WeekDaysUnixOffset {
+    fn from(val: String) -> Self {
+        match val.as_str() {
             "THU" => WeekDaysUnixOffset::Thu,
             "FRI" => WeekDaysUnixOffset::Fri,
             "SAT" => WeekDaysUnixOffset::Sat,
@@ -37,9 +37,9 @@ impl Into<WeekDaysUnixOffset> for String {
     }
 }
 
-impl Into<WeekDaysUnixOffset> for i32 {
-    fn into(self) -> WeekDaysUnixOffset {
-        match self {
+impl From<i32> for WeekDaysUnixOffset {
+    fn from(val: i32) -> Self {
+        match val {
             0 => WeekDaysUnixOffset::Thu,
             1 => WeekDaysUnixOffset::Fri,
             2 => WeekDaysUnixOffset::Sat,

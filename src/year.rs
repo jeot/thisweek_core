@@ -1,9 +1,7 @@
 use crate::calendar::Calendar;
-/* Year */
 use crate::config;
 use crate::db_sqlite;
 use crate::language::Language;
-use crate::ordering;
 use crate::ordering::Result;
 use crate::prelude::Result as AppResult;
 use crate::today;
@@ -65,7 +63,7 @@ impl Year {
 
         // update yearly view
         self.update_year_title_info();
-        self.year_view.items = self.items.iter().map(|i| ItemView::from(i)).collect();
+        self.year_view.items = self.items.iter().map(ItemView::from).collect();
         Ok(())
     }
 
@@ -89,6 +87,7 @@ impl Year {
         self.year_view.info = String::new();
     }
 
+    #[allow(clippy::should_implement_trait)]
     pub fn next(&mut self) -> Result<()> {
         self.reference_year += 1;
         self.update()

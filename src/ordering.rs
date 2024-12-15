@@ -35,7 +35,10 @@ pub trait Ordering {
         let mut i: usize = 0;
         loop {
             let new_key = midstring::mid_string(&top, &bot);
-            if let Err(_) = self.set_ordering_key_of_posision(i, Some(new_key.clone())) {
+            if self
+                .set_ordering_key_of_posision(i, Some(new_key.clone()))
+                .is_err()
+            {
                 break;
             }
             i += 1;

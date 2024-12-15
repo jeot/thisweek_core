@@ -280,7 +280,7 @@ fn default_config_data_path() -> AppResult<(PathBuf, PathBuf)> {
 fn load_from_filepath(path: PathBuf) -> AppResult<Config> {
     println!("reading config file {}...", path.to_string_lossy());
     if let Ok(config) = fs::read_to_string(path) {
-        let config = toml::from_str(&config).map_err(|e| AppError::ConfigSyntaxError(e))?;
+        let config = toml::from_str(&config).map_err(AppError::ConfigSyntaxError)?;
         Ok(config)
     } else {
         Err(AppError::ConfigNotFoundError)

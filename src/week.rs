@@ -66,6 +66,7 @@ impl Week {
         (start, middle, end)
     }
 
+    #[allow(dead_code)]
     fn get_persian_first_and_last_week_days(&self) -> (ptime::Tm, ptime::Tm) {
         let shanbeh = ptime::at(Timespec::new((self.start_day as i64) * 24 * 3600, 0));
         let jomeh = ptime::at(Timespec::new((self.end_day as i64) * 24 * 3600, 0));
@@ -116,11 +117,11 @@ impl Week {
                 self.end_day,
                 today,
                 cal,
-                aux_language.into(),
+                aux_language,
             )
             .unwrap_or_default()
         });
-        self.week_view.items = self.items.iter().map(|i| ItemView::from(i)).collect();
+        self.week_view.items = self.items.iter().map(ItemView::from).collect();
         Ok(())
     }
 
@@ -128,6 +129,7 @@ impl Week {
         self.week_view.clone()
     }
 
+    #[allow(clippy::should_implement_trait)]
     pub fn next(&mut self) -> AppResult<()> {
         self.reference_day += SEVEN_DAY_WEEK_SIZE;
         self.update()
@@ -247,55 +249,55 @@ mod tests {
     #[test]
     fn test_find_week_period_with_ptime() {
         let mut pt_vec: Vec<ptime::Tm> = Vec::new();
-        let pt = ptime::from_persian_components(1403, 04 - 1, 22, 23, 22, 11, 0).unwrap();
+        let pt = ptime::from_persian_components(1403, 4 - 1, 22, 23, 22, 11, 0).unwrap();
         pt_vec.push(pt);
-        let pt = ptime::from_persian_components(1403, 04 - 1, 22, 23, 59, 36, 0).unwrap();
+        let pt = ptime::from_persian_components(1403, 4 - 1, 22, 23, 59, 36, 0).unwrap();
         pt_vec.push(pt);
-        let pt = ptime::from_persian_components(1403, 04 - 1, 22, 23, 59, 59, 0).unwrap();
+        let pt = ptime::from_persian_components(1403, 4 - 1, 22, 23, 59, 59, 0).unwrap();
         pt_vec.push(pt);
         assert!(check_correct_reference_from_persian_dates(pt_vec, 19913));
 
         let mut pt_vec: Vec<ptime::Tm> = Vec::new();
-        let pt = ptime::from_persian_components(1403, 04 - 1, 23, 0, 0, 0, 0).unwrap();
+        let pt = ptime::from_persian_components(1403, 4 - 1, 23, 0, 0, 0, 0).unwrap();
         pt_vec.push(pt);
-        let pt = ptime::from_persian_components(1403, 04 - 1, 23, 0, 0, 0, 888888).unwrap();
+        let pt = ptime::from_persian_components(1403, 4 - 1, 23, 0, 0, 0, 888888).unwrap();
         pt_vec.push(pt);
-        let pt = ptime::from_persian_components(1403, 04 - 1, 23, 0, 0, 1, 0).unwrap();
+        let pt = ptime::from_persian_components(1403, 4 - 1, 23, 0, 0, 1, 0).unwrap();
         pt_vec.push(pt);
-        let pt = ptime::from_persian_components(1403, 04 - 1, 23, 0, 0, 11, 0).unwrap();
+        let pt = ptime::from_persian_components(1403, 4 - 1, 23, 0, 0, 11, 0).unwrap();
         pt_vec.push(pt);
-        let pt = ptime::from_persian_components(1403, 04 - 1, 23, 0, 1, 1, 1).unwrap();
+        let pt = ptime::from_persian_components(1403, 4 - 1, 23, 0, 1, 1, 1).unwrap();
         pt_vec.push(pt);
-        let pt = ptime::from_persian_components(1403, 04 - 1, 24, 12, 0, 0, 0).unwrap();
+        let pt = ptime::from_persian_components(1403, 4 - 1, 24, 12, 0, 0, 0).unwrap();
         pt_vec.push(pt);
-        let pt = ptime::from_persian_components(1403, 04 - 1, 25, 0, 0, 0, 0).unwrap();
+        let pt = ptime::from_persian_components(1403, 4 - 1, 25, 0, 0, 0, 0).unwrap();
         pt_vec.push(pt);
-        let pt = ptime::from_persian_components(1403, 04 - 1, 26, 23, 23, 23, 23).unwrap();
+        let pt = ptime::from_persian_components(1403, 4 - 1, 26, 23, 23, 23, 23).unwrap();
         pt_vec.push(pt);
-        let pt = ptime::from_persian_components(1403, 04 - 1, 27, 23, 23, 23, 23).unwrap();
+        let pt = ptime::from_persian_components(1403, 4 - 1, 27, 23, 23, 23, 23).unwrap();
         pt_vec.push(pt);
-        let pt = ptime::from_persian_components(1403, 04 - 1, 28, 23, 59, 23, 23).unwrap();
+        let pt = ptime::from_persian_components(1403, 4 - 1, 28, 23, 59, 23, 23).unwrap();
         pt_vec.push(pt);
-        let pt = ptime::from_persian_components(1403, 04 - 1, 29, 0, 0, 0, 0).unwrap();
+        let pt = ptime::from_persian_components(1403, 4 - 1, 29, 0, 0, 0, 0).unwrap();
         pt_vec.push(pt);
-        let pt = ptime::from_persian_components(1403, 04 - 1, 29, 23, 59, 23, 23).unwrap();
+        let pt = ptime::from_persian_components(1403, 4 - 1, 29, 23, 59, 23, 23).unwrap();
         pt_vec.push(pt);
-        let pt = ptime::from_persian_components(1403, 04 - 1, 29, 23, 59, 59, 19993294).unwrap();
+        let pt = ptime::from_persian_components(1403, 4 - 1, 29, 23, 59, 59, 19993294).unwrap();
         pt_vec.push(pt);
         assert!(check_correct_reference_from_persian_dates(pt_vec, 19920));
 
         let mut pt_vec: Vec<ptime::Tm> = Vec::new();
-        let pt = ptime::from_persian_components(1403, 04 - 1, 30, 0, 0, 0, 0).unwrap();
+        let pt = ptime::from_persian_components(1403, 4 - 1, 30, 0, 0, 0, 0).unwrap();
         pt_vec.push(pt);
-        let pt = ptime::from_persian_components(1403, 04 - 1, 30, 0, 0, 0, 1).unwrap();
+        let pt = ptime::from_persian_components(1403, 4 - 1, 30, 0, 0, 0, 1).unwrap();
         pt_vec.push(pt);
-        let pt = ptime::from_persian_components(1403, 04 - 1, 30, 0, 0, 1, 1).unwrap();
+        let pt = ptime::from_persian_components(1403, 4 - 1, 30, 0, 0, 1, 1).unwrap();
         pt_vec.push(pt);
-        let pt = ptime::from_persian_components(1403, 04 - 1, 30, 0, 1, 1, 1).unwrap();
+        let pt = ptime::from_persian_components(1403, 4 - 1, 30, 0, 1, 1, 1).unwrap();
         pt_vec.push(pt);
-        let pt = ptime::from_persian_components(1403, 04 - 1, 30, 1, 1, 1, 1).unwrap();
+        let pt = ptime::from_persian_components(1403, 4 - 1, 30, 1, 1, 1, 1).unwrap();
         pt_vec.push(pt);
-        let pt = ptime::from_persian_components(1403, 04 - 1, 31, 6, 6, 6, 6).unwrap();
+        let pt = ptime::from_persian_components(1403, 4 - 1, 31, 6, 6, 6, 6).unwrap();
         pt_vec.push(pt);
         assert!(check_correct_reference_from_persian_dates(pt_vec, 19927));
     }

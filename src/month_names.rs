@@ -2,7 +2,7 @@
 // GREGORIAN CALENDAR //
 ////////////////////////
 
-const GREGORIAN_MONTH_NAME_EN: [&str; 12] = [
+pub const GREGORIAN_MONTH_NAME_EN: [&str; 12] = [
     "January",
     "February",
     "March",
@@ -17,7 +17,7 @@ const GREGORIAN_MONTH_NAME_EN: [&str; 12] = [
     "December",
 ];
 
-const GREGORIAN_MONTH_NAME_FA: [&str; 12] = [
+pub const GREGORIAN_MONTH_NAME_FA: [&str; 12] = [
     "ژانویه",
     "فوریه",
     "مارس",
@@ -50,7 +50,7 @@ This naming system is straightforward, as it simply combines the number of the m
 12. **十二月** (Shí'èryuè) – December
 */
 
-const GREGORIAN_MONTH_NAME_ZH: [&str; 12] = [
+pub const GREGORIAN_MONTH_NAME_ZH: [&str; 12] = [
     "一月",
     "二月",
     "三月",
@@ -80,7 +80,7 @@ const GREGORIAN_MONTH_NAME_ZH: [&str; 12] = [
 // November (نُوفَمْبِر): Nūfambir
 // December (دِيسَمْبِر): Dīsambir
 
-const GREGORIAN_MONTH_NAME_AR: [&str; 12] = [
+pub const GREGORIAN_MONTH_NAME_AR: [&str; 12] = [
     "يَنايِر",
     "فِبْرايِر",
     "مارِس",
@@ -112,7 +112,7 @@ const GREGORIAN_MONTH_NAME_AR: [&str; 12] = [
 // Dhu al-Qi’dah (ذُو القَعْدَة): The eleventh month, another sacred month.
 // Dhu al-Hijjah (ذُو الحِجَّة): The twelfth month, during which Hajj takes place.
 
-const ARABIC_MONTH_NAME_EN: [&str; 12] = [
+pub const ARABIC_MONTH_NAME_EN: [&str; 12] = [
     "Muharram",
     "Safar",
     "Rabi’ al-Awwal",
@@ -127,7 +127,7 @@ const ARABIC_MONTH_NAME_EN: [&str; 12] = [
     "Dhu al-Hijjah",
 ];
 
-const ARABIC_MONTH_NAME_AR: [&str; 12] = [
+pub const ARABIC_MONTH_NAME_AR: [&str; 12] = [
     "مُحَرَّم",
     "صَفَر",
     "رَبِيعُ الأَوَّلِ",
@@ -142,7 +142,7 @@ const ARABIC_MONTH_NAME_AR: [&str; 12] = [
     "ذُو الحِجَّة",
 ];
 
-const ARABIC_MONTH_NAME_FA: [&str; 12] = [
+pub const ARABIC_MONTH_NAME_FA: [&str; 12] = [
     "محرم",
     "صفر",
     "ربیع الاول",
@@ -193,8 +193,8 @@ The leap month is represented by adding the character **闰** (Rùn) before the 
 
 The leap month does not have a fixed position—it depends on astronomical calculations and varies year to year. For instance, in one year, the leap month might be **闰五月** (Leap Fifth Month), while in another, it might be **闰八月** (Leap Eighth Month). This ensures the lunar calendar stays synchronized with the solar year.
 */
-const CHINESE_LEAP_MONTH_PREFIX_ZH: &str = "闰";
-const CHINESE_MONTH_NAME_ZH: [&str; 12] = [
+pub const CHINESE_LEAP_MONTH_PREFIX_ZH: &str = "闰";
+pub const CHINESE_MONTH_NAME_ZH: [&str; 12] = [
     "正月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "冬月", "腊月",
 ];
 
@@ -215,8 +215,8 @@ const CHINESE_MONTH_NAME_ZH: [&str; 12] = [
 // Between Dec 22 - Jan 21	冰月 (bīng yuè) Ice Month	丑月 (chǒu yuè) Ox Month	腊月 (là yuè) End-of-the-Year Month, Preserved Meat Month
 */
 
-const CHINESE_LEAP_MONTH_PREFIX_EN: &str = "Leap-";
-const CHINESE_MONTH_NAME_EN: [&str; 12] = [
+pub const CHINESE_LEAP_MONTH_PREFIX_EN: &str = "Leap-";
+pub const CHINESE_MONTH_NAME_EN: [&str; 12] = [
     "1st-Lunar-Month",
     "2nd-Lunar-Month",
     "3rd-Lunar-Month",
@@ -235,7 +235,7 @@ const CHINESE_MONTH_NAME_EN: [&str; 12] = [
 // PERSIAN CALENDAR //
 ////////////////////////////
 
-const PERSIAN_MONTH_NAME_EN: [&str; 12] = [
+pub const PERSIAN_MONTH_NAME_EN: [&str; 12] = [
     "Farvardin",
     "Ordibehesht",
     "Khordad",
@@ -250,7 +250,7 @@ const PERSIAN_MONTH_NAME_EN: [&str; 12] = [
     "Esfand",
 ];
 
-const PERSIAN_MONTH_NAME_FA: [&str; 12] = [
+pub const PERSIAN_MONTH_NAME_FA: [&str; 12] = [
     "فروردین",
     "اردیبهشت",
     "خرداد",

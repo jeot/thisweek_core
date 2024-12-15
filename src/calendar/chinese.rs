@@ -1,13 +1,13 @@
+use crate::weekdays::convert_weekday;
 use crate::{
     language::{str_to_vec, Language},
     week_info::{Date, DateView},
-    weekdays::{convert_weekday, WeekDaysUnixOffset},
 };
 
-include!("../weekday_names.rs");
-include!("../month_names.rs");
-include!("../season_names.rs");
-include!("./calendar_names.rs");
+use crate::calendar::calendar_names::*;
+use crate::month_names::*;
+use crate::season_names::*;
+use crate::weekday_names::*;
 
 use super::{Calendar, CalendarSpecificDateView, CalendarView, CALENDAR_CHINESE};
 use chinese_lunisolar_calendar::{LunisolarDate, SolarDate};
@@ -74,18 +74,27 @@ impl CalendarSpecificDateView for ChineseCalendar {
         };
         let year = match lang {
             // Language::Chinese => year.to_string(), // this is not very intuitive!
+            Language::Chinese => year.to_u16().to_string(),
             _ => year.to_u16().to_string(),
         };
 
         let weekday = convert_weekday(weekday) as usize;
         let full_format = match lang {
-            Language::Chinese => format!("{}, {} {} {}", WEEKDAY_NAME_FULL_CN[weekday], day, month, year),
-            _ => format!("{}, {} {} {}", WEEKDAY_NAME_FULL_EN[weekday], day, month, year),
-        }.to_string();
+            Language::Chinese => format!(
+                "{}, {} {} {}",
+                WEEKDAY_NAME_FULL_CN[weekday], day, month, year
+            ),
+            _ => format!(
+                "{}, {} {} {}",
+                WEEKDAY_NAME_FULL_EN[weekday], day, month, year
+            ),
+        }
+        .to_string();
         let weekday = match lang {
             Language::Chinese => WEEKDAY_NAME_FULL_CN[weekday],
             _ => WEEKDAY_NAME_HALF_CAP_EN[weekday],
-        }.to_string();
+        }
+        .to_string();
 
         DateView {
             unix_day: 0,

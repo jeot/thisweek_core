@@ -5,12 +5,12 @@ use chrono::Datelike;
 use chrono::{DateTime, Local};
 use serde::Serialize;
 
-use super::{Calendar, CalendarSpecificDateView, CalendarView, CALENDAR_ARABIC};
+use crate::calendar::{Calendar, CalendarSpecificDateView, CalendarView, CALENDAR_ARABIC};
 
-include!("../weekday_names.rs");
-include!("../month_names.rs");
-include!("../season_names.rs");
-include!("./calendar_names.rs");
+use crate::calendar::calendar_names::*;
+use crate::month_names::*;
+use crate::season_names::*;
+use crate::weekday_names::*;
 
 #[derive(Debug, Serialize, Clone, PartialEq)]
 pub struct ArabicCalendar;
@@ -54,15 +54,26 @@ impl CalendarSpecificDateView for ArabicCalendar {
 
         let weekday = date.weekday as usize;
         let full_format = match lang {
-            Language::Arabic => format!("{}، {} {} {}", WEEKDAY_NAME_FULL_AR[weekday], day, month, year),
-            Language::Farsi => format!("{}، {} {} {}", WEEKDAY_NAME_FULL_FA[weekday], day, month, year),
-            _ => format!("{}, {} {} {}", WEEKDAY_NAME_FULL_EN[weekday], day, month, year),
-        }.to_string();
+            Language::Arabic => format!(
+                "{}، {} {} {}",
+                WEEKDAY_NAME_FULL_AR[weekday], day, month, year
+            ),
+            Language::Farsi => format!(
+                "{}، {} {} {}",
+                WEEKDAY_NAME_FULL_FA[weekday], day, month, year
+            ),
+            _ => format!(
+                "{}, {} {} {}",
+                WEEKDAY_NAME_FULL_EN[weekday], day, month, year
+            ),
+        }
+        .to_string();
         let weekday = match lang {
             Language::Arabic => WEEKDAY_NAME_FULL_AR[weekday],
             Language::Farsi => WEEKDAY_NAME_FULL_FA[weekday],
             _ => WEEKDAY_NAME_HALF_CAP_EN[weekday],
-        }.to_string();
+        }
+        .to_string();
 
         DateView {
             unix_day: 0,
