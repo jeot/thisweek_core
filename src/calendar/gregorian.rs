@@ -16,11 +16,6 @@ use crate::month_names::*;
 use crate::season_names::*;
 use crate::weekday_names::*;
 
-// include!("../weekday_names.rs");
-// include!("../month_names.rs");
-// include!("../season_names.rs");
-// include!("./calendar_names.rs");
-
 #[derive(Debug, Serialize, Clone, PartialEq)]
 pub struct GregorianCalendar;
 
