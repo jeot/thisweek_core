@@ -3,6 +3,20 @@ use thisweek_core::{db_sqlite, week::Week, year::Year};
 #[allow(unreachable_code)]
 /// only for testing. ignore.
 fn main() {
+    let terms = vec!["shamim", "hello"];
+    let result = db_sqlite::search_texts(terms);
+    if let Ok(result) = result {
+        let result: Vec<_> = result
+            .into_iter()
+            .map(|i| (i.id, i.title, i.note))
+            .collect();
+        println!("results:\n{:#?}", result);
+        println!("results count: {}", result.len());
+    } else {
+        println!("result failed!");
+    }
+
+    return;
     let path = "weeksapp.db.2024-09-30T10-17-50+03-30.backup";
     let result = db_sqlite::is_correct_db(path);
     println!("path: {path}\nresult: {result}");

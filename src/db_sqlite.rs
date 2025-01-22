@@ -273,3 +273,21 @@ pub fn create_db(_filepath: &str) -> AppResult<()> {
     //     fs::create_dir_all(parent).map_err(|_| AppError::DatabaseFileCopyError)?;
     // }
 }
+
+pub fn search_texts(terms: Vec<&str>) -> QueryResult<Vec<Item>> {
+    // Function to perform the search.
+    use crate::schema::items::dsl::*;
+    let conn = &mut establish_connection();
+
+    // Start building the query.
+    let mut query = items.into_boxed();
+
+    // Add LIKE conditions for each term.
+    for term in terms {
+        let like_term = format!("%{}%", term);
+        query = query.or_filter(title.like(like_term.clone()).or(note.like(like_term)));
+    }
+
+    // Execute the query and return the results.
+    query.load::<Item>(conn)
+}
