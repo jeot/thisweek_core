@@ -1,10 +1,8 @@
 use crate::language::str_to_vec;
-use crate::weekdays::WeekDaysUnixOffset;
+use crate::weekdays::convert_weekday;
 use crate::{language::Language, week_info::Date, week_info::DateView};
-use chrono::{DateTime, Local};
-use ptime;
+use chrono::{DateTime, Datelike, Local};
 use serde::Serialize;
-use time::Timespec;
 
 use crate::calendar::{Calendar, CalendarSpecificDateView, CalendarView, CALENDAR_PERSIAN};
 
@@ -16,7 +14,7 @@ use crate::weekday_names::*;
 #[derive(Debug, Serialize, Clone, PartialEq)]
 pub struct PersianCalendar;
 
-fn convert_weekday(weekday: i32) -> WeekDaysUnixOffset {
+/* fn convert_weekday(weekday: i32) -> WeekDaysUnixOffset {
     // Weekday since Shanbe - [0, 6](<0, 6>). 0 = Shanbeh, ..., 6 = Jomeh.
     match weekday {
         0 => WeekDaysUnixOffset::Sat,
@@ -28,40 +26,34 @@ fn convert_weekday(weekday: i32) -> WeekDaysUnixOffset {
         6 => WeekDaysUnixOffset::Fri,
         _ => WeekDaysUnixOffset::Sat,
     }
-}
+} */
 
 impl CalendarSpecificDateView for PersianCalendar {
     fn new_date(datetime: DateTime<Local>) -> Date {
-        let ts = datetime.timestamp();
-        let pdate = ptime::at(Timespec::new(ts, 0));
-        let weekday: i32 = pdate.tm_wday;
-        let weekday: WeekDaysUnixOffset = convert_weekday(weekday);
+        let (gy, gm, gd) = (datetime.year(), datetime.month(), datetime.day());
+        let (year, month, day) = Self::gregorian_to_jalali(gy, gm, gd);
+        let weekday = convert_weekday(datetime.weekday()) as u32;
         Date {
             calendar: Calendar::Persian(PersianCalendar),
-            day: pdate.tm_mday as u32,
-            month: (pdate.tm_mon + 1) as u32,
-            weekday: weekday as u32,
-            year: pdate.tm_year,
+            day,
+            month,
+            weekday,
+            year,
         }
     }
 
     fn new_date_view(datetime: DateTime<Local>, lang: &Language) -> DateView {
-        let ts = datetime.timestamp();
-        let pt = ptime::at(Timespec::new(ts, 0));
-
-        let day = pt.tm_mday.to_string();
-        let day = lang.change_numbers_language(&day);
-        let month = pt.tm_mon as usize;
+        let (gy, gm, gd) = (datetime.year(), datetime.month(), datetime.day());
+        let (year, month, day) = Self::gregorian_to_jalali(gy, gm, gd);
+        let day = lang.change_numbers_language(&day.to_string());
+        let month = (month - 1) as usize;
         let month = match lang {
             Language::Farsi => PERSIAN_MONTH_NAME_FA[month],
             _ => PERSIAN_MONTH_NAME_EN[month],
         };
         let month = month.to_string();
-        let year = pt.tm_year.to_string();
-        let year = lang.change_numbers_language(&year);
-
-        let weekday = pt.tm_wday;
-        let weekday = convert_weekday(weekday) as usize;
+        let year = lang.change_numbers_language(&year.to_string());
+        let weekday = convert_weekday(datetime.weekday()) as usize;
         let full_format = match lang {
             Language::Farsi => format!(
                 "{}، {} {} {}",
@@ -109,5 +101,47 @@ impl CalendarSpecificDateView for PersianCalendar {
             months_names,
             seasons_names,
         }
+    }
+}
+
+impl PersianCalendar {
+    /// note: the chrono-persian calendar (provided link below) has a bug that tries to convert
+    /// from persian dates (output of gregorian_to_jalali function) to chrono::NaiveDate, which
+    /// internally checks for gregorian dates and fails on some specific persian dates. (like 31th
+    /// of 2nd month is available in Ordibehesht, but not in February.)
+    /// source: https://jdf.scr.ir
+    /// https://docs.rs/chrono-persian/0.1.2/src/chrono_persian/lib.rs.html#1-140;
+    fn gregorian_to_jalali(gy: i32, gm: u32, gd: u32) -> (i32, u32, u32) {
+        const G_D_M: [i32; 12] = [0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334];
+        let gy2 = if gm > 2 { gy + 1 } else { gy };
+
+        let mut days = 355666 + (365 * gy) + ((gy2 + 3) / 4) - ((gy2 + 99) / 100)
+            + ((gy2 + 399) / 400)
+            + gd as i32
+            + G_D_M[(gm - 1) as usize];
+
+        let mut jy = -1595 + (33 * (days / 12053));
+        days %= 12053;
+        jy += 4 * (days / 1461);
+        days %= 1461;
+
+        if days > 365 {
+            jy += (days - 1) / 365;
+            days = (days - 1) % 365;
+        }
+
+        let jm = if days < 186 {
+            1 + (days / 31)
+        } else {
+            7 + ((days - 186) / 30)
+        };
+
+        let jd = if days < 186 {
+            1 + (days % 31)
+        } else {
+            1 + ((days - 186) % 30)
+        };
+
+        (jy, jm as u32, jd as u32)
     }
 }

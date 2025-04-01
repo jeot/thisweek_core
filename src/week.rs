@@ -19,9 +19,7 @@ use crate::today;
 use crate::week_info::WeekInfo;
 use crate::weekdays::WeekDaysUnixOffset;
 use crate::weekdays::SEVEN_DAY_WEEK_SIZE;
-use ptime;
 use serde::Serialize;
-use time::Timespec;
 
 #[derive(Debug, Clone, Default)]
 pub struct Week {
@@ -64,13 +62,6 @@ impl Week {
             ((unix_day - day_offset) / week_size) * week_size + day_offset + (week_size / 2);
         let end = ((unix_day - day_offset) / week_size) * week_size + day_offset + week_size - 1;
         (start, middle, end)
-    }
-
-    #[allow(dead_code)]
-    fn get_persian_first_and_last_week_days(&self) -> (ptime::Tm, ptime::Tm) {
-        let shanbeh = ptime::at(Timespec::new((self.start_day as i64) * 24 * 3600, 0));
-        let jomeh = ptime::at(Timespec::new((self.end_day as i64) * 24 * 3600, 0));
-        (shanbeh, jomeh)
     }
 
     pub fn update(&mut self) -> AppResult<()> {
@@ -142,6 +133,10 @@ impl Week {
 
     pub fn current(&mut self) -> AppResult<()> {
         self.reference_day = today::get_unix_day();
+        // println!(
+        //     "setting week to current date. reference_day: {}",
+        //     self.reference_day
+        // );
         self.update()
     }
 
@@ -215,90 +210,67 @@ impl Ordering for Week {
 
 #[cfg(test)]
 mod tests {
+    use crate::time;
     use crate::week::Week;
     use crate::weekdays::{WeekDaysUnixOffset, SEVEN_DAY_WEEK_SIZE};
+    use chrono::{DateTime, Local};
 
-    fn check_correct_reference_from_persian_dates(
-        dates: Vec<ptime::Tm>,
-        expected_middle_day: i32,
-    ) -> bool {
+    #[test]
+    fn test_week_middle_day_ref() {
+        let gregorian_dates_and_reference = vec![
+            // persian 1403-04-22
+            ("2024-07-12 23:22:11 +03:30", 19913),
+            ("2024-07-12 23:59:36 +03:30", 19913),
+            ("2024-07-12 23:59:59 +03:30", 19913),
+            // persian 1403-04-23
+            ("2024-07-13 00:00:00 +03:30", 19920),
+            ("2024-07-13 00:00:01 +03:30", 19920),
+            ("2024-07-13 00:00:11 +03:30", 19920),
+            ("2024-07-13 01:01:01 +03:30", 19920),
+            ("2024-07-13 12:00:00 +03:30", 19920),
+            ("2024-07-14 12:00:00 +03:30", 19920),
+            ("2024-07-15 00:00:00 +03:30", 19920),
+            ("2024-07-16 23:00:00 +03:30", 19920),
+            ("2024-07-17 23:23:00 +03:30", 19920),
+            ("2024-07-18 23:23:23 +03:30", 19920),
+            ("2024-07-18 23:59:23 +03:30", 19920),
+            ("2024-07-19 00:00:00 +03:30", 19920),
+            ("2024-07-19 02:00:00 +03:30", 19920),
+            ("2024-07-19 05:00:00 +03:30", 19920),
+            ("2024-07-19 18:00:00 +03:30", 19920),
+            ("2024-07-19 23:00:00 +03:30", 19920),
+            ("2024-07-19 23:59:59 +03:30", 19920),
+            // persian 1403-04-30
+            ("2024-07-20 00:00:00 +03:30", 19927),
+            ("2024-07-20 00:00:01 +03:30", 19927),
+            ("2024-07-20 00:01:01 +03:30", 19927),
+            ("2024-07-20 01:00:01 +03:30", 19927),
+            ("2024-07-20 03:00:00 +03:30", 19927),
+            ("2024-07-20 04:00:00 +03:30", 19927),
+        ];
+        assert!(check_gregorian_dates_and_reference(
+            gregorian_dates_and_reference
+        ));
+    }
+
+    fn check_gregorian_dates_and_reference(dates_and_ref: Vec<(&str, i32)>) -> bool {
         println!("----");
-        for pt in dates {
-            let pt_day = (pt.to_timespec().sec / 3600 / 24) as i32;
+        for (date_string, expected_middle_day) in dates_and_ref {
+            let dt = date_string.parse::<DateTime<Local>>().unwrap();
+            let unix_day = time::get_unix_day_from_local_datetime(dt);
             let (s, m, e) = Week::calculate_week_start_middle_end_unix_day(
-                pt_day,
+                unix_day,
                 WeekDaysUnixOffset::Sat as i32,
                 SEVEN_DAY_WEEK_SIZE,
             );
-            let week = Week::default();
-            let (first, last) = week.get_persian_first_and_last_week_days();
-            let date = pt.to_string("yyyy-MM-dd HH:mm:ss");
-            let shanbeh = first.to_string("yyyy-MM-dd HH:mm:ss");
-            let jomeh = last.to_string("yyyy-MM-dd HH:mm:ss");
             println!(
-                "ptime: {}, start_day: {}, middle_day: {}, end_day: {}, week: {} -> {}",
-                date, s, m, e, shanbeh, jomeh
+                "date: {}, start_day: {}, middle_day: {}, end_day: {}",
+                dt, s, m, e
             );
             if expected_middle_day != m {
                 return false;
             }
         }
         true
-    }
-
-    #[test]
-    fn test_find_week_period_with_ptime() {
-        let mut pt_vec: Vec<ptime::Tm> = Vec::new();
-        let pt = ptime::from_persian_components(1403, 4 - 1, 22, 23, 22, 11, 0).unwrap();
-        pt_vec.push(pt);
-        let pt = ptime::from_persian_components(1403, 4 - 1, 22, 23, 59, 36, 0).unwrap();
-        pt_vec.push(pt);
-        let pt = ptime::from_persian_components(1403, 4 - 1, 22, 23, 59, 59, 0).unwrap();
-        pt_vec.push(pt);
-        assert!(check_correct_reference_from_persian_dates(pt_vec, 19913));
-
-        let mut pt_vec: Vec<ptime::Tm> = Vec::new();
-        let pt = ptime::from_persian_components(1403, 4 - 1, 23, 0, 0, 0, 0).unwrap();
-        pt_vec.push(pt);
-        let pt = ptime::from_persian_components(1403, 4 - 1, 23, 0, 0, 0, 888888).unwrap();
-        pt_vec.push(pt);
-        let pt = ptime::from_persian_components(1403, 4 - 1, 23, 0, 0, 1, 0).unwrap();
-        pt_vec.push(pt);
-        let pt = ptime::from_persian_components(1403, 4 - 1, 23, 0, 0, 11, 0).unwrap();
-        pt_vec.push(pt);
-        let pt = ptime::from_persian_components(1403, 4 - 1, 23, 0, 1, 1, 1).unwrap();
-        pt_vec.push(pt);
-        let pt = ptime::from_persian_components(1403, 4 - 1, 24, 12, 0, 0, 0).unwrap();
-        pt_vec.push(pt);
-        let pt = ptime::from_persian_components(1403, 4 - 1, 25, 0, 0, 0, 0).unwrap();
-        pt_vec.push(pt);
-        let pt = ptime::from_persian_components(1403, 4 - 1, 26, 23, 23, 23, 23).unwrap();
-        pt_vec.push(pt);
-        let pt = ptime::from_persian_components(1403, 4 - 1, 27, 23, 23, 23, 23).unwrap();
-        pt_vec.push(pt);
-        let pt = ptime::from_persian_components(1403, 4 - 1, 28, 23, 59, 23, 23).unwrap();
-        pt_vec.push(pt);
-        let pt = ptime::from_persian_components(1403, 4 - 1, 29, 0, 0, 0, 0).unwrap();
-        pt_vec.push(pt);
-        let pt = ptime::from_persian_components(1403, 4 - 1, 29, 23, 59, 23, 23).unwrap();
-        pt_vec.push(pt);
-        let pt = ptime::from_persian_components(1403, 4 - 1, 29, 23, 59, 59, 19993294).unwrap();
-        pt_vec.push(pt);
-        assert!(check_correct_reference_from_persian_dates(pt_vec, 19920));
-
-        let mut pt_vec: Vec<ptime::Tm> = Vec::new();
-        let pt = ptime::from_persian_components(1403, 4 - 1, 30, 0, 0, 0, 0).unwrap();
-        pt_vec.push(pt);
-        let pt = ptime::from_persian_components(1403, 4 - 1, 30, 0, 0, 0, 1).unwrap();
-        pt_vec.push(pt);
-        let pt = ptime::from_persian_components(1403, 4 - 1, 30, 0, 0, 1, 1).unwrap();
-        pt_vec.push(pt);
-        let pt = ptime::from_persian_components(1403, 4 - 1, 30, 0, 1, 1, 1).unwrap();
-        pt_vec.push(pt);
-        let pt = ptime::from_persian_components(1403, 4 - 1, 30, 1, 1, 1, 1).unwrap();
-        pt_vec.push(pt);
-        let pt = ptime::from_persian_components(1403, 4 - 1, 31, 6, 6, 6, 6).unwrap();
-        pt_vec.push(pt);
-        assert!(check_correct_reference_from_persian_dates(pt_vec, 19927));
     }
 }
