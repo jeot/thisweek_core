@@ -1,0 +1,282 @@
+// this is the country coverage for the api at: https://date.nager.at/Api
+// the list is gatered from the following link in April 2025
+// https://date.nager.at/Country/Coverage
+
+// Europe Available
+
+{ "continent": "Europe", "available": true, "code": "AL", "name": "Albania" }
+{ "continent": "Europe", "available": true, "code": "AD", "name": "Andorra" }
+{ "continent": "Europe", "available": true, "code": "AT", "name": "Austria" }
+{ "continent": "Europe", "available": true, "code": "BY", "name": "Belarus" }
+{ "continent": "Europe", "available": true, "code": "BE", "name": "Belgium" }
+{ "continent": "Europe", "available": true, "code": "BA", "name": "Bosnia and Herzegovina" }
+{ "continent": "Europe", "available": true, "code": "BG", "name": "Bulgaria" }
+{ "continent": "Europe", "available": true, "code": "HR", "name": "Croatia" }
+{ "continent": "Europe", "available": true, "code": "CY", "name": "Cyprus" }
+{ "continent": "Europe", "available": true, "code": "CZ", "name": "Czechia" }
+{ "continent": "Europe", "available": true, "code": "DK", "name": "Denmark" }
+{ "continent": "Europe", "available": true, "code": "EE", "name": "Estonia" }
+{ "continent": "Europe", "available": true, "code": "FO", "name": "Faroe Islands" }
+{ "continent": "Europe", "available": true, "code": "FI", "name": "Finland" }
+{ "continent": "Europe", "available": true, "code": "FR", "name": "France" }
+{ "continent": "Europe", "available": true, "code": "DE", "name": "Germany" }
+{ "continent": "Europe", "available": true, "code": "GI", "name": "Gibraltar" }
+{ "continent": "Europe", "available": true, "code": "GR", "name": "Greece" }
+{ "continent": "Europe", "available": true, "code": "GG", "name": "Guernsey" }
+{ "continent": "Europe", "available": true, "code": "HU", "name": "Hungary" }
+{ "continent": "Europe", "available": true, "code": "IS", "name": "Iceland" }
+{ "continent": "Europe", "available": true, "code": "IE", "name": "Ireland" }
+{ "continent": "Europe", "available": true, "code": "IM", "name": "Isle of Man" }
+{ "continent": "Europe", "available": true, "code": "IT", "name": "Italy" }
+{ "continent": "Europe", "available": true, "code": "JE", "name": "Jersey" }
+{ "continent": "Europe", "available": true, "code": "LV", "name": "Latvia" }
+{ "continent": "Europe", "available": true, "code": "LI", "name": "Liechtenstein" }
+{ "continent": "Europe", "available": true, "code": "LT", "name": "Lithuania" }
+{ "continent": "Europe", "available": true, "code": "LU", "name": "Luxembourg" }
+{ "continent": "Europe", "available": true, "code": "MT", "name": "Malta" }
+{ "continent": "Europe", "available": true, "code": "MD", "name": "Moldova" }
+{ "continent": "Europe", "available": true, "code": "MC", "name": "Monaco" }
+{ "continent": "Europe", "available": true, "code": "ME", "name": "Montenegro" }
+{ "continent": "Europe", "available": true, "code": "NL", "name": "Netherlands" }
+{ "continent": "Europe", "available": true, "code": "MK", "name": "North Macedonia" }
+{ "continent": "Europe", "available": true, "code": "NO", "name": "Norway" }
+{ "continent": "Europe", "available": true, "code": "PL", "name": "Poland" }
+{ "continent": "Europe", "available": true, "code": "PT", "name": "Portugal" }
+{ "continent": "Europe", "available": true, "code": "RO", "name": "Romania" }
+{ "continent": "Europe", "available": true, "code": "RU", "name": "Russia" }
+{ "continent": "Europe", "available": true, "code": "SM", "name": "San Marino" }
+{ "continent": "Europe", "available": true, "code": "RS", "name": "Serbia" }
+{ "continent": "Europe", "available": true, "code": "SK", "name": "Slovakia" }
+{ "continent": "Europe", "available": true, "code": "SI", "name": "Slovenia" }
+{ "continent": "Europe", "available": true, "code": "ES", "name": "Spain" }
+{ "continent": "Europe", "available": true, "code": "SJ", "name": "Svalbard and Jan Mayen" }
+{ "continent": "Europe", "available": true, "code": "SE", "name": "Sweden" }
+{ "continent": "Europe", "available": true, "code": "CH", "name": "Switzerland" }
+{ "continent": "Europe", "available": true, "code": "UA", "name": "Ukraine" }
+{ "continent": "Europe", "available": true, "code": "GB", "name": "United Kingdom" }
+{ "continent": "Europe", "available": true, "code": "VA", "name": "Vatican City" }
+{ "continent": "Europe", "available": true, "code": "AX", "name": "Åland Islands" }
+
+// Americas Available
+
+{ "continent": "Americas", "available": true, "code": "AR", "name": "Argentina" }
+{ "continent": "Americas", "available": true, "code": "BS", "name": "Bahamas" }
+{ "continent": "Americas", "available": true, "code": "BB", "name": "Barbados" }
+{ "continent": "Americas", "available": true, "code": "BZ", "name": "Belize" }
+{ "continent": "Americas", "available": true, "code": "BO", "name": "Bolivia" }
+{ "continent": "Americas", "available": true, "code": "BR", "name": "Brazil" }
+{ "continent": "Americas", "available": true, "code": "CA", "name": "Canada" }
+{ "continent": "Americas", "available": true, "code": "CL", "name": "Chile" }
+{ "continent": "Americas", "available": true, "code": "CO", "name": "Colombia" }
+{ "continent": "Americas", "available": true, "code": "CR", "name": "Costa Rica" }
+{ "continent": "Americas", "available": true, "code": "CU", "name": "Cuba" }
+{ "continent": "Americas", "available": true, "code": "DO", "name": "Dominican Republic" }
+{ "continent": "Americas", "available": true, "code": "EC", "name": "Ecuador" }
+{ "continent": "Americas", "available": true, "code": "SV", "name": "El Salvador" }
+{ "continent": "Americas", "available": true, "code": "GL", "name": "Greenland" }
+{ "continent": "Americas", "available": true, "code": "GD", "name": "Grenada" }
+{ "continent": "Americas", "available": true, "code": "GT", "name": "Guatemala" }
+{ "continent": "Americas", "available": true, "code": "GY", "name": "Guyana" }
+{ "continent": "Americas", "available": true, "code": "HT", "name": "Haiti" }
+{ "continent": "Americas", "available": true, "code": "HN", "name": "Honduras" }
+{ "continent": "Americas", "available": true, "code": "JM", "name": "Jamaica" }
+{ "continent": "Americas", "available": true, "code": "MX", "name": "Mexico" }
+{ "continent": "Americas", "available": true, "code": "MS", "name": "Montserrat" }
+{ "continent": "Americas", "available": true, "code": "NI", "name": "Nicaragua" }
+{ "continent": "Americas", "available": true, "code": "PA", "name": "Panama" }
+{ "continent": "Americas", "available": true, "code": "PY", "name": "Paraguay" }
+{ "continent": "Americas", "available": true, "code": "PE", "name": "Peru" }
+{ "continent": "Americas", "available": true, "code": "PR", "name": "Puerto Rico" }
+{ "continent": "Americas", "available": true, "code": "SR", "name": "Suriname" }
+{ "continent": "Americas", "available": true, "code": "US", "name": "United States" }
+{ "continent": "Americas", "available": true, "code": "UY", "name": "Uruguay" }
+{ "continent": "Americas", "available": true, "code": "VE", "name": "Venezuela" }
+
+// Americas Missing
+
+{ "continent": "Americas", "available": false, "code": "AI", "name": "Anguilla" }
+{ "continent": "Americas", "available": false, "code": "AG", "name": "Antigua and Barbuda" }
+{ "continent": "Americas", "available": false, "code": "AW", "name": "Aruba" }
+{ "continent": "Americas", "available": false, "code": "BM", "name": "Bermuda" }
+{ "continent": "Americas", "available": false, "code": "VG", "name": "British Virgin Islands" }
+{ "continent": "Americas", "available": false, "code": "BQ", "name": "Caribbean Netherlands" }
+{ "continent": "Americas", "available": false, "code": "KY", "name": "Cayman Islands" }
+{ "continent": "Americas", "available": false, "code": "CW", "name": "Curaçao" }
+{ "continent": "Americas", "available": false, "code": "DM", "name": "Dominica" }
+{ "continent": "Americas", "available": false, "code": "FK", "name": "Falkland Islands" }
+{ "continent": "Americas", "available": false, "code": "GF", "name": "French Guiana" }
+{ "continent": "Americas", "available": false, "code": "GP", "name": "Guadeloupe" }
+{ "continent": "Americas", "available": false, "code": "MQ", "name": "Martinique" }
+{ "continent": "Americas", "available": false, "code": "BL", "name": "Saint Barthélemy" }
+{ "continent": "Americas", "available": false, "code": "KN", "name": "Saint Kitts and Nevis" }
+{ "continent": "Americas", "available": false, "code": "LC", "name": "Saint Lucia" }
+{ "continent": "Americas", "available": false, "code": "MF", "name": "Saint Martin" }
+{ "continent": "Americas", "available": false, "code": "PM", "name": "Saint Pierre and Miquelon" }
+{ "continent": "Americas", "available": false, "code": "VC", "name": "Saint Vincent and the Grenadines" }
+{ "continent": "Americas", "available": false, "code": "SX", "name": "Sint Maarten" }
+{ "continent": "Americas", "available": false, "code": "TT", "name": "Trinidad and Tobago" }
+{ "continent": "Americas", "available": false, "code": "TC", "name": "Turks and Caicos Islands" }
+{ "continent": "Americas", "available": false, "code": "UM", "name": "United States Minor Outlying Islands" }
+{ "continent": "Americas", "available": false, "code": "VI", "name": "United States Virgin Islands" }
+
+// Asia Available
+
+{ "continent": "Asia", "available": true, "code": "AM", "name": "Armenia" }
+{ "continent": "Asia", "available": true, "code": "CN", "name": "China" }
+{ "continent": "Asia", "available": true, "code": "GE", "name": "Georgia" }
+{ "continent": "Asia", "available": true, "code": "HK", "name": "Hong Kong" }
+{ "continent": "Asia", "available": true, "code": "ID", "name": "Indonesia" }
+{ "continent": "Asia", "available": true, "code": "JP", "name": "Japan" }
+{ "continent": "Asia", "available": true, "code": "KZ", "name": "Kazakhstan" }
+{ "continent": "Asia", "available": true, "code": "MN", "name": "Mongolia" }
+{ "continent": "Asia", "available": true, "code": "PH", "name": "Philippines" }
+{ "continent": "Asia", "available": true, "code": "SG", "name": "Singapore" }
+{ "continent": "Asia", "available": true, "code": "KR", "name": "South Korea" }
+{ "continent": "Asia", "available": true, "code": "TR", "name": "Turkey" }
+{ "continent": "Asia", "available": true, "code": "VN", "name": "Vietnam" }
+
+// Asia Missing
+
+{ "continent": "Asia", "available": false, "code": "AF", "name": "Afghanistan" }
+{ "continent": "Asia", "available": false, "code": "AZ", "name": "Azerbaijan" }
+{ "continent": "Asia", "available": false, "code": "BH", "name": "Bahrain" }
+{ "continent": "Asia", "available": false, "code": "BD", "name": "Bangladesh" }
+{ "continent": "Asia", "available": false, "code": "BT", "name": "Bhutan" }
+{ "continent": "Asia", "available": false, "code": "BN", "name": "Brunei" }
+{ "continent": "Asia", "available": false, "code": "KH", "name": "Cambodia" }
+{ "continent": "Asia", "available": false, "code": "IN", "name": "India" }
+{ "continent": "Asia", "available": false, "code": "IR", "name": "Iran" }
+{ "continent": "Asia", "available": false, "code": "IQ", "name": "Iraq" }
+{ "continent": "Asia", "available": false, "code": "IL", "name": "Israel" }
+{ "continent": "Asia", "available": false, "code": "JO", "name": "Jordan" }
+{ "continent": "Asia", "available": false, "code": "KW", "name": "Kuwait" }
+{ "continent": "Asia", "available": false, "code": "KG", "name": "Kyrgyzstan" }
+{ "continent": "Asia", "available": false, "code": "LA", "name": "Laos" }
+{ "continent": "Asia", "available": false, "code": "LB", "name": "Lebanon" }
+{ "continent": "Asia", "available": false, "code": "MO", "name": "Macau" }
+{ "continent": "Asia", "available": false, "code": "MY", "name": "Malaysia" }
+{ "continent": "Asia", "available": false, "code": "MV", "name": "Maldives" }
+{ "continent": "Asia", "available": false, "code": "MM", "name": "Myanmar" }
+{ "continent": "Asia", "available": false, "code": "NP", "name": "Nepal" }
+{ "continent": "Asia", "available": false, "code": "KP", "name": "North Korea" }
+{ "continent": "Asia", "available": false, "code": "OM", "name": "Oman" }
+{ "continent": "Asia", "available": false, "code": "PK", "name": "Pakistan" }
+{ "continent": "Asia", "available": false, "code": "PS", "name": "Palestine" }
+{ "continent": "Asia", "available": false, "code": "QA", "name": "Qatar" }
+{ "continent": "Asia", "available": false, "code": "SA", "name": "Saudi Arabia" }
+{ "continent": "Asia", "available": false, "code": "LK", "name": "Sri Lanka" }
+{ "continent": "Asia", "available": false, "code": "SY", "name": "Syria" }
+{ "continent": "Asia", "available": false, "code": "TW", "name": "Taiwan" }
+{ "continent": "Asia", "available": false, "code": "TJ", "name": "Tajikistan" }
+{ "continent": "Asia", "available": false, "code": "TH", "name": "Thailand" }
+{ "continent": "Asia", "available": false, "code": "TL", "name": "Timor-Leste" }
+{ "continent": "Asia", "available": false, "code": "TM", "name": "Turkmenistan" }
+{ "continent": "Asia", "available": false, "code": "AE", "name": "United Arab Emirates" }
+{ "continent": "Asia", "available": false, "code": "UZ", "name": "Uzbekistan" }
+{ "continent": "Asia", "available": false, "code": "YE", "name": "Yemen" }
+
+// Africa Available
+
+{ "continent": "Africa", "available": true, "code": "BJ", "name": "Benin" }
+{ "continent": "Africa", "available": true, "code": "BW", "name": "Botswana" }
+{ "continent": "Africa", "available": true, "code": "EG", "name": "Egypt" }
+{ "continent": "Africa", "available": true, "code": "GA", "name": "Gabon" }
+{ "continent": "Africa", "available": true, "code": "GM", "name": "Gambia" }
+{ "continent": "Africa", "available": true, "code": "LS", "name": "Lesotho" }
+{ "continent": "Africa", "available": true, "code": "MG", "name": "Madagascar" }
+{ "continent": "Africa", "available": true, "code": "MA", "name": "Morocco" }
+{ "continent": "Africa", "available": true, "code": "MZ", "name": "Mozambique" }
+{ "continent": "Africa", "available": true, "code": "NA", "name": "Namibia" }
+{ "continent": "Africa", "available": true, "code": "NE", "name": "Niger" }
+{ "continent": "Africa", "available": true, "code": "NG", "name": "Nigeria" }
+{ "continent": "Africa", "available": true, "code": "ZA", "name": "South Africa" }
+{ "continent": "Africa", "available": true, "code": "TN", "name": "Tunisia" }
+{ "continent": "Africa", "available": true, "code": "ZW", "name": "Zimbabwe" }
+
+// Africa Missing
+
+{ "continent": "Africa", "available": false, "code": "DZ", "name": "Algeria" }
+{ "continent": "Africa", "available": false, "code": "AO", "name": "Angola" }
+{ "continent": "Africa", "available": false, "code": "IO", "name": "British Indian Ocean Territory" }
+{ "continent": "Africa", "available": false, "code": "BF", "name": "Burkina Faso" }
+{ "continent": "Africa", "available": false, "code": "BI", "name": "Burundi" }
+{ "continent": "Africa", "available": false, "code": "CM", "name": "Cameroon" }
+{ "continent": "Africa", "available": false, "code": "CV", "name": "Cape Verde" }
+{ "continent": "Africa", "available": false, "code": "CF", "name": "Central African Republic" }
+{ "continent": "Africa", "available": false, "code": "TD", "name": "Chad" }
+{ "continent": "Africa", "available": false, "code": "KM", "name": "Comoros" }
+{ "continent": "Africa", "available": false, "code": "CD", "name": "DR Congo" }
+{ "continent": "Africa", "available": false, "code": "DJ", "name": "Djibouti" }
+{ "continent": "Africa", "available": false, "code": "GQ", "name": "Equatorial Guinea" }
+{ "continent": "Africa", "available": false, "code": "ER", "name": "Eritrea" }
+{ "continent": "Africa", "available": false, "code": "SZ", "name": "Eswatini" }
+{ "continent": "Africa", "available": false, "code": "ET", "name": "Ethiopia" }
+{ "continent": "Africa", "available": false, "code": "GH", "name": "Ghana" }
+{ "continent": "Africa", "available": false, "code": "GN", "name": "Guinea" }
+{ "continent": "Africa", "available": false, "code": "GW", "name": "Guinea-Bissau" }
+{ "continent": "Africa", "available": false, "code": "CI", "name": "Ivory Coast" }
+{ "continent": "Africa", "available": false, "code": "KE", "name": "Kenya" }
+{ "continent": "Africa", "available": false, "code": "LR", "name": "Liberia" }
+{ "continent": "Africa", "available": false, "code": "LY", "name": "Libya" }
+{ "continent": "Africa", "available": false, "code": "MW", "name": "Malawi" }
+{ "continent": "Africa", "available": false, "code": "ML", "name": "Mali" }
+{ "continent": "Africa", "available": false, "code": "MR", "name": "Mauritania" }
+{ "continent": "Africa", "available": false, "code": "MU", "name": "Mauritius" }
+{ "continent": "Africa", "available": false, "code": "YT", "name": "Mayotte" }
+{ "continent": "Africa", "available": false, "code": "CG", "name": "Republic of the Congo" }
+{ "continent": "Africa", "available": false, "code": "RW", "name": "Rwanda" }
+{ "continent": "Africa", "available": false, "code": "RE", "name": "Réunion" }
+{ "continent": "Africa", "available": false, "code": "SH", "name": "Saint Helena, Ascension and Tristan da Cunha" }
+{ "continent": "Africa", "available": false, "code": "SN", "name": "Senegal" }
+{ "continent": "Africa", "available": false, "code": "SC", "name": "Seychelles" }
+{ "continent": "Africa", "available": false, "code": "SL", "name": "Sierra Leone" }
+{ "continent": "Africa", "available": false, "code": "SO", "name": "Somalia" }
+{ "continent": "Africa", "available": false, "code": "SS", "name": "South Sudan" }
+{ "continent": "Africa", "available": false, "code": "SD", "name": "Sudan" }
+{ "continent": "Africa", "available": false, "code": "ST", "name": "Sao Tome and Principe" }
+{ "continent": "Africa", "available": false, "code": "TZ", "name": "Tanzania" }
+{ "continent": "Africa", "available": false, "code": "TG", "name": "Togo" }
+{ "continent": "Africa", "available": false, "code": "UG", "name": "Uganda" }
+{ "continent": "Africa", "available": false, "code": "EH", "name": "Western Sahara" }
+{ "continent": "Africa", "available": false, "code": "ZM", "name": "Zambia" }
+
+// Oceania Available
+
+{ "continent": "Oceania", "available": true, "code": "AU", "name": "Australia" }
+{ "continent": "Oceania", "available": true, "code": "NZ", "name": "New Zealand" }
+{ "continent": "Oceania", "available": true, "code": "PG", "name": "Papua New Guinea" }
+
+// Oceania Missing
+
+{ "continent": "Oceania", "available": false, "code": "AS", "name": "American Samoa" }
+{ "continent": "Oceania", "available": false, "code": "CX", "name": "Christmas Island" }
+{ "continent": "Oceania", "available": false, "code": "CC", "name": "Cocos (Keeling) Islands" }
+{ "continent": "Oceania", "available": false, "code": "CK", "name": "Cook Islands" }
+{ "continent": "Oceania", "available": false, "code": "FJ", "name": "Fiji" }
+{ "continent": "Oceania", "available": false, "code": "PF", "name": "French Polynesia" }
+{ "continent": "Oceania", "available": false, "code": "GU", "name": "Guam" }
+{ "continent": "Oceania", "available": false, "code": "KI", "name": "Kiribati" }
+{ "continent": "Oceania", "available": false, "code": "MH", "name": "Marshall Islands" }
+{ "continent": "Oceania", "available": false, "code": "FM", "name": "Micronesia" }
+{ "continent": "Oceania", "available": false, "code": "NR", "name": "Nauru" }
+{ "continent": "Oceania", "available": false, "code": "NC", "name": "New Caledonia" }
+{ "continent": "Oceania", "available": false, "code": "NU", "name": "Niue" }
+{ "continent": "Oceania", "available": false, "code": "NF", "name": "Norfolk Island" }
+{ "continent": "Oceania", "available": false, "code": "MP", "name": "Northern Mariana Islands" }
+{ "continent": "Oceania", "available": false, "code": "PW", "name": "Palau" }
+{ "continent": "Oceania", "available": false, "code": "PN", "name": "Pitcairn Islands" }
+{ "continent": "Oceania", "available": false, "code": "WS", "name": "Samoa" }
+{ "continent": "Oceania", "available": false, "code": "SB", "name": "Solomon Islands" }
+{ "continent": "Oceania", "available": false, "code": "TK", "name": "Tokelau" }
+{ "continent": "Oceania", "available": false, "code": "TO", "name": "Tonga" }
+{ "continent": "Oceania", "available": false, "code": "TV", "name": "Tuvalu" }
+{ "continent": "Oceania", "available": false, "code": "VU", "name": "Vanuatu" }
+{ "continent": "Oceania", "available": false, "code": "WF", "name": "Wallis and Futuna" }
+
+// Antarctic Available
+
+{ "continent": "Antarctic", "available": true, "code": "AQ", "name": "Antarctica" }
+{ "continent": "Antarctic", "available": true, "code": "BV", "name": "Bouvet Island" }
+{ "continent": "Antarctic", "available": true, "code": "TF", "name": "French Southern and Antarctic Lands" }
+{ "continent": "Antarctic", "available": true, "code": "HM", "name": "Heard Island and McDonald Islands" }
+{ "continent": "Antarctic", "available": true, "code": "GS", "name": "South Georgia" }
