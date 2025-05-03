@@ -1,0 +1,145 @@
+[
+  {
+    "date": "2025-01-01",
+    "localName": "New Year's Day",
+    "name": "New Year's Day",
+    "countryCode": "GY",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2025-02-23",
+    "localName": "Republic Day",
+    "name": "Republic Day",
+    "countryCode": "GY",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2025-04-18",
+    "localName": "Good Friday",
+    "name": "Good Friday",
+    "countryCode": "GY",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2025-04-21",
+    "localName": "Easter Monday",
+    "name": "Easter Monday",
+    "countryCode": "GY",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2025-05-01",
+    "localName": "Labour Day",
+    "name": "Labour Day",
+    "countryCode": "GY",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2025-05-05",
+    "localName": "Arrival Day",
+    "name": "Arrival Day",
+    "countryCode": "GY",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2025-05-26",
+    "localName": "Independence Day",
+    "name": "Independence Day",
+    "countryCode": "GY",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2025-07-07",
+    "localName": "Caricom Day",
+    "name": "Caricom Day",
+    "countryCode": "GY",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2025-08-01",
+    "localName": "Emancipation Day",
+    "name": "Emancipation Day",
+    "countryCode": "GY",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2025-12-25",
+    "localName": "Christmas Day",
+    "name": "Christmas Day",
+    "countryCode": "GY",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2025-12-26",
+    "localName": "Boxing Day",
+    "name": "Boxing Day",
+    "countryCode": "GY",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  }
+]

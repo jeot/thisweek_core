@@ -1,0 +1,275 @@
+[
+  {
+    "date": "2031-01-01",
+    "localName": "Neujahr",
+    "name": "New Year's Day",
+    "countryCode": "LI",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2031-01-02",
+    "localName": "Berchtoldstag",
+    "name": "St. Berchtold's Day",
+    "countryCode": "LI",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Bank"
+    ]
+  },
+  {
+    "date": "2031-01-06",
+    "localName": "Heilige Drei Könige",
+    "name": "Epiphany",
+    "countryCode": "LI",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2031-02-02",
+    "localName": "Mariä Lichtmess",
+    "name": "Candlemas",
+    "countryCode": "LI",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2031-02-25",
+    "localName": "Fasnachtsdienstag",
+    "name": "Shrove Tuesday",
+    "countryCode": "LI",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Bank"
+    ]
+  },
+  {
+    "date": "2031-03-19",
+    "localName": "Josefstag",
+    "name": "Saint Joseph's Day",
+    "countryCode": "LI",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2031-04-11",
+    "localName": "Karfreitag",
+    "name": "Good Friday",
+    "countryCode": "LI",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Bank"
+    ]
+  },
+  {
+    "date": "2031-04-14",
+    "localName": "Ostermontag",
+    "name": "Easter Monday",
+    "countryCode": "LI",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2031-05-01",
+    "localName": "Tag der Arbeit",
+    "name": "Labour Day",
+    "countryCode": "LI",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2031-05-22",
+    "localName": "Auffahrt",
+    "name": "Ascension Day",
+    "countryCode": "LI",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2031-06-01",
+    "localName": "Pfingstsonntag",
+    "name": "Pentecost",
+    "countryCode": "LI",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2031-06-02",
+    "localName": "Pfingstmontag",
+    "name": "Whit Monday",
+    "countryCode": "LI",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2031-06-12",
+    "localName": "Fronleichnam",
+    "name": "Corpus Christi",
+    "countryCode": "LI",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2031-08-15",
+    "localName": "Staatsfeiertag",
+    "name": "National Holiday",
+    "countryCode": "LI",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2031-09-08",
+    "localName": "Maria Geburt",
+    "name": "Nativity of Our Lady",
+    "countryCode": "LI",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2031-11-01",
+    "localName": "Allerheiligen",
+    "name": "All Saints Day",
+    "countryCode": "LI",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2031-12-08",
+    "localName": "Mariä Empfängnis",
+    "name": "Immaculate Conception",
+    "countryCode": "LI",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2031-12-24",
+    "localName": "Heiliger Abend",
+    "name": "Christmas Eve",
+    "countryCode": "LI",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Bank"
+    ]
+  },
+  {
+    "date": "2031-12-25",
+    "localName": "Weihnachten",
+    "name": "Christmas Day",
+    "countryCode": "LI",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2031-12-26",
+    "localName": "Stephanstag",
+    "name": "St. Stephen's Day",
+    "countryCode": "LI",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2031-12-31",
+    "localName": "Silvester",
+    "name": "New Year's Eve",
+    "countryCode": "LI",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Bank"
+    ]
+  }
+]

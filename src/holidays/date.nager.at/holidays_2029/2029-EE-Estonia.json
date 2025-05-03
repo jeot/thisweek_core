@@ -1,0 +1,158 @@
+[
+  {
+    "date": "2029-01-01",
+    "localName": "uusaasta",
+    "name": "New Year's Day",
+    "countryCode": "EE",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2029-02-24",
+    "localName": "iseseisvuspäev",
+    "name": "Independence Day",
+    "countryCode": "EE",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2029-03-30",
+    "localName": "suur reede",
+    "name": "Good Friday",
+    "countryCode": "EE",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2029-04-01",
+    "localName": "ülestõusmispühade 1. püha",
+    "name": "Easter Sunday",
+    "countryCode": "EE",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2029-05-01",
+    "localName": "kevadpüha",
+    "name": "Spring Day",
+    "countryCode": "EE",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2029-05-20",
+    "localName": "nelipühade 1. püha",
+    "name": "Pentecost",
+    "countryCode": "EE",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2029-06-23",
+    "localName": "võidupüha and jaanilaupäev",
+    "name": "Victory Day",
+    "countryCode": "EE",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2029-06-24",
+    "localName": "jaanipäev",
+    "name": "Midsummer Day",
+    "countryCode": "EE",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2029-08-20",
+    "localName": "taasiseseisvumispäev",
+    "name": "Day of Restoration of Independence",
+    "countryCode": "EE",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2029-12-24",
+    "localName": "jõululaupäev",
+    "name": "Christmas Eve",
+    "countryCode": "EE",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2029-12-25",
+    "localName": "esimene jõulupüha",
+    "name": "Christmas Day",
+    "countryCode": "EE",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2029-12-26",
+    "localName": "teine jõulupüha",
+    "name": "St. Stephen's Day",
+    "countryCode": "EE",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  }
+]

@@ -1,0 +1,158 @@
+[
+  {
+    "date": "2022-01-01",
+    "localName": "New Year's Day",
+    "name": "New Year's Day",
+    "countryCode": "NA",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2022-03-21",
+    "localName": "Independence Day",
+    "name": "Independence Day",
+    "countryCode": "NA",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2022-04-15",
+    "localName": "Good Friday",
+    "name": "Good Friday",
+    "countryCode": "NA",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2022-04-18",
+    "localName": "Easter Monday",
+    "name": "Easter Monday",
+    "countryCode": "NA",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2022-05-01",
+    "localName": "Workers' Day",
+    "name": "Workers' Day",
+    "countryCode": "NA",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2022-05-04",
+    "localName": "Cassinga Day",
+    "name": "Cassinga Day",
+    "countryCode": "NA",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2022-05-25",
+    "localName": "Africa Day",
+    "name": "Africa Day",
+    "countryCode": "NA",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2022-05-26",
+    "localName": "Ascension Day",
+    "name": "Ascension Day",
+    "countryCode": "NA",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2022-08-26",
+    "localName": "Heroes' Day",
+    "name": "Heroes' Day",
+    "countryCode": "NA",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2022-12-10",
+    "localName": "Human Rights Day",
+    "name": "Human Rights Day",
+    "countryCode": "NA",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2022-12-25",
+    "localName": "Christmas Day",
+    "name": "Christmas Day",
+    "countryCode": "NA",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2022-12-26",
+    "localName": "St. Stephen's Day",
+    "name": "Day of Goodwill",
+    "countryCode": "NA",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  }
+]

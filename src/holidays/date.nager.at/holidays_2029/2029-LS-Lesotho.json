@@ -1,0 +1,145 @@
+[
+  {
+    "date": "2029-01-01",
+    "localName": "New Year's Day",
+    "name": "New Year's Day",
+    "countryCode": "LS",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2029-03-11",
+    "localName": "Moshoeshoe Day",
+    "name": "Moshoeshoe Day",
+    "countryCode": "LS",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2029-03-30",
+    "localName": "Good Friday",
+    "name": "Good Friday",
+    "countryCode": "LS",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2029-04-02",
+    "localName": "Easter Monday",
+    "name": "Easter Monday",
+    "countryCode": "LS",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2029-05-01",
+    "localName": "Workers' Day",
+    "name": "Workers' Day",
+    "countryCode": "LS",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2029-05-10",
+    "localName": "Ascension Day",
+    "name": "Ascension Day",
+    "countryCode": "LS",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2029-05-25",
+    "localName": "Africa Day/ Heroes' Day",
+    "name": "Africa Day/ Heroes' Day",
+    "countryCode": "LS",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2029-07-17",
+    "localName": "King Letsie III's Birthday",
+    "name": "King Letsie III's Birthday",
+    "countryCode": "LS",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2029-10-04",
+    "localName": "Independence Day",
+    "name": "Independence Day",
+    "countryCode": "LS",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2029-12-25",
+    "localName": "Christmas Day",
+    "name": "Christmas Day",
+    "countryCode": "LS",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2029-12-26",
+    "localName": "St. Stephen's Day",
+    "name": "Boxing Day",
+    "countryCode": "LS",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  }
+]

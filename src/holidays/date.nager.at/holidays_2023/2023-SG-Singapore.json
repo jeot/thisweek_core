@@ -1,0 +1,158 @@
+[
+  {
+    "date": "2023-01-02",
+    "localName": "New Year's Day",
+    "name": "New Year's Day",
+    "countryCode": "SG",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2023-01-23",
+    "localName": "Chinese New Year",
+    "name": "Chinese New Year",
+    "countryCode": "SG",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2023-01-23",
+    "localName": "Chinese New Year",
+    "name": "Chinese New Year",
+    "countryCode": "SG",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2023-04-07",
+    "localName": "Good Friday",
+    "name": "Good Friday",
+    "countryCode": "SG",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2023-04-22",
+    "localName": "Hari Raya Puasa",
+    "name": "Hari Raya Puasa",
+    "countryCode": "SG",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2023-05-01",
+    "localName": "Labour Day",
+    "name": "Labour Day",
+    "countryCode": "SG",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2023-06-02",
+    "localName": "Vesak Day",
+    "name": "Vesak Day",
+    "countryCode": "SG",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2023-06-29",
+    "localName": "Hari Raya Haji",
+    "name": "Hari Raya Haji",
+    "countryCode": "SG",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2023-08-09",
+    "localName": "National Day",
+    "name": "National Day",
+    "countryCode": "SG",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2023-09-01",
+    "localName": "Polling Day",
+    "name": "Polling Day",
+    "countryCode": "SG",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2023-11-13",
+    "localName": "Deepavali",
+    "name": "Deepavali",
+    "countryCode": "SG",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2023-12-25",
+    "localName": "Christmas Day",
+    "name": "Christmas Day",
+    "countryCode": "SG",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  }
+]

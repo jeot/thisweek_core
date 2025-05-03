@@ -1,0 +1,158 @@
+[
+  {
+    "date": "2022-01-03",
+    "localName": "New Year's Day",
+    "name": "New Year's Day",
+    "countryCode": "IM",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2022-04-15",
+    "localName": "Good Friday",
+    "name": "Good Friday",
+    "countryCode": "IM",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2022-04-18",
+    "localName": "Easter Monday",
+    "name": "Easter Monday",
+    "countryCode": "IM",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2022-05-02",
+    "localName": "Early May Bank Holiday",
+    "name": "Early May Bank Holiday",
+    "countryCode": "IM",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2022-06-02",
+    "localName": "Spring Bank Holiday",
+    "name": "Spring Bank Holiday",
+    "countryCode": "IM",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2022-06-03",
+    "localName": "Queen’s Platinum Jubilee",
+    "name": "Queen’s Platinum Jubilee",
+    "countryCode": "IM",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2022-06-10",
+    "localName": "Senior Race Day",
+    "name": "Senior Race Day",
+    "countryCode": "IM",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2022-07-05",
+    "localName": "Tynwald Day",
+    "name": "Tynwald Day",
+    "countryCode": "IM",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2022-08-29",
+    "localName": "Late Summer Bank Holiday",
+    "name": "Late Summer Bank Holiday",
+    "countryCode": "IM",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2022-09-19",
+    "localName": "Queen’s State Funeral",
+    "name": "Queen’s State Funeral",
+    "countryCode": "IM",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2022-12-27",
+    "localName": "Christmas Day",
+    "name": "Christmas Day",
+    "countryCode": "IM",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2022-12-26",
+    "localName": "St. Stephen's Day",
+    "name": "Boxing Day",
+    "countryCode": "IM",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  }
+]

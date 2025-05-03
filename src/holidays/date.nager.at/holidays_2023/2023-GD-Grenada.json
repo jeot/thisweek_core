@@ -1,0 +1,171 @@
+[
+  {
+    "date": "2023-01-01",
+    "localName": "New Year's Day",
+    "name": "New Year's Day",
+    "countryCode": "GD",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2023-02-07",
+    "localName": "Independence Day",
+    "name": "Independence Day",
+    "countryCode": "GD",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2023-04-07",
+    "localName": "Good Friday",
+    "name": "Good Friday",
+    "countryCode": "GD",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2023-04-10",
+    "localName": "Easter Monday",
+    "name": "Easter Monday",
+    "countryCode": "GD",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2023-05-01",
+    "localName": "Labour Day",
+    "name": "Labour Day",
+    "countryCode": "GD",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2023-05-01",
+    "localName": "Indian Arrival Day",
+    "name": "Indian Arrival Day",
+    "countryCode": "GD",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2023-05-29",
+    "localName": "Whit Monday",
+    "name": "Whit Monday",
+    "countryCode": "GD",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2023-06-08",
+    "localName": "Corpus Christi",
+    "name": "Corpus Christi",
+    "countryCode": "GD",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2023-08-07",
+    "localName": "Emancipation Day",
+    "name": "Emancipation Day",
+    "countryCode": "GD",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2023-08-11",
+    "localName": "Carnival",
+    "name": "Carnival",
+    "countryCode": "GD",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2023-10-25",
+    "localName": "Thanksgiving Day",
+    "name": "Thanksgiving Day",
+    "countryCode": "GD",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2023-12-25",
+    "localName": "Christmas Day",
+    "name": "Christmas Day",
+    "countryCode": "GD",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2023-12-26",
+    "localName": "Boxing Day",
+    "name": "Boxing Day",
+    "countryCode": "GD",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  }
+]

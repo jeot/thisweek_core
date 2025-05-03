@@ -1,0 +1,158 @@
+[
+  {
+    "date": "2031-01-01",
+    "localName": "Første nyttårsdag",
+    "name": "New Year's Day",
+    "countryCode": "NO",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2031-04-10",
+    "localName": "Skjærtorsdag",
+    "name": "Maundy Thursday",
+    "countryCode": "NO",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2031-04-11",
+    "localName": "Langfredag",
+    "name": "Good Friday",
+    "countryCode": "NO",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2031-04-13",
+    "localName": "Første påskedag",
+    "name": "Easter Sunday",
+    "countryCode": "NO",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2031-04-14",
+    "localName": "Andre påskedag",
+    "name": "Easter Monday",
+    "countryCode": "NO",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2031-05-01",
+    "localName": "Første mai",
+    "name": "Labour Day",
+    "countryCode": "NO",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2031-05-17",
+    "localName": "Syttende mai",
+    "name": "Constitution Day",
+    "countryCode": "NO",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2031-05-22",
+    "localName": "Kristi himmelfartsdag",
+    "name": "Ascension Day",
+    "countryCode": "NO",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2031-06-01",
+    "localName": "Første pinsedag",
+    "name": "Pentecost",
+    "countryCode": "NO",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2031-06-02",
+    "localName": "Andre pinsedag",
+    "name": "Whit Monday",
+    "countryCode": "NO",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2031-12-25",
+    "localName": "Første juledag",
+    "name": "Christmas Day",
+    "countryCode": "NO",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2031-12-26",
+    "localName": "Andre juledag",
+    "name": "St. Stephen's Day",
+    "countryCode": "NO",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  }
+]

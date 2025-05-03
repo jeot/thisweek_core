@@ -1,0 +1,119 @@
+[
+  {
+    "date": "2024-01-01",
+    "localName": "New Year's Day",
+    "name": "New Year's Day",
+    "countryCode": "JE",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2024-03-29",
+    "localName": "Good Friday",
+    "name": "Good Friday",
+    "countryCode": "JE",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2024-04-01",
+    "localName": "Easter Monday",
+    "name": "Easter Monday",
+    "countryCode": "JE",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2024-05-06",
+    "localName": "Early May Bank Holiday",
+    "name": "Early May Bank Holiday",
+    "countryCode": "JE",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2024-05-09",
+    "localName": "Liberation Day",
+    "name": "Liberation Day",
+    "countryCode": "JE",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2024-05-27",
+    "localName": "Spring Bank Holiday",
+    "name": "Spring Bank Holiday",
+    "countryCode": "JE",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2024-08-26",
+    "localName": "Summer Bank Holiday",
+    "name": "Summer Bank Holiday",
+    "countryCode": "JE",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2024-12-25",
+    "localName": "Christmas Day",
+    "name": "Christmas Day",
+    "countryCode": "JE",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2024-12-26",
+    "localName": "St. Stephen's Day",
+    "name": "Boxing Day",
+    "countryCode": "JE",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  }
+]

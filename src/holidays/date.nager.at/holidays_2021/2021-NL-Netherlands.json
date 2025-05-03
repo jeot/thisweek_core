@@ -1,0 +1,148 @@
+[
+  {
+    "date": "2021-01-01",
+    "localName": "Nieuwjaarsdag",
+    "name": "New Year's Day",
+    "countryCode": "NL",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2021-04-02",
+    "localName": "Goede Vrijdag",
+    "name": "Good Friday",
+    "countryCode": "NL",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "School",
+      "Authorities",
+      "Observance"
+    ]
+  },
+  {
+    "date": "2021-04-04",
+    "localName": "Eerste Paasdag",
+    "name": "Easter Sunday",
+    "countryCode": "NL",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2021-04-05",
+    "localName": "Tweede Paasdag",
+    "name": "Easter Monday",
+    "countryCode": "NL",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2021-04-27",
+    "localName": "Koningsdag",
+    "name": "King's Day",
+    "countryCode": "NL",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2021-05-05",
+    "localName": "Bevrijdingsdag",
+    "name": "Liberation Day",
+    "countryCode": "NL",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "School",
+      "Authorities"
+    ]
+  },
+  {
+    "date": "2021-05-13",
+    "localName": "Hemelvaartsdag",
+    "name": "Ascension Day",
+    "countryCode": "NL",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2021-05-23",
+    "localName": "Eerste Pinksterdag",
+    "name": "Pentecost",
+    "countryCode": "NL",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2021-05-24",
+    "localName": "Tweede Pinksterdag",
+    "name": "Whit Monday",
+    "countryCode": "NL",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2021-12-25",
+    "localName": "Eerste Kerstdag",
+    "name": "Christmas Day",
+    "countryCode": "NL",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2021-12-26",
+    "localName": "Tweede Kerstdag",
+    "name": "St. Stephen's Day",
+    "countryCode": "NL",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  }
+]

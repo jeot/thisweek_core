@@ -1,4 +1,5 @@
 use crate::weekdays::convert_weekday;
+use crate::weekdays::is_weekday_weekend_holiday;
 use crate::{
     language::{str_to_vec, Language},
     week_info::{Date, DateView},
@@ -79,6 +80,7 @@ impl CalendarSpecificDateView for ChineseCalendar {
         };
 
         let weekday = convert_weekday(weekday) as usize;
+        let weekend_holiday = is_weekday_weekend_holiday(weekday.into());
         let full_format = match lang {
             Language::Chinese => format!(
                 "{}, {} {} {}",
@@ -103,6 +105,7 @@ impl CalendarSpecificDateView for ChineseCalendar {
             weekday,
             year,
             full_format,
+            weekend_holiday,
         }
     }
 

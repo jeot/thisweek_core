@@ -1,3 +1,7 @@
+use std::fmt::Display;
+
+use crate::config;
+
 pub const SEVEN_DAY_WEEK_SIZE: i32 = 7;
 
 // January 1, 1970 was Thursday
@@ -37,6 +41,41 @@ impl From<String> for WeekDaysUnixOffset {
     }
 }
 
+impl Display for WeekDaysUnixOffset {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        let _ = match self {
+            WeekDaysUnixOffset::Thu => write!(f, "THU"),
+            WeekDaysUnixOffset::Fri => write!(f, "FRI"),
+            WeekDaysUnixOffset::Sat => write!(f, "SAT"),
+            WeekDaysUnixOffset::Sun => write!(f, "SUN"),
+            WeekDaysUnixOffset::Mon => write!(f, "MON"),
+            WeekDaysUnixOffset::Tue => write!(f, "TUE"),
+            WeekDaysUnixOffset::Wed => write!(f, "WED"),
+        };
+        Ok(())
+    }
+}
+
+impl From<WeekDaysUnixOffset> for usize {
+    fn from(value: WeekDaysUnixOffset) -> Self {
+        match value {
+            WeekDaysUnixOffset::Thu => 0,
+            WeekDaysUnixOffset::Fri => 1,
+            WeekDaysUnixOffset::Sat => 2,
+            WeekDaysUnixOffset::Sun => 3,
+            WeekDaysUnixOffset::Mon => 4,
+            WeekDaysUnixOffset::Tue => 5,
+            WeekDaysUnixOffset::Wed => 6,
+        }
+    }
+}
+
+impl From<usize> for WeekDaysUnixOffset {
+    fn from(val: usize) -> Self {
+        WeekDaysUnixOffset::from(val as i32)
+    }
+}
+
 impl From<i32> for WeekDaysUnixOffset {
     fn from(val: i32) -> Self {
         match val {
@@ -62,4 +101,9 @@ pub fn convert_weekday(weekday: chrono::prelude::Weekday) -> WeekDaysUnixOffset 
         chrono::Weekday::Sat => WeekDaysUnixOffset::Sat,
         chrono::Weekday::Sun => WeekDaysUnixOffset::Sun,
     }
+}
+
+pub fn is_weekday_weekend_holiday(weekday: WeekDaysUnixOffset) -> bool {
+    let config = config::get_config();
+    config.weekend_holidays.contains(&weekday.to_string())
 }

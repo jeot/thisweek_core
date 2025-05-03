@@ -1,0 +1,197 @@
+[
+  {
+    "date": "2031-01-01",
+    "localName": "Neujahr",
+    "name": "New Year's Day",
+    "countryCode": "AT",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2031-01-06",
+    "localName": "Heilige Drei Könige",
+    "name": "Epiphany",
+    "countryCode": "AT",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2031-04-13",
+    "localName": "Ostersonntag",
+    "name": "Easter Sunday",
+    "countryCode": "AT",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2031-04-14",
+    "localName": "Ostermontag",
+    "name": "Easter Monday",
+    "countryCode": "AT",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2031-05-01",
+    "localName": "Staatsfeiertag",
+    "name": "National Holiday",
+    "countryCode": "AT",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2031-05-22",
+    "localName": "Christi Himmelfahrt",
+    "name": "Ascension Day",
+    "countryCode": "AT",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2031-06-01",
+    "localName": "Pfingstsonntag",
+    "name": "Pentecost",
+    "countryCode": "AT",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2031-06-02",
+    "localName": "Pfingstmontag",
+    "name": "Whit Monday",
+    "countryCode": "AT",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2031-06-12",
+    "localName": "Fronleichnam",
+    "name": "Corpus Christi",
+    "countryCode": "AT",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2031-08-15",
+    "localName": "Maria Himmelfahrt",
+    "name": "Assumption Day",
+    "countryCode": "AT",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2031-10-26",
+    "localName": "Nationalfeiertag",
+    "name": "National Holiday",
+    "countryCode": "AT",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2031-11-01",
+    "localName": "Allerheiligen",
+    "name": "All Saints' Day",
+    "countryCode": "AT",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2031-12-08",
+    "localName": "Mariä Empfängnis",
+    "name": "Immaculate Conception",
+    "countryCode": "AT",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2031-12-25",
+    "localName": "Weihnachten",
+    "name": "Christmas Day",
+    "countryCode": "AT",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2031-12-26",
+    "localName": "Stefanitag",
+    "name": "St. Stephen's Day",
+    "countryCode": "AT",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  }
+]

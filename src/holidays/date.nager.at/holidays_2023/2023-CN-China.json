@@ -1,0 +1,93 @@
+[
+  {
+    "date": "2023-01-01",
+    "localName": "元旦",
+    "name": "New Year's Day",
+    "countryCode": "CN",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2023-01-22",
+    "localName": "春节",
+    "name": "Chinese New Year (Spring Festival)",
+    "countryCode": "CN",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2023-04-05",
+    "localName": "清明节",
+    "name": "Qingming Festival (Tomb-Sweeping Day)",
+    "countryCode": "CN",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2023-05-01",
+    "localName": "劳动节",
+    "name": "Labour Day",
+    "countryCode": "CN",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2023-06-22",
+    "localName": "端午节",
+    "name": "Dragon Boat Festival",
+    "countryCode": "CN",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2023-09-29",
+    "localName": "中秋节",
+    "name": "Mid-Autumn Festival",
+    "countryCode": "CN",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2023-10-01",
+    "localName": "国庆节",
+    "name": "National Day",
+    "countryCode": "CN",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  }
+]

@@ -1,0 +1,236 @@
+[
+  {
+    "date": "2024-01-01",
+    "localName": "Año Nuevo",
+    "name": "New Year's Day",
+    "countryCode": "CO",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2024-01-08",
+    "localName": "Día de los Reyes Magos",
+    "name": "Epiphany",
+    "countryCode": "CO",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2024-03-25",
+    "localName": "Día de San José",
+    "name": "Saint Joseph's Day",
+    "countryCode": "CO",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2024-03-28",
+    "localName": "Jueves Santo",
+    "name": "Maundy Thursday",
+    "countryCode": "CO",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2024-03-29",
+    "localName": "Viernes Santo",
+    "name": "Good Friday",
+    "countryCode": "CO",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2024-05-01",
+    "localName": "Primero de Mayo",
+    "name": "Labour Day",
+    "countryCode": "CO",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2024-05-13",
+    "localName": "Ascensión del señor",
+    "name": "Ascension Day",
+    "countryCode": "CO",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2024-06-03",
+    "localName": "Corpus Christi",
+    "name": "Corpus Christi",
+    "countryCode": "CO",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2024-06-10",
+    "localName": "Sagrado Corazón",
+    "name": "Sacred Heart",
+    "countryCode": "CO",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2024-07-01",
+    "localName": "San Pedro y San Pablo",
+    "name": "Saint Peter and Saint Paul",
+    "countryCode": "CO",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2024-07-20",
+    "localName": "Declaracion de la Independencia de Colombia",
+    "name": "Declaration of Independence",
+    "countryCode": "CO",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2024-08-07",
+    "localName": "Batalla de Boyacá",
+    "name": "Battle of Boyacá",
+    "countryCode": "CO",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2024-08-19",
+    "localName": "La Asunción",
+    "name": "Assumption of Mary",
+    "countryCode": "CO",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2024-10-14",
+    "localName": "Día de la Raza",
+    "name": "Columbus Day",
+    "countryCode": "CO",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2024-11-04",
+    "localName": "Dia de los Santos",
+    "name": "All Saints’ Day",
+    "countryCode": "CO",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2024-11-11",
+    "localName": "Independencia de Cartagena",
+    "name": "Independence of Cartagena",
+    "countryCode": "CO",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2024-12-08",
+    "localName": "La Inmaculada Concepción",
+    "name": "Immaculate Conception",
+    "countryCode": "CO",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2024-12-25",
+    "localName": "Navidad",
+    "name": "Christmas Day",
+    "countryCode": "CO",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  }
+]

@@ -1,5 +1,5 @@
 use crate::language::str_to_vec;
-use crate::weekdays::convert_weekday;
+use crate::weekdays::{convert_weekday, is_weekday_weekend_holiday};
 use crate::{language::Language, week_info::Date, week_info::DateView};
 use chrono::Datelike;
 use chrono::{DateTime, Local};
@@ -53,6 +53,7 @@ impl CalendarSpecificDateView for ArabicCalendar {
         let year = lang.change_numbers_language(&year);
 
         let weekday = date.weekday as usize;
+        let weekend_holiday = is_weekday_weekend_holiday(weekday.into());
         let full_format = match lang {
             Language::Arabic => format!(
                 "{}، {} {} {}",
@@ -82,6 +83,7 @@ impl CalendarSpecificDateView for ArabicCalendar {
             weekday,
             year,
             full_format,
+            weekend_holiday,
         }
     }
 

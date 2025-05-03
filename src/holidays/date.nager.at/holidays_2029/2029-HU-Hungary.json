@@ -1,0 +1,171 @@
+[
+  {
+    "date": "2029-01-01",
+    "localName": "Újév",
+    "name": "New Year's Day",
+    "countryCode": "HU",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2029-03-15",
+    "localName": "Nemzeti ünnep",
+    "name": "1848 Revolution Memorial Day",
+    "countryCode": "HU",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2029-03-30",
+    "localName": "Nagypéntek",
+    "name": "Good Friday",
+    "countryCode": "HU",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2029-04-01",
+    "localName": "Húsvétvasárnap",
+    "name": "Easter Sunday",
+    "countryCode": "HU",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2029-04-02",
+    "localName": "Húsvéthétfő",
+    "name": "Easter Monday",
+    "countryCode": "HU",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2029-05-01",
+    "localName": "A munka ünnepe",
+    "name": "Labour day",
+    "countryCode": "HU",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2029-05-20",
+    "localName": "Pünkösdvasárnap",
+    "name": "Pentecost",
+    "countryCode": "HU",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2029-05-21",
+    "localName": "Pünkösdhétfő",
+    "name": "Whit Monday",
+    "countryCode": "HU",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2029-08-20",
+    "localName": "Az államalapítás ünnepe",
+    "name": "State Foundation Day",
+    "countryCode": "HU",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2029-10-23",
+    "localName": "Nemzeti ünnep",
+    "name": "1956 Revolution Memorial Day",
+    "countryCode": "HU",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2029-11-01",
+    "localName": "Mindenszentek",
+    "name": "All Saints Day",
+    "countryCode": "HU",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2029-12-25",
+    "localName": "Karácsony",
+    "name": "Christmas Day",
+    "countryCode": "HU",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2029-12-26",
+    "localName": "Karácsony másnapja",
+    "name": "St. Stephen's Day",
+    "countryCode": "HU",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  }
+]

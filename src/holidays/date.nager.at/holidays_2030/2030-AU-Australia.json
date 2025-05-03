@@ -1,0 +1,381 @@
+[
+  {
+    "date": "2030-01-01",
+    "localName": "New Year's Day",
+    "name": "New Year's Day",
+    "countryCode": "AU",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2030-01-28",
+    "localName": "Australia Day",
+    "name": "Australia Day",
+    "countryCode": "AU",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2030-03-04",
+    "localName": "Labour Day",
+    "name": "Labour Day",
+    "countryCode": "AU",
+    "fixed": false,
+    "global": false,
+    "counties": [
+      "AU-WA"
+    ],
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2030-03-11",
+    "localName": "Canberra Day",
+    "name": "Canberra Day",
+    "countryCode": "AU",
+    "fixed": false,
+    "global": false,
+    "counties": [
+      "AU-ACT"
+    ],
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2030-03-11",
+    "localName": "March Public Holiday",
+    "name": "March Public Holiday",
+    "countryCode": "AU",
+    "fixed": false,
+    "global": false,
+    "counties": [
+      "AU-SA"
+    ],
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2030-03-11",
+    "localName": "Eight Hours Day",
+    "name": "Eight Hours Day",
+    "countryCode": "AU",
+    "fixed": false,
+    "global": false,
+    "counties": [
+      "AU-TAS"
+    ],
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2030-03-11",
+    "localName": "Labour Day",
+    "name": "Labour Day",
+    "countryCode": "AU",
+    "fixed": false,
+    "global": false,
+    "counties": [
+      "AU-VIC"
+    ],
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2030-04-19",
+    "localName": "Good Friday",
+    "name": "Good Friday",
+    "countryCode": "AU",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2030-04-20",
+    "localName": "Easter Eve",
+    "name": "Holy Saturday",
+    "countryCode": "AU",
+    "fixed": false,
+    "global": false,
+    "counties": [
+      "AU-ACT",
+      "AU-NSW",
+      "AU-NT",
+      "AU-QLD",
+      "AU-SA",
+      "AU-VIC"
+    ],
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2030-04-21",
+    "localName": "Easter Sunday",
+    "name": "Easter Sunday",
+    "countryCode": "AU",
+    "fixed": false,
+    "global": false,
+    "counties": [
+      "AU-ACT",
+      "AU-NSW",
+      "AU-NT",
+      "AU-QLD",
+      "AU-SA",
+      "AU-VIC",
+      "AU-WA"
+    ],
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2030-04-22",
+    "localName": "Easter Monday",
+    "name": "Easter Monday",
+    "countryCode": "AU",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2030-04-25",
+    "localName": "Anzac Day",
+    "name": "Anzac Day",
+    "countryCode": "AU",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2030-05-06",
+    "localName": "May Day",
+    "name": "May Day",
+    "countryCode": "AU",
+    "fixed": false,
+    "global": false,
+    "counties": [
+      "AU-NT"
+    ],
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2030-05-06",
+    "localName": "Labour Day",
+    "name": "Labour Day",
+    "countryCode": "AU",
+    "fixed": false,
+    "global": false,
+    "counties": [
+      "AU-QLD"
+    ],
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2030-05-27",
+    "localName": "Reconciliation Day",
+    "name": "Reconciliation Day",
+    "countryCode": "AU",
+    "fixed": false,
+    "global": false,
+    "counties": [
+      "AU-ACT"
+    ],
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2030-06-03",
+    "localName": "Western Australia Day",
+    "name": "Western Australia Day",
+    "countryCode": "AU",
+    "fixed": false,
+    "global": false,
+    "counties": [
+      "AU-WA"
+    ],
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2030-06-10",
+    "localName": "King's Birthday",
+    "name": "King's Birthday",
+    "countryCode": "AU",
+    "fixed": false,
+    "global": false,
+    "counties": [
+      "AU-ACT",
+      "AU-NSW",
+      "AU-NT",
+      "AU-SA",
+      "AU-TAS",
+      "AU-VIC"
+    ],
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2030-08-05",
+    "localName": "Picnic Day",
+    "name": "Picnic Day",
+    "countryCode": "AU",
+    "fixed": false,
+    "global": false,
+    "counties": [
+      "AU-NT"
+    ],
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2030-09-27",
+    "localName": "Friday before AFL Grand Final (Tentative Date)",
+    "name": "Friday before AFL Grand Final (Tentative Date)",
+    "countryCode": "AU",
+    "fixed": false,
+    "global": false,
+    "counties": [
+      "AU-VIC"
+    ],
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2030-09-30",
+    "localName": "King's Birthday",
+    "name": "King's Birthday",
+    "countryCode": "AU",
+    "fixed": false,
+    "global": false,
+    "counties": [
+      "AU-WA"
+    ],
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2030-10-07",
+    "localName": "Labour Day",
+    "name": "Labour Day",
+    "countryCode": "AU",
+    "fixed": false,
+    "global": false,
+    "counties": [
+      "AU-ACT",
+      "AU-NSW",
+      "AU-SA"
+    ],
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2030-10-07",
+    "localName": "King's Birthday",
+    "name": "King's Birthday",
+    "countryCode": "AU",
+    "fixed": false,
+    "global": false,
+    "counties": [
+      "AU-QLD"
+    ],
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2030-11-05",
+    "localName": "Melbourne Cup",
+    "name": "Melbourne Cup",
+    "countryCode": "AU",
+    "fixed": false,
+    "global": false,
+    "counties": [
+      "AU-VIC"
+    ],
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2030-12-25",
+    "localName": "Christmas Day",
+    "name": "Christmas Day",
+    "countryCode": "AU",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2030-12-26",
+    "localName": "Boxing Day",
+    "name": "St. Stephen's Day",
+    "countryCode": "AU",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  }
+]

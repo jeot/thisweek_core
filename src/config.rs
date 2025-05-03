@@ -11,6 +11,56 @@ use std::path::Path;
 use std::sync::Arc;
 use std::{fs, path::PathBuf};
 
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct Config {
+    pub database: String,
+    pub main_calendar_type: String,
+    pub main_calendar_language: String,
+    pub main_calendar_start_weekday: String,
+    pub secondary_calendar_type: Option<String>,
+    pub secondary_calendar_language: Option<String>,
+    pub weekdates_display_direction: String,
+    pub items_display_direction: String,
+    pub weekend_holidays: Vec<String>,
+}
+
+impl Config {
+    pub fn get_copy(&self) -> Config {
+        Config {
+            database: self.database.clone(),
+            main_calendar_type: self.main_calendar_type.clone(),
+            main_calendar_language: self.main_calendar_language.clone(),
+            main_calendar_start_weekday: self.main_calendar_start_weekday.clone(),
+            secondary_calendar_type: self.secondary_calendar_type.clone(),
+            secondary_calendar_language: self.secondary_calendar_language.clone(),
+            weekdates_display_direction: self.weekdates_display_direction.clone(),
+            items_display_direction: self.items_display_direction.clone(),
+            weekend_holidays: self.weekend_holidays.clone(),
+        }
+    }
+}
+
+impl Default for Config {
+    fn default() -> Self {
+        let data_path = default_config_data_path()
+            .unwrap()
+            .1
+            .to_string_lossy()
+            .into_owned();
+        Self {
+            database: data_path,
+            main_calendar_type: "Gregorian".into(),
+            main_calendar_language: "en".into(),
+            main_calendar_start_weekday: "MON".into(),
+            secondary_calendar_type: None,
+            secondary_calendar_language: None,
+            weekdates_display_direction: "auto".into(),
+            items_display_direction: "auto".into(),
+            weekend_holidays: vec![],
+        }
+    }
+}
+
 // global ref to static value
 // static CONFIG: OnceCell<Config> = OnceCell::new();
 pub static CONFIG: OnceCell<ArcSwap<Config>> = OnceCell::new();
@@ -84,6 +134,11 @@ pub fn get_config() -> Config {
     gaurd.get_copy()
 }
 
+pub fn set_and_save_config(new_config: Config) -> Result<(), AppError> {
+    set_config(new_config.clone());
+    save_config(new_config)
+}
+
 pub fn move_database<P: AsRef<str>>(filepath: P) -> Result<(), AppError> {
     let filepath = filepath.as_ref();
     let mut config = get_config();
@@ -106,8 +161,7 @@ pub fn move_database<P: AsRef<str>>(filepath: P) -> Result<(), AppError> {
                 .map_err(|_| AppError::DatabaseFileCopyError)?;
             // change and save config
             config.database = filepath.to_string();
-            set_config(config.clone());
-            save_config(config)?;
+            set_and_save_config(config)?;
             // delete original database file
             std::fs::remove_file(&current_db_path)
                 .map(|_| ())
@@ -132,86 +186,9 @@ pub fn open_database<P: AsRef<str>>(filepath: P) -> Result<(), AppError> {
             // switch database
             // change and save config
             config.database = filepath.to_string();
-            set_config(config.clone());
-            save_config(config)
+            set_and_save_config(config)
         }
     }
-}
-
-/// check if the new filepath exists or not
-/// if exists, it should be a valid database and we only switch to it.
-/// if the path don't exists, we will move our database to that location.
-pub fn set_database_file(filepath: String) -> Result<(), AppError> {
-    let mut config = get_config();
-    let current_db_path = config.database;
-    let current_db_valid = db_sqlite::is_correct_db(&current_db_path);
-    let exists = Path::new(&filepath).exists();
-    let valid = db_sqlite::is_correct_db(&filepath);
-    if !exists {
-        if !current_db_valid {
-            // create new db
-            println!("Attempting to creating new database file: {}", filepath);
-            db_sqlite::create_db(&filepath)
-        } else {
-            // move current db
-            // ensure target directory exists
-            if let Some(parent) = Path::new(&filepath).parent() {
-                fs::create_dir_all(parent).map_err(|_| AppError::DatabaseFileCopyError)?;
-            }
-            // copy database file
-            std::fs::copy(&current_db_path, &filepath)
-                .map_err(|_| AppError::DatabaseFileCopyError)?;
-            // change and save config
-            config.database = filepath;
-            set_config(config.clone());
-            save_config(config)?;
-            // delete original database file
-            std::fs::remove_file(&current_db_path)
-                .map(|_| ())
-                .map_err(|_| AppError::DatabaseFileRemoveError)
-        }
-    } else if exists && valid {
-        // switch database
-        // change and save config
-        config.database = filepath;
-        set_config(config.clone());
-        save_config(config)
-    } else {
-        Err(AppError::DatabaseFileInvalidError)
-    }
-}
-
-pub fn set_main_cal_config(
-    main_calendar_type: String,
-    main_calendar_language: String,
-    main_calendar_start_weekday: String,
-    weekdates_display_direction: String,
-) -> Result<(), AppError> {
-    let mut config = get_config();
-    config.main_calendar_type = main_calendar_type;
-    config.main_calendar_language = main_calendar_language;
-    config.main_calendar_start_weekday = main_calendar_start_weekday;
-    config.weekdates_display_direction = weekdates_display_direction;
-    set_config(config.clone());
-    save_config(config)
-}
-
-pub fn set_secondary_cal_config(
-    secondary_calendar_type: Option<String>,
-    secondary_calendar_language: Option<String>,
-) -> Result<(), AppError> {
-    let mut config = get_config();
-    config.secondary_calendar_type = secondary_calendar_type;
-    config.secondary_calendar_language = secondary_calendar_language;
-    set_config(config.clone());
-    save_config(config)
-}
-
-pub fn set_items_display_direction_config(items_direction: String) -> Result<(), AppError> {
-    let mut config = get_config();
-    config.items_display_direction = items_direction;
-    set_config(config.clone());
-    save_config(config)
 }
 
 pub fn save_config(config: Config) -> Result<(), AppError> {
@@ -286,54 +263,79 @@ fn load_from_filepath(path: PathBuf) -> AppResult<Config> {
         Err(AppError::ConfigNotFoundError)
     }
 }
-
-#[derive(Debug, Clone, Serialize, Deserialize)]
-pub struct Config {
-    pub database: String,
-    pub main_calendar_type: String,
-    pub main_calendar_language: String,
-    pub main_calendar_start_weekday: String,
-    pub secondary_calendar_type: Option<String>,
-    pub secondary_calendar_language: Option<String>,
-    pub weekdates_display_direction: String,
-    pub items_display_direction: String,
-}
-
-impl Config {
-    pub fn get_copy(&self) -> Config {
-        Config {
-            database: self.database.clone(),
-            main_calendar_type: self.main_calendar_type.clone(),
-            main_calendar_language: self.main_calendar_language.clone(),
-            main_calendar_start_weekday: self.main_calendar_start_weekday.clone(),
-            secondary_calendar_type: self.secondary_calendar_type.clone(),
-            secondary_calendar_language: self.secondary_calendar_language.clone(),
-            weekdates_display_direction: self.weekdates_display_direction.clone(),
-            items_display_direction: self.items_display_direction.clone(),
-        }
-    }
-}
-
-impl Default for Config {
-    fn default() -> Self {
-        let data_path = default_config_data_path()
-            .unwrap()
-            .1
-            .to_string_lossy()
-            .into_owned();
-        Self {
-            database: data_path,
-            main_calendar_type: "Gregorian".into(),
-            main_calendar_language: "en".into(),
-            main_calendar_start_weekday: "MON".into(),
-            secondary_calendar_type: None,
-            secondary_calendar_language: None,
-            weekdates_display_direction: "ltr".into(),
-            items_display_direction: "auto".into(),
-        }
-    }
-}
-
 pub fn get_config_path() -> PathBuf {
     default_config_data_path().unwrap().0
 }
+
+/*
+/// check if the new filepath exists or not
+/// if exists, it should be a valid database and we only switch to it.
+/// if the path don't exists, we will move our database to that location.
+pub fn set_database_file(filepath: String) -> Result<(), AppError> {
+    let mut config = get_config();
+    let current_db_path = config.database;
+    let current_db_valid = db_sqlite::is_correct_db(&current_db_path);
+    let exists = Path::new(&filepath).exists();
+    let valid = db_sqlite::is_correct_db(&filepath);
+    if !exists {
+        if !current_db_valid {
+            // create new db
+            println!("Attempting to creating new database file: {}", filepath);
+            db_sqlite::create_db(&filepath)
+        } else {
+            // move current db
+            // ensure target directory exists
+            if let Some(parent) = Path::new(&filepath).parent() {
+                fs::create_dir_all(parent).map_err(|_| AppError::DatabaseFileCopyError)?;
+            }
+            // copy database file
+            std::fs::copy(&current_db_path, &filepath)
+                .map_err(|_| AppError::DatabaseFileCopyError)?;
+            // change and save config
+            config.database = filepath;
+            set_and_save_config(config)?;
+            // delete original database file
+            std::fs::remove_file(&current_db_path)
+                .map(|_| ())
+                .map_err(|_| AppError::DatabaseFileRemoveError)
+        }
+    } else if exists && valid {
+        // switch database
+        // change and save config
+        config.database = filepath;
+        set_and_save_config(config)
+    } else {
+        Err(AppError::DatabaseFileInvalidError)
+    }
+}
+
+pub fn set_main_cal_config(
+    main_calendar_type: String,
+    main_calendar_language: String,
+    main_calendar_start_weekday: String,
+    weekdates_display_direction: String,
+) -> Result<(), AppError> {
+    let mut config = get_config();
+    config.main_calendar_type = main_calendar_type;
+    config.main_calendar_language = main_calendar_language;
+    config.main_calendar_start_weekday = main_calendar_start_weekday;
+    config.weekdates_display_direction = weekdates_display_direction;
+    set_and_save_config(config)
+}
+
+pub fn set_secondary_cal_config(
+    secondary_calendar_type: Option<String>,
+    secondary_calendar_language: Option<String>,
+) -> Result<(), AppError> {
+    let mut config = get_config();
+    config.secondary_calendar_type = secondary_calendar_type;
+    config.secondary_calendar_language = secondary_calendar_language;
+    set_and_save_config(config)
+}
+
+pub fn set_items_display_direction_config(items_direction: String) -> Result<(), AppError> {
+    let mut config = get_config();
+    config.items_display_direction = items_direction;
+    set_and_save_config(config)
+}
+*/

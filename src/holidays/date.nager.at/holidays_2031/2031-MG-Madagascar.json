@@ -1,0 +1,132 @@
+[
+  {
+    "date": "2031-01-01",
+    "localName": "New Year's Day",
+    "name": "New Year's Day",
+    "countryCode": "MG",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2031-03-29",
+    "localName": "Martyrs' Day",
+    "name": "Martyrs' Day",
+    "countryCode": "MG",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2031-04-14",
+    "localName": "Easter Monday",
+    "name": "Easter Monday",
+    "countryCode": "MG",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2031-05-01",
+    "localName": "Labour Day",
+    "name": "Labour Day",
+    "countryCode": "MG",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2031-05-22",
+    "localName": "Ascension Day",
+    "name": "Ascension Day",
+    "countryCode": "MG",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2031-06-02",
+    "localName": "Whit Monday",
+    "name": "Whit Monday",
+    "countryCode": "MG",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2031-06-26",
+    "localName": "Independence Day",
+    "name": "Independence Day",
+    "countryCode": "MG",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2031-08-15",
+    "localName": "Assumption Day",
+    "name": "Assumption Day",
+    "countryCode": "MG",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2031-11-01",
+    "localName": "All Saints' Day",
+    "name": "All Saints' Day",
+    "countryCode": "MG",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2031-12-25",
+    "localName": "Christmas Day",
+    "name": "Christmas Day",
+    "countryCode": "MG",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  }
+]

@@ -1,0 +1,184 @@
+[
+  {
+    "date": "2025-01-01",
+    "localName": "New Year's Day",
+    "name": "New Year's Day",
+    "countryCode": "ZW",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2025-02-21",
+    "localName": "Robert Mugabe National Youth Day",
+    "name": "Robert Mugabe National Youth Day",
+    "countryCode": "ZW",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2025-04-18",
+    "localName": "Independence Day",
+    "name": "Independence Day",
+    "countryCode": "ZW",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2025-04-18",
+    "localName": "Good Friday",
+    "name": "Good Friday",
+    "countryCode": "ZW",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2025-04-19",
+    "localName": "Easter Saturday",
+    "name": "Easter Saturday",
+    "countryCode": "ZW",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2025-04-19",
+    "localName": "Easter Saturday",
+    "name": "Holy Saturday",
+    "countryCode": "ZW",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2025-04-21",
+    "localName": "Easter Monday",
+    "name": "Easter Monday",
+    "countryCode": "ZW",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2025-05-01",
+    "localName": "Worker's Day",
+    "name": "Worker's Day",
+    "countryCode": "ZW",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2025-05-25",
+    "localName": "Africa Day",
+    "name": "Africa Day",
+    "countryCode": "ZW",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2025-08-11",
+    "localName": "Heroes' Day",
+    "name": "Heroes' Day",
+    "countryCode": "ZW",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2025-08-12",
+    "localName": "Defence Forces Day",
+    "name": "Defence Forces Day",
+    "countryCode": "ZW",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2025-12-22",
+    "localName": "Unity Day",
+    "name": "Unity Day",
+    "countryCode": "ZW",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2025-12-25",
+    "localName": "Christmas Day",
+    "name": "Christmas Day",
+    "countryCode": "ZW",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2025-12-26",
+    "localName": "Boxing Day",
+    "name": "St. Stephen's Day",
+    "countryCode": "ZW",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  }
+]

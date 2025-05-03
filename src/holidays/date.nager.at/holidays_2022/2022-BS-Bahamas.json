@@ -1,0 +1,145 @@
+[
+  {
+    "date": "2022-01-03",
+    "localName": "New Year's Day",
+    "name": "New Year's Day",
+    "countryCode": "BS",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2022-01-10",
+    "localName": "Majority Rule Day",
+    "name": "Majority Rule Day",
+    "countryCode": "BS",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2022-04-01",
+    "localName": "Perry Christie Day",
+    "name": "Perry Christie Day",
+    "countryCode": "BS",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2022-04-15",
+    "localName": "Good Friday",
+    "name": "Good Friday",
+    "countryCode": "BS",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2022-04-18",
+    "localName": "Easter Monday",
+    "name": "Easter Monday",
+    "countryCode": "BS",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2022-06-06",
+    "localName": "Whit Monday",
+    "name": "Whit Monday",
+    "countryCode": "BS",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2022-07-10",
+    "localName": "Independence Day",
+    "name": "Independence Day",
+    "countryCode": "BS",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2022-08-05",
+    "localName": "Emancipation Day",
+    "name": "Emancipation Day",
+    "countryCode": "BS",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2022-10-14",
+    "localName": "National Heroes' Day",
+    "name": "National Heroes' Day",
+    "countryCode": "BS",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2022-12-25",
+    "localName": "Christmas Day",
+    "name": "Christmas Day",
+    "countryCode": "BS",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2022-12-26",
+    "localName": "Boxing Day",
+    "name": "St. Stephen's Day",
+    "countryCode": "BS",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  }
+]

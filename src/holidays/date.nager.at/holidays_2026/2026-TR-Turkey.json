@@ -1,0 +1,93 @@
+[
+  {
+    "date": "2026-01-01",
+    "localName": "Yılbaşı",
+    "name": "New Year's Day",
+    "countryCode": "TR",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2026-04-23",
+    "localName": "Ulusal Egemenlik ve Çocuk Bayramı",
+    "name": "National Independence & Children's Day",
+    "countryCode": "TR",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2026-05-01",
+    "localName": "İşçi Bayramı",
+    "name": "Labour Day",
+    "countryCode": "TR",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2026-05-19",
+    "localName": "Atatürk'ü Anma, Gençlik ve Spor Bayramı",
+    "name": "Atatürk Commemoration & Youth Day",
+    "countryCode": "TR",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2026-07-15",
+    "localName": "Demokrasi ve Millî Birlik Günü",
+    "name": "Democracy and National Unity Day",
+    "countryCode": "TR",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2026-08-30",
+    "localName": "Zafer Bayramı",
+    "name": "Victory Day",
+    "countryCode": "TR",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2026-10-29",
+    "localName": "Cumhuriyet Bayramı",
+    "name": "Republic Day",
+    "countryCode": "TR",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  }
+]

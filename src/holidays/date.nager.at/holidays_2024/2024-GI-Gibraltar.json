@@ -1,0 +1,158 @@
+[
+  {
+    "date": "2024-01-01",
+    "localName": "New Year's Day",
+    "name": "New Year's Day",
+    "countryCode": "GI",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2024-03-11",
+    "localName": "Commonwealth Day",
+    "name": "Commonwealth Day",
+    "countryCode": "GI",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2024-03-29",
+    "localName": "Good Friday",
+    "name": "Good Friday",
+    "countryCode": "GI",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2024-04-01",
+    "localName": "Easter Monday",
+    "name": "Easter Monday",
+    "countryCode": "GI",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2024-04-28",
+    "localName": "Workers' Memorial Day",
+    "name": "Workers' Memorial Day",
+    "countryCode": "GI",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2024-05-01",
+    "localName": "May Day Bank Holiday",
+    "name": "May Day Bank Holiday",
+    "countryCode": "GI",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2024-05-27",
+    "localName": "Spring Bank Holiday",
+    "name": "Spring Bank Holiday",
+    "countryCode": "GI",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2024-06-10",
+    "localName": "Queen's Birthday",
+    "name": "Queen's Birthday",
+    "countryCode": "GI",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2024-08-26",
+    "localName": "Summer Bank Holiday",
+    "name": "Summer Bank Holiday",
+    "countryCode": "GI",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2024-09-10",
+    "localName": "Gibraltar National Day",
+    "name": "Gibraltar National Day",
+    "countryCode": "GI",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2024-12-25",
+    "localName": "Christmas Day",
+    "name": "Christmas Day",
+    "countryCode": "GI",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2024-12-26",
+    "localName": "St. Stephen's Day",
+    "name": "Boxing Day",
+    "countryCode": "GI",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  }
+]

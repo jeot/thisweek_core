@@ -1,0 +1,158 @@
+[
+  {
+    "date": "2025-01-01",
+    "localName": "Neijoerschdag",
+    "name": "New Year's Day",
+    "countryCode": "LU",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2025-04-18",
+    "localName": "Karfreideg",
+    "name": "Good Friday",
+    "countryCode": "LU",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Bank"
+    ]
+  },
+  {
+    "date": "2025-04-21",
+    "localName": "Ouschterméindeg",
+    "name": "Easter Monday",
+    "countryCode": "LU",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2025-05-01",
+    "localName": "Dag vun der Aarbecht",
+    "name": "Labour Day",
+    "countryCode": "LU",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2025-05-09",
+    "localName": "Europadag",
+    "name": "Europe Day",
+    "countryCode": "LU",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2025-05-29",
+    "localName": "Christi Himmelfaart",
+    "name": "Ascension Day",
+    "countryCode": "LU",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2025-06-09",
+    "localName": "Péngschtméindeg",
+    "name": "Whit Monday",
+    "countryCode": "LU",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2025-06-23",
+    "localName": "Groussherzogsgebuertsdag",
+    "name": "Sovereign's birthday",
+    "countryCode": "LU",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2025-08-15",
+    "localName": "Léiffrawëschdag",
+    "name": "Assumption Day",
+    "countryCode": "LU",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2025-11-01",
+    "localName": "Allerhellgen",
+    "name": "All Saints' Day",
+    "countryCode": "LU",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2025-12-25",
+    "localName": "Chrëschtdag",
+    "name": "Christmas Day",
+    "countryCode": "LU",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2025-12-26",
+    "localName": "Stiefesdag",
+    "name": "St. Stephen's Day",
+    "countryCode": "LU",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  }
+]

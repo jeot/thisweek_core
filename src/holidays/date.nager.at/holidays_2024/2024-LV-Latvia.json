@@ -1,0 +1,184 @@
+[
+  {
+    "date": "2024-01-01",
+    "localName": "Jaunais Gads",
+    "name": "New Year's Day",
+    "countryCode": "LV",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2024-03-29",
+    "localName": "Lielā Piektdiena",
+    "name": "Good Friday",
+    "countryCode": "LV",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2024-03-31",
+    "localName": "Lieldienas",
+    "name": "Easter Sunday",
+    "countryCode": "LV",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2024-04-01",
+    "localName": "Otrās Lieldienas",
+    "name": "Easter Monday",
+    "countryCode": "LV",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2024-05-01",
+    "localName": "Darba svētki",
+    "name": "Labour Day",
+    "countryCode": "LV",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2024-05-04",
+    "localName": "Latvijas Republikas Neatkarības atjaunošanas diena",
+    "name": "Restoration of Independence day",
+    "countryCode": "LV",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2024-05-12",
+    "localName": "Mātes diena",
+    "name": "Mother's Day",
+    "countryCode": "LV",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2024-06-23",
+    "localName": "Līgo Diena",
+    "name": "Midsummer Eve",
+    "countryCode": "LV",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2024-06-24",
+    "localName": "Jāņi",
+    "name": "Midsummer Day",
+    "countryCode": "LV",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2024-11-18",
+    "localName": "Latvijas Republikas proklamēšanas diena",
+    "name": "Proclamation Day of the Republic of Latvia",
+    "countryCode": "LV",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2024-12-24",
+    "localName": "Ziemassvētku vakars",
+    "name": "Christmas Eve",
+    "countryCode": "LV",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2024-12-25",
+    "localName": "Ziemassvētki",
+    "name": "Christmas Day",
+    "countryCode": "LV",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2024-12-26",
+    "localName": "Otrie Ziemassvētki",
+    "name": "St. Stephen's Day",
+    "countryCode": "LV",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2024-12-31",
+    "localName": "Vecgada vakars",
+    "name": "New Year's Eve",
+    "countryCode": "LV",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  }
+]

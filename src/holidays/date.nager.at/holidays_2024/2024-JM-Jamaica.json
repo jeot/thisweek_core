@@ -1,0 +1,132 @@
+[
+  {
+    "date": "2024-01-01",
+    "localName": "New Year's Day",
+    "name": "New Year's Day",
+    "countryCode": "JM",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2024-02-14",
+    "localName": "Ash Wednesday",
+    "name": "Ash Wednesday",
+    "countryCode": "JM",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2024-03-29",
+    "localName": "Good Friday",
+    "name": "Good Friday",
+    "countryCode": "JM",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2024-04-01",
+    "localName": "Easter Monday",
+    "name": "Easter Monday",
+    "countryCode": "JM",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2024-05-23",
+    "localName": "Labour Day",
+    "name": "Labour Day",
+    "countryCode": "JM",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2024-08-01",
+    "localName": "Emancipation Day",
+    "name": "Emancipation Day",
+    "countryCode": "JM",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2024-08-06",
+    "localName": "Independence Day",
+    "name": "Independence Day",
+    "countryCode": "JM",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2024-10-16",
+    "localName": "National Heroes Day",
+    "name": "National Heroes Day",
+    "countryCode": "JM",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2024-12-25",
+    "localName": "Christmas Day",
+    "name": "Christmas Day",
+    "countryCode": "JM",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2024-12-26",
+    "localName": "Boxing Day",
+    "name": "St. Stephen's Day",
+    "countryCode": "JM",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  }
+]

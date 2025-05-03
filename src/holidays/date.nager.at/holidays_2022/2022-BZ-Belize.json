@@ -1,0 +1,184 @@
+[
+  {
+    "date": "2022-01-03",
+    "localName": "New Year's Day",
+    "name": "New Year's Day",
+    "countryCode": "BZ",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2022-03-07",
+    "localName": "Baron Bliss Day",
+    "name": "Baron Bliss Day",
+    "countryCode": "BZ",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2022-04-15",
+    "localName": "Good Friday",
+    "name": "Good Friday",
+    "countryCode": "BZ",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2022-04-16",
+    "localName": "Holy Saturday",
+    "name": "Holy Saturday",
+    "countryCode": "BZ",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2022-04-17",
+    "localName": "Easter Sunday",
+    "name": "Easter Sunday",
+    "countryCode": "BZ",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2022-04-18",
+    "localName": "Easter Monday",
+    "name": "Easter Monday",
+    "countryCode": "BZ",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2022-05-01",
+    "localName": "Labour Day",
+    "name": "Labour Day",
+    "countryCode": "BZ",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2022-05-23",
+    "localName": "Commonwealth Day",
+    "name": "Commonwealth Day",
+    "countryCode": "BZ",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2022-09-12",
+    "localName": "Saint George's Caye Day",
+    "name": "Saint George's Caye Day",
+    "countryCode": "BZ",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2022-09-21",
+    "localName": "Independence Day",
+    "name": "Independence Day",
+    "countryCode": "BZ",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2022-10-10",
+    "localName": "Day of the Americas",
+    "name": "Day of the Americas",
+    "countryCode": "BZ",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2022-11-21",
+    "localName": "Garifuna Settlement Day",
+    "name": "Garifuna Settlement Day",
+    "countryCode": "BZ",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2022-12-25",
+    "localName": "Christmas Day",
+    "name": "Christmas Day",
+    "countryCode": "BZ",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2022-12-26",
+    "localName": "Boxing Day",
+    "name": "Boxing Day",
+    "countryCode": "BZ",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  }
+]

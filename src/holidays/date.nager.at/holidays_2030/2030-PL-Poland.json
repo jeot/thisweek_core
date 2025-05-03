@@ -1,0 +1,184 @@
+[
+  {
+    "date": "2030-01-01",
+    "localName": "Nowy Rok",
+    "name": "New Year's Day",
+    "countryCode": "PL",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2030-01-06",
+    "localName": "Święto Trzech Króli",
+    "name": "Epiphany",
+    "countryCode": "PL",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2030-04-21",
+    "localName": "Wielkanoc",
+    "name": "Easter Sunday",
+    "countryCode": "PL",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2030-04-22",
+    "localName": "Drugi Dzień Wielkanocy",
+    "name": "Easter Monday",
+    "countryCode": "PL",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2030-05-01",
+    "localName": "Święto Pracy",
+    "name": "May Day",
+    "countryCode": "PL",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2030-05-03",
+    "localName": "Święto Narodowe Trzeciego Maja",
+    "name": "Constitution Day",
+    "countryCode": "PL",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2030-06-09",
+    "localName": "Zielone Świątki",
+    "name": "Pentecost",
+    "countryCode": "PL",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2030-06-20",
+    "localName": "Boże Ciało",
+    "name": "Corpus Christi",
+    "countryCode": "PL",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2030-08-15",
+    "localName": "Wniebowzięcie Najświętszej Maryi Panny",
+    "name": "Assumption Day",
+    "countryCode": "PL",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2030-11-01",
+    "localName": "Wszystkich Świętych",
+    "name": "All Saints' Day",
+    "countryCode": "PL",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2030-11-11",
+    "localName": "Narodowe Święto Niepodległości",
+    "name": "Independence Day",
+    "countryCode": "PL",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2030-12-24",
+    "localName": "Wolna Wigilia",
+    "name": "Christmas Eve",
+    "countryCode": "PL",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2030-12-25",
+    "localName": "Boże Narodzenie",
+    "name": "Christmas Day",
+    "countryCode": "PL",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2030-12-26",
+    "localName": "Drugi Dzień Bożego Narodzenia",
+    "name": "St. Stephen's Day",
+    "countryCode": "PL",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  }
+]

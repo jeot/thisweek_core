@@ -1,0 +1,210 @@
+[
+  {
+    "date": "2023-01-01",
+    "localName": "Nyårsdagen",
+    "name": "New Year's Day",
+    "countryCode": "SE",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2023-01-06",
+    "localName": "Trettondedag jul",
+    "name": "Epiphany",
+    "countryCode": "SE",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2023-04-07",
+    "localName": "Långfredagen",
+    "name": "Good Friday",
+    "countryCode": "SE",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2023-04-09",
+    "localName": "Påskdagen",
+    "name": "Easter Sunday",
+    "countryCode": "SE",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2023-04-10",
+    "localName": "Annandag påsk",
+    "name": "Easter Monday",
+    "countryCode": "SE",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2023-05-01",
+    "localName": "Första maj",
+    "name": "International Workers' Day",
+    "countryCode": "SE",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2023-05-18",
+    "localName": "Kristi himmelsfärdsdag",
+    "name": "Ascension Day",
+    "countryCode": "SE",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2023-05-28",
+    "localName": "Pingstdagen",
+    "name": "Pentecost",
+    "countryCode": "SE",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2023-06-06",
+    "localName": "Sveriges nationaldag",
+    "name": "National Day of Sweden",
+    "countryCode": "SE",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2023-06-23",
+    "localName": "Midsommarafton",
+    "name": "Midsummer Eve",
+    "countryCode": "SE",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2023-06-24",
+    "localName": "Midsommardagen",
+    "name": "Midsummer Day",
+    "countryCode": "SE",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2023-11-04",
+    "localName": "Alla helgons dag",
+    "name": "All Saints' Day",
+    "countryCode": "SE",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2023-12-24",
+    "localName": "Julafton",
+    "name": "Christmas Eve",
+    "countryCode": "SE",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2023-12-25",
+    "localName": "Juldagen",
+    "name": "Christmas Day",
+    "countryCode": "SE",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2023-12-26",
+    "localName": "Annandag jul",
+    "name": "St. Stephen's Day",
+    "countryCode": "SE",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2023-12-31",
+    "localName": "Nyårsafton",
+    "name": "New Year's Eve",
+    "countryCode": "SE",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  }
+]

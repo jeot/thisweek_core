@@ -1,0 +1,197 @@
+[
+  {
+    "date": "2025-01-01",
+    "localName": "Neujahr",
+    "name": "New Year's Day",
+    "countryCode": "AT",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2025-01-06",
+    "localName": "Heilige Drei Könige",
+    "name": "Epiphany",
+    "countryCode": "AT",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2025-04-20",
+    "localName": "Ostersonntag",
+    "name": "Easter Sunday",
+    "countryCode": "AT",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2025-04-21",
+    "localName": "Ostermontag",
+    "name": "Easter Monday",
+    "countryCode": "AT",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2025-05-01",
+    "localName": "Staatsfeiertag",
+    "name": "National Holiday",
+    "countryCode": "AT",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2025-05-29",
+    "localName": "Christi Himmelfahrt",
+    "name": "Ascension Day",
+    "countryCode": "AT",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2025-06-08",
+    "localName": "Pfingstsonntag",
+    "name": "Pentecost",
+    "countryCode": "AT",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2025-06-09",
+    "localName": "Pfingstmontag",
+    "name": "Whit Monday",
+    "countryCode": "AT",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2025-06-19",
+    "localName": "Fronleichnam",
+    "name": "Corpus Christi",
+    "countryCode": "AT",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2025-08-15",
+    "localName": "Maria Himmelfahrt",
+    "name": "Assumption Day",
+    "countryCode": "AT",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2025-10-26",
+    "localName": "Nationalfeiertag",
+    "name": "National Holiday",
+    "countryCode": "AT",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2025-11-01",
+    "localName": "Allerheiligen",
+    "name": "All Saints' Day",
+    "countryCode": "AT",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2025-12-08",
+    "localName": "Mariä Empfängnis",
+    "name": "Immaculate Conception",
+    "countryCode": "AT",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2025-12-25",
+    "localName": "Weihnachten",
+    "name": "Christmas Day",
+    "countryCode": "AT",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2025-12-26",
+    "localName": "Stefanitag",
+    "name": "St. Stephen's Day",
+    "countryCode": "AT",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  }
+]

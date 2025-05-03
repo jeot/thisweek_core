@@ -1,0 +1,184 @@
+[
+  {
+    "date": "2030-01-01",
+    "localName": "Año Nuevo",
+    "name": "New Year's Day",
+    "countryCode": "PE",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2030-04-18",
+    "localName": "Jueves Santo",
+    "name": "Holy Thursday",
+    "countryCode": "PE",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2030-04-18",
+    "localName": "Jueves Santo",
+    "name": "Maundy Thursday",
+    "countryCode": "PE",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2030-04-19",
+    "localName": "Viernes Santo",
+    "name": "Good Friday",
+    "countryCode": "PE",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2030-04-21",
+    "localName": "Domingo Santo",
+    "name": "Easter Sunday",
+    "countryCode": "PE",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2030-05-01",
+    "localName": "Día del Trabajo",
+    "name": "International Workers' Day",
+    "countryCode": "PE",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2030-06-29",
+    "localName": "Día de San Pedro y San Pablo",
+    "name": "St. Peter and St. Paul",
+    "countryCode": "PE",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2030-07-28",
+    "localName": "Día de la Independencia",
+    "name": "Independence Day",
+    "countryCode": "PE",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2030-07-29",
+    "localName": "Día de la Independencia",
+    "name": "Independence Day",
+    "countryCode": "PE",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2030-08-30",
+    "localName": "Día de Santa Rosa de Lima",
+    "name": "Santa Rosa de Lima",
+    "countryCode": "PE",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2030-10-08",
+    "localName": "Combate de Angamos",
+    "name": "Battle of Angamos",
+    "countryCode": "PE",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2030-11-01",
+    "localName": "Día de Todos los Santos",
+    "name": "All Saints Day",
+    "countryCode": "PE",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2030-12-08",
+    "localName": "Inmaculada Concepción",
+    "name": "Immaculate Conception",
+    "countryCode": "PE",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2030-12-25",
+    "localName": "Navidad",
+    "name": "Christmas Day",
+    "countryCode": "PE",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  }
+]

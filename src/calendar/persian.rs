@@ -1,5 +1,6 @@
 use crate::language::str_to_vec;
 use crate::weekdays::convert_weekday;
+use crate::weekdays::is_weekday_weekend_holiday;
 use crate::{language::Language, week_info::Date, week_info::DateView};
 use chrono::{DateTime, Datelike, Local};
 use serde::Serialize;
@@ -54,6 +55,7 @@ impl CalendarSpecificDateView for PersianCalendar {
         let month = month.to_string();
         let year = lang.change_numbers_language(&year.to_string());
         let weekday = convert_weekday(datetime.weekday()) as usize;
+        let weekend_holiday = is_weekday_weekend_holiday(weekday.into());
         let full_format = match lang {
             Language::Farsi => format!(
                 "{}، {} {} {}",
@@ -77,6 +79,7 @@ impl CalendarSpecificDateView for PersianCalendar {
             weekday,
             year,
             full_format,
+            weekend_holiday,
         }
     }
 

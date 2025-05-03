@@ -1,0 +1,145 @@
+[
+  {
+    "date": "2022-01-01",
+    "localName": "Año Nuevo",
+    "name": "New Year's Day",
+    "countryCode": "CR",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2022-04-11",
+    "localName": "Día de Juan Santamaría",
+    "name": "Juan Santamaría Day",
+    "countryCode": "CR",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2022-04-14",
+    "localName": "Jueves Santo",
+    "name": "Maundy Thursday",
+    "countryCode": "CR",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2022-04-15",
+    "localName": "Viernes Santo",
+    "name": "Good Friday",
+    "countryCode": "CR",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2022-05-02",
+    "localName": "Día Internacional del Trabajo",
+    "name": "Labour Day",
+    "countryCode": "CR",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2022-07-25",
+    "localName": "Anexión del Partido de Nicoya a Costa Rica",
+    "name": "Annexation of the Party of Nicoya to Costa Rica",
+    "countryCode": "CR",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2022-08-02",
+    "localName": "Fiesta de Nuestra Señora de los Ángeles",
+    "name": "Feast of Our Lady of the Angels",
+    "countryCode": "CR",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2022-08-15",
+    "localName": "Día de la Madre",
+    "name": "Mother's Day",
+    "countryCode": "CR",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2022-09-19",
+    "localName": "Día de la Independencia",
+    "name": "Independence Day",
+    "countryCode": "CR",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2022-12-05",
+    "localName": "Día de la Abolición del Ejército",
+    "name": "Army Abolition Day",
+    "countryCode": "CR",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2022-12-25",
+    "localName": "Navidad",
+    "name": "Christmas Day",
+    "countryCode": "CR",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  }
+]

@@ -1,0 +1,197 @@
+[
+  {
+    "date": "2029-01-01",
+    "localName": "Uudenvuodenpäivä",
+    "name": "New Year's Day",
+    "countryCode": "FI",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2029-01-06",
+    "localName": "Loppiainen",
+    "name": "Epiphany",
+    "countryCode": "FI",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2029-03-30",
+    "localName": "Pitkäperjantai",
+    "name": "Good Friday",
+    "countryCode": "FI",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2029-04-01",
+    "localName": "Pääsiäispäivä",
+    "name": "Easter Sunday",
+    "countryCode": "FI",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2029-04-02",
+    "localName": "Toinen pääsiäispäivä",
+    "name": "Easter Monday",
+    "countryCode": "FI",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2029-05-01",
+    "localName": "Vappu",
+    "name": "May Day",
+    "countryCode": "FI",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2029-05-10",
+    "localName": "Helatorstai",
+    "name": "Ascension Day",
+    "countryCode": "FI",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2029-05-20",
+    "localName": "Helluntaipäivä",
+    "name": "Pentecost",
+    "countryCode": "FI",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2029-06-22",
+    "localName": "Juhannusaatto",
+    "name": "Midsummer Eve",
+    "countryCode": "FI",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2029-06-23",
+    "localName": "Juhannuspäivä",
+    "name": "Midsummer Day",
+    "countryCode": "FI",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2029-11-03",
+    "localName": "Pyhäinpäivä",
+    "name": "All Saints' Day",
+    "countryCode": "FI",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2029-12-06",
+    "localName": "Itsenäisyyspäivä",
+    "name": "Independence Day",
+    "countryCode": "FI",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2029-12-24",
+    "localName": "Jouluaatto",
+    "name": "Christmas Eve",
+    "countryCode": "FI",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2029-12-25",
+    "localName": "Joulupäivä",
+    "name": "Christmas Day",
+    "countryCode": "FI",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2029-12-26",
+    "localName": "Tapaninpäivä",
+    "name": "St. Stephen's Day",
+    "countryCode": "FI",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  }
+]

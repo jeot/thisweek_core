@@ -1,0 +1,184 @@
+[
+  {
+    "date": "2029-01-01",
+    "localName": "Jaunais Gads",
+    "name": "New Year's Day",
+    "countryCode": "LV",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2029-03-30",
+    "localName": "Lielā Piektdiena",
+    "name": "Good Friday",
+    "countryCode": "LV",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2029-04-01",
+    "localName": "Lieldienas",
+    "name": "Easter Sunday",
+    "countryCode": "LV",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2029-04-02",
+    "localName": "Otrās Lieldienas",
+    "name": "Easter Monday",
+    "countryCode": "LV",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2029-05-01",
+    "localName": "Darba svētki",
+    "name": "Labour Day",
+    "countryCode": "LV",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2029-05-04",
+    "localName": "Latvijas Republikas Neatkarības atjaunošanas diena",
+    "name": "Restoration of Independence day",
+    "countryCode": "LV",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2029-05-13",
+    "localName": "Mātes diena",
+    "name": "Mother's Day",
+    "countryCode": "LV",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2029-06-23",
+    "localName": "Līgo Diena",
+    "name": "Midsummer Eve",
+    "countryCode": "LV",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2029-06-24",
+    "localName": "Jāņi",
+    "name": "Midsummer Day",
+    "countryCode": "LV",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2029-11-18",
+    "localName": "Latvijas Republikas proklamēšanas diena",
+    "name": "Proclamation Day of the Republic of Latvia",
+    "countryCode": "LV",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2029-12-24",
+    "localName": "Ziemassvētku vakars",
+    "name": "Christmas Eve",
+    "countryCode": "LV",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2029-12-25",
+    "localName": "Ziemassvētki",
+    "name": "Christmas Day",
+    "countryCode": "LV",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2029-12-26",
+    "localName": "Otrie Ziemassvētki",
+    "name": "St. Stephen's Day",
+    "countryCode": "LV",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2029-12-31",
+    "localName": "Vecgada vakars",
+    "name": "New Year's Eve",
+    "countryCode": "LV",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  }
+]

@@ -7,6 +7,7 @@ use crate::language::Language;
 use crate::week_info::Date;
 use crate::week_info::DateView;
 use crate::weekdays::convert_weekday;
+use crate::weekdays::is_weekday_weekend_holiday;
 use chrono::Datelike;
 use chrono::{DateTime, Local};
 use serde::Serialize;
@@ -44,6 +45,7 @@ impl CalendarSpecificDateView for GregorianCalendar {
 
         let weekday = datetime.weekday();
         let weekday = convert_weekday(weekday) as usize;
+        let weekend_holiday = is_weekday_weekend_holiday(weekday.into());
         let full_format = match lang {
             Language::English => format!(
                 "{}, {} {} {}",
@@ -78,6 +80,7 @@ impl CalendarSpecificDateView for GregorianCalendar {
             weekday,
             year,
             full_format,
+            weekend_holiday,
         }
     }
 

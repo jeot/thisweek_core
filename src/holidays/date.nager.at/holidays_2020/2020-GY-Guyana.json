@@ -1,0 +1,145 @@
+[
+  {
+    "date": "2020-01-01",
+    "localName": "New Year's Day",
+    "name": "New Year's Day",
+    "countryCode": "GY",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2020-02-23",
+    "localName": "Republic Day",
+    "name": "Republic Day",
+    "countryCode": "GY",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2020-04-10",
+    "localName": "Good Friday",
+    "name": "Good Friday",
+    "countryCode": "GY",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2020-04-13",
+    "localName": "Easter Monday",
+    "name": "Easter Monday",
+    "countryCode": "GY",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2020-05-01",
+    "localName": "Labour Day",
+    "name": "Labour Day",
+    "countryCode": "GY",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2020-05-05",
+    "localName": "Arrival Day",
+    "name": "Arrival Day",
+    "countryCode": "GY",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2020-05-26",
+    "localName": "Independence Day",
+    "name": "Independence Day",
+    "countryCode": "GY",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2020-07-06",
+    "localName": "Caricom Day",
+    "name": "Caricom Day",
+    "countryCode": "GY",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2020-08-01",
+    "localName": "Emancipation Day",
+    "name": "Emancipation Day",
+    "countryCode": "GY",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2020-12-25",
+    "localName": "Christmas Day",
+    "name": "Christmas Day",
+    "countryCode": "GY",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2020-12-26",
+    "localName": "Boxing Day",
+    "name": "Boxing Day",
+    "countryCode": "GY",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  }
+]

@@ -1,0 +1,145 @@
+[
+  {
+    "date": "2031-01-01",
+    "localName": "Nova Godina",
+    "name": "New Year's Day",
+    "countryCode": "RS",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2031-01-02",
+    "localName": "Nova Godina",
+    "name": "New Year's Day",
+    "countryCode": "RS",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2031-01-07",
+    "localName": "Božić",
+    "name": "Christmas Day",
+    "countryCode": "RS",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2031-02-15",
+    "localName": "Dan državnosti Srbije",
+    "name": "Statehood Day",
+    "countryCode": "RS",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2031-02-17",
+    "localName": "Dan državnosti Srbije",
+    "name": "Statehood Day",
+    "countryCode": "RS",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2031-04-11",
+    "localName": "Veliki petak",
+    "name": "Good Friday",
+    "countryCode": "RS",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2031-04-13",
+    "localName": "Vaskrs (Uskrs)",
+    "name": "Easter Sunday",
+    "countryCode": "RS",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2031-04-14",
+    "localName": "Vaskrsni (Uskrsni) ponedeljak",
+    "name": "Easter Monday",
+    "countryCode": "RS",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2031-05-01",
+    "localName": "Praznik rada",
+    "name": "Labour Day",
+    "countryCode": "RS",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2031-05-02",
+    "localName": "Praznik rada",
+    "name": "Labour Day",
+    "countryCode": "RS",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2031-11-11",
+    "localName": "Dan primirja",
+    "name": "Armistice Day",
+    "countryCode": "RS",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  }
+]

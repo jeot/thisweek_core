@@ -1,0 +1,197 @@
+[
+  {
+    "date": "2031-01-01",
+    "localName": "Uudenvuodenpäivä",
+    "name": "New Year's Day",
+    "countryCode": "FI",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2031-01-06",
+    "localName": "Loppiainen",
+    "name": "Epiphany",
+    "countryCode": "FI",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2031-04-11",
+    "localName": "Pitkäperjantai",
+    "name": "Good Friday",
+    "countryCode": "FI",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2031-04-13",
+    "localName": "Pääsiäispäivä",
+    "name": "Easter Sunday",
+    "countryCode": "FI",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2031-04-14",
+    "localName": "Toinen pääsiäispäivä",
+    "name": "Easter Monday",
+    "countryCode": "FI",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2031-05-01",
+    "localName": "Vappu",
+    "name": "May Day",
+    "countryCode": "FI",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2031-05-22",
+    "localName": "Helatorstai",
+    "name": "Ascension Day",
+    "countryCode": "FI",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2031-06-01",
+    "localName": "Helluntaipäivä",
+    "name": "Pentecost",
+    "countryCode": "FI",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2031-06-20",
+    "localName": "Juhannusaatto",
+    "name": "Midsummer Eve",
+    "countryCode": "FI",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2031-06-21",
+    "localName": "Juhannuspäivä",
+    "name": "Midsummer Day",
+    "countryCode": "FI",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2031-11-01",
+    "localName": "Pyhäinpäivä",
+    "name": "All Saints' Day",
+    "countryCode": "FI",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2031-12-06",
+    "localName": "Itsenäisyyspäivä",
+    "name": "Independence Day",
+    "countryCode": "FI",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2031-12-24",
+    "localName": "Jouluaatto",
+    "name": "Christmas Eve",
+    "countryCode": "FI",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2031-12-25",
+    "localName": "Joulupäivä",
+    "name": "Christmas Day",
+    "countryCode": "FI",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2031-12-26",
+    "localName": "Tapaninpäivä",
+    "name": "St. Stephen's Day",
+    "countryCode": "FI",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  }
+]

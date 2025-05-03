@@ -1,0 +1,158 @@
+[
+  {
+    "date": "2024-01-01",
+    "localName": "Første nyttårsdag",
+    "name": "New Year's Day",
+    "countryCode": "SJ",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2024-03-28",
+    "localName": "Skjærtorsdag",
+    "name": "Maundy Thursday",
+    "countryCode": "SJ",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2024-03-29",
+    "localName": "Langfredag",
+    "name": "Good Friday",
+    "countryCode": "SJ",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2024-03-31",
+    "localName": "Første påskedag",
+    "name": "Easter Sunday",
+    "countryCode": "SJ",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2024-04-01",
+    "localName": "Andre påskedag",
+    "name": "Easter Monday",
+    "countryCode": "SJ",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2024-05-01",
+    "localName": "Første mai",
+    "name": "May Day",
+    "countryCode": "SJ",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2024-05-09",
+    "localName": "Kristi himmelfartsdag",
+    "name": "Ascension Day",
+    "countryCode": "SJ",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2024-05-17",
+    "localName": "Syttende mai",
+    "name": "Constitution Day",
+    "countryCode": "SJ",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2024-05-19",
+    "localName": "Første pinsedag",
+    "name": "Pentecost",
+    "countryCode": "SJ",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2024-05-20",
+    "localName": "Andre pinsedag",
+    "name": "Whit Monday",
+    "countryCode": "SJ",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2024-12-25",
+    "localName": "Første juledag",
+    "name": "Christmas Day",
+    "countryCode": "SJ",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2024-12-26",
+    "localName": "Andre juledag",
+    "name": "Second day of Christmas",
+    "countryCode": "SJ",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  }
+]

@@ -1,0 +1,132 @@
+[
+  {
+    "date": "2021-01-01",
+    "localName": "New Year's Day",
+    "name": "New Year's Day",
+    "countryCode": "IM",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2021-04-02",
+    "localName": "Good Friday",
+    "name": "Good Friday",
+    "countryCode": "IM",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2021-04-05",
+    "localName": "Easter Monday",
+    "name": "Easter Monday",
+    "countryCode": "IM",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2021-05-03",
+    "localName": "Early May Bank Holiday",
+    "name": "Early May Bank Holiday",
+    "countryCode": "IM",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2021-05-31",
+    "localName": "Spring Bank Holiday",
+    "name": "Spring Bank Holiday",
+    "countryCode": "IM",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2021-06-11",
+    "localName": "Senior Race Day",
+    "name": "Senior Race Day",
+    "countryCode": "IM",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2021-07-05",
+    "localName": "Tynwald Day",
+    "name": "Tynwald Day",
+    "countryCode": "IM",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2021-08-30",
+    "localName": "Late Summer Bank Holiday",
+    "name": "Late Summer Bank Holiday",
+    "countryCode": "IM",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2021-12-27",
+    "localName": "Christmas Day",
+    "name": "Christmas Day",
+    "countryCode": "IM",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  },
+  {
+    "date": "2021-12-28",
+    "localName": "St. Stephen's Day",
+    "name": "Boxing Day",
+    "countryCode": "IM",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "types": [
+      "Public"
+    ]
+  }
+]
